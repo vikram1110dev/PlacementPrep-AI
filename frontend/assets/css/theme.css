@@ -1,0 +1,47 @@
+/* Theme / Dark Mode Variables */
+
+/* Data attribute theme toggle */
+[data-theme="dark"] {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    
+    /* Modify Glassmorphism for Dark Mode */
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .card-glass {
+    background: rgba(30, 41, 59, 0.85);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .form-control, 
+[data-theme="dark"] .form-select {
+    background-color: #0f172a;
+    color: #f8fafc;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .form-control:focus, 
+[data-theme="dark"] .form-select:focus {
+    background-color: #1e293b;
+    color: #fff;
+}
+
+[data-theme="dark"] .table {
+    color: #f8fafc;
+}
+[data-theme="dark"] .table th {
+    background-color: #1e293b;
+    color: #cbd5e1;
+    border-color: #334155;
+}
+[data-theme="dark"] .table td {
+    border-color: #334155;
+}
+[data-theme="dark"] .table-hover tbody tr:hover {
+    color: #fff;
+    background-color: #334155;
+}

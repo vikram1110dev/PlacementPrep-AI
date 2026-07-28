@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mentor - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/ai-mentor.css">
+</head>
+<body class="bg-light" style="background-image: radial-gradient(#cbd5e1 1px, transparent 1px); background-size: 20px 20px;">
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand">
+                <i class="bi bi-robot"></i> PlacementPrep AI
+            </a>
+        </div>
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Learning</div>
+            <li class="sidebar-item"><a href="aptitude.html" class="sidebar-link"><i class="bi bi-calculator"></i> Aptitude</a></li>
+            <li class="sidebar-item"><a href="dsa.html" class="sidebar-link"><i class="bi bi-code-square"></i> DSA</a></li>
+            <li class="sidebar-item"><a href="coding.html" class="sidebar-link"><i class="bi bi-journal-code"></i> Coding</a></li>
+            <li class="sidebar-item"><a href="projects.html" class="sidebar-link"><i class="bi bi-folder-check"></i> Projects</a></li>
+            <li class="sidebar-item"><a href="company.html" class="sidebar-link"><i class="bi bi-building"></i> Company Prep</a></li>
+            
+            <div class="sidebar-menu-title">Assessments</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-camera-video"></i> Mock Interviews</a></li>
+            <li class="sidebar-item"><a href="ai-mentor.html" class="sidebar-link active"><i class="bi bi-chat-dots"></i> AI Mentor</a></li>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-trophy"></i> Leaderboard</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar bg-white bg-opacity-75" style="backdrop-filter: blur(10px);">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search AI tools or past conversations...">
+            </div>
+            <div class="nav-actions">
+                <button class="nav-action-btn" title="Toggle Dark Mode"><i class="bi bi-moon"></i></button>
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile" data-bs-toggle="dropdown">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area pt-3">
+            
+            <div class="row g-4">
+                
+                <!-- Left Column: AI Hub & Tools -->
+                <div class="col-xl-8">
+                    
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+                        <div>
+                            <h2 class="fw-bold mb-1"><i class="bi bi-stars text-primary me-2"></i>AI Mentor Hub</h2>
+                            <p class="text-muted mb-0">Your personal AI career coach for placements, coding, interviews and career growth.</p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions Pills -->
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <div class="action-pill"><i class="bi bi-chat-dots text-primary"></i> Ask AI</div>
+                        <div class="action-pill"><i class="bi bi-journal-text text-success"></i> Generate Notes</div>
+                        <div class="action-pill"><i class="bi bi-question-circle text-warning"></i> Generate Quiz</div>
+                        <div class="action-pill"><i class="bi bi-card-text text-info"></i> Flashcards</div>
+                        <div class="action-pill"><i class="bi bi-code-slash text-danger"></i> Coding Challenge</div>
+                    </div>
+
+                    <!-- Personalized Learning Plan -->
+                    <div class="ai-glass p-4 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="fw-bold mb-0">Personalized Learning Plan</h6>
+                            <span class="badge bg-primary rounded-pill"><i class="bi bi-calendar-check me-1"></i> Week 4/12</span>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                <div class="bg-white rounded p-3 border h-100">
+                                    <small class="text-muted fw-bold text-uppercase d-block mb-1">Current Goal</small>
+                                    <span class="fw-semibold">Master DP & Graphs</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="bg-white rounded p-3 border h-100 border-primary shadow-sm">
+                                    <small class="text-muted fw-bold text-uppercase d-block mb-1 text-primary">Daily Goal</small>
+                                    <span class="fw-semibold">Solve 2 Graph Problems</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="bg-white rounded p-3 border h-100">
+                                    <small class="text-muted fw-bold text-uppercase d-block mb-1">Completed</small>
+                                    <span class="fw-semibold text-success">14/20 Tasks</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="flex-grow-1">
+                                <div class="custom-progress" style="height: 8px;">
+                                    <div class="custom-progress-bar bg-primary" style="width: 70%;"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-sm rounded-pill px-4">Continue <i class="bi bi-arrow-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Performance Insights -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="ai-glass p-4 h-100">
+                                <h6 class="fw-bold mb-3">Performance Insights</h6>
+                                <div class="d-flex justify-content-between text-center mb-3">
+                                    <div class="insight-stat px-2 w-100">
+                                        <h3 class="fw-bold text-success mb-0">A-</h3>
+                                        <small class="text-muted fw-medium">AI Score</small>
+                                    </div>
+                                    <div class="insight-stat px-2 w-100">
+                                        <h3 class="fw-bold text-primary mb-0">85%</h3>
+                                        <small class="text-muted fw-medium">Readiness</small>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="d-flex justify-content-between small mb-1">
+                                        <span class="fw-medium text-success"><i class="bi bi-arrow-up-circle-fill me-1"></i> Strong: Trees</span>
+                                        <span class="fw-medium text-danger"><i class="bi bi-arrow-down-circle-fill me-1"></i> Weak: DP</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="ai-glass p-4 h-100">
+                                <h6 class="fw-bold mb-3">Achievements</h6>
+                                <div class="row g-2 text-center">
+                                    <div class="col-4">
+                                        <i class="bi bi-chat-heart-fill fs-3 text-danger mb-1 d-block"></i>
+                                        <div class="fw-bold">45</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Sessions</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="bi bi-question-circle-fill fs-3 text-info mb-1 d-block"></i>
+                                        <div class="fw-bold">120</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Questions</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="bi bi-camera-video-fill fs-3 text-warning mb-1 d-block"></i>
+                                        <div class="fw-bold">12</div>
+                                        <small class="text-muted" style="font-size: 0.7rem;">Mocks</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Specializations (Grids) -->
+                    <h5 class="fw-bold mb-3 mt-4">AI Mentor Categories</h5>
+                    <div class="row g-3 mb-5">
+                        
+                        <!-- Resume AI -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="ai-action-card">
+                                <div class="ai-icon-box bg-primary bg-opacity-10 text-primary"><i class="bi bi-file-earmark-person"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Resume AI</h6>
+                                    <div class="small text-muted mb-2">Review, ATS check, Generate Summary.</div>
+                                    <span class="badge bg-light text-dark border">4 Tools</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interview Coach -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="ai-action-card">
+                                <div class="ai-icon-box bg-success bg-opacity-10 text-success"><i class="bi bi-mic"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Interview Coach</h6>
+                                    <div class="small text-muted mb-2">Mock HR, Tech, Behavioral Questions.</div>
+                                    <span class="badge bg-light text-dark border">Start Mock</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Coding Assistant -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="ai-action-card border-primary" style="background-color: #f8fafc;">
+                                <div class="ai-icon-box bg-primary text-white shadow-sm"><i class="bi bi-code-square"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-primary">Coding Assistant</h6>
+                                    <div class="small text-muted mb-2">Debug, Optimize, Explain Complexity.</div>
+                                    <span class="badge bg-primary">Active</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Mentor -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="ai-action-card">
+                                <div class="ai-icon-box bg-warning bg-opacity-10 text-warning"><i class="bi bi-kanban"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Project Mentor</h6>
+                                    <div class="small text-muted mb-2">Ideas, Architecture, Deployment.</div>
+                                    <span class="badge bg-light text-dark border">Ideate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Study Planner -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="ai-action-card">
+                                <div class="ai-icon-box bg-info bg-opacity-10 text-info"><i class="bi bi-calendar-range"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">AI Study Planner</h6>
+                                    <div class="small text-muted mb-2">Daily/Weekly Plans & Exam Countdown.</div>
+                                    <span class="badge bg-light text-dark border">Generate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Company Prep AI -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="ai-action-card">
+                                <div class="ai-icon-box bg-danger bg-opacity-10 text-danger"><i class="bi bi-building"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Company Prep AI</h6>
+                                    <div class="small text-muted mb-2">Roadmaps, Interview Tips, FAQ.</div>
+                                    <span class="badge bg-light text-dark border">Explore</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Sticky Chat Interface -->
+                <div class="col-xl-4">
+                    <div class="ai-glass chat-wrapper shadow">
+                        
+                        <!-- Chat Header -->
+                        <div class="chat-header d-flex justify-content-between align-items-center bg-white" style="border-radius: 1.25rem 1.25rem 0 0;">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width:36px; height:36px;">
+                                    <i class="bi bi-robot"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold mb-0">Placement AI Mentor</h6>
+                                    <small class="text-success fw-medium"><i class="bi bi-circle-fill" style="font-size: 0.5rem;"></i> Online</small>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2 text-muted">
+                                <i class="bi bi-search" style="cursor: pointer;"></i>
+                                <i class="bi bi-three-dots-vertical" style="cursor: pointer;"></i>
+                            </div>
+                        </div>
+
+                        <!-- Chat Messages -->
+                        <div class="chat-messages" id="chatMessages">
+                            
+                            <div class="text-center my-3">
+                                <span class="badge bg-light text-muted border">Today, 10:30 AM</span>
+                            </div>
+
+                            <!-- Initial AI Greeting -->
+                            <div class="chat-msg-row ai">
+                                <div class="chat-avatar ai shadow-sm"><i class="bi bi-robot"></i></div>
+                                <div>
+                                    <div class="chat-bubble chat-ai-bubble">
+                                        Hi John! 👋 I'm your Placement AI Mentor. I can help you with coding questions, interview prep, resume reviews, or study plans. What would you like to focus on today?
+                                    </div>
+                                    <span class="chat-time">10:30 AM</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Chat Input Area -->
+                        <div class="chat-input-area">
+                            
+                            <!-- Suggested Questions -->
+                            <div class="suggested-chips-wrapper mb-3">
+                                <div class="suggested-chip">Review my resume</div>
+                                <div class="suggested-chip">Explain Binary Search</div>
+                                <div class="suggested-chip">How do I prepare for Amazon?</div>
+                                <div class="suggested-chip">Generate a Java project idea</div>
+                            </div>
+
+                            <div class="chat-input-box">
+                                <i class="bi bi-paperclip text-muted fs-5" style="cursor:pointer;" title="Attach file or resume"></i>
+                                <input type="text" id="chatInput" placeholder="Message AI Mentor..." autocomplete="off">
+                                <button class="chat-send-btn shadow-sm" id="sendMsgBtn">
+                                    <i class="bi bi-send-fill"></i>
+                                </button>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted" style="font-size: 0.65rem;">AI can make mistakes. Consider verifying important information.</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Footer omitted here to save space for the sticky chat to reach bottom cleanly -->
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/ai-mentor.js"></script>
+</body>
+</html>

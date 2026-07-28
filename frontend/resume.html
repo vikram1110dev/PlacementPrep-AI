@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Builder - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/resume.css">
+    <!-- html2pdf for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="bg-light">
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand"><i class="bi bi-robot"></i> PlacementPrep AI</a>
+        </div>
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Tools</div>
+            <li class="sidebar-item"><a href="resume.html" class="sidebar-link active"><i class="bi bi-file-earmark-person"></i> AI Resume Builder</a></li>
+            <li class="sidebar-item"><a href="ai-mentor.html" class="sidebar-link"><i class="bi bi-chat-dots"></i> AI Mentor</a></li>
+            
+            <div class="sidebar-menu-title">Learning</div>
+            <li class="sidebar-item"><a href="aptitude.html" class="sidebar-link"><i class="bi bi-calculator"></i> Aptitude</a></li>
+            <li class="sidebar-item"><a href="dsa.html" class="sidebar-link"><i class="bi bi-code-square"></i> DSA</a></li>
+            <li class="sidebar-item"><a href="coding.html" class="sidebar-link"><i class="bi bi-journal-code"></i> Coding</a></li>
+            <li class="sidebar-item"><a href="projects.html" class="sidebar-link"><i class="bi bi-folder-check"></i> Projects</a></li>
+            <li class="sidebar-item"><a href="company.html" class="sidebar-link"><i class="bi bi-building"></i> Company Prep</a></li>
+            
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar bg-white border-bottom shadow-sm">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search templates, tips...">
+            </div>
+            <div class="nav-actions">
+                <button class="nav-action-btn"><i class="bi bi-moon"></i></button>
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile" data-bs-toggle="dropdown">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area pt-3 px-4">
+            
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">AI Resume Builder</h2>
+                    <p class="text-muted mb-0">Create an ATS-friendly resume that helps you get shortlisted.</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary fw-medium rounded-pill"><i class="bi bi-eye"></i> Recruiter Preview</button>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                
+                <!-- Left Column: Form Builder & AI Tools -->
+                <div class="col-xl-5 col-lg-6">
+                    <div class="builder-scroll pe-2 pb-5">
+                        
+                        <!-- AI Assistant Header -->
+                        <div class="ai-tool-card p-3 mb-4 border-primary">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center gap-3">
+                                    <i class="bi bi-magic fs-3 text-primary"></i>
+                                    <div>
+                                        <h6 class="fw-bold mb-0 text-primary">AI Resume Assistant</h6>
+                                        <small class="text-muted">Auto-write your summary & bullets</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-sm rounded-pill fw-bold">Turn On</button>
+                            </div>
+                        </div>
+
+                        <!-- Templates Selection -->
+                        <h6 class="fw-bold mb-3">Templates</h6>
+                        <div class="row g-2 mb-4">
+                            <div class="col-3">
+                                <div class="template-card active text-center pb-2">
+                                    <div class="template-thumb mb-2"></div>
+                                    <small class="fw-bold text-dark" style="font-size:0.7rem;">Professional</small>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="template-card text-center pb-2">
+                                    <div class="template-thumb mb-2"></div>
+                                    <small class="fw-bold text-dark" style="font-size:0.7rem;">Minimal</small>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="template-card text-center pb-2">
+                                    <div class="template-thumb mb-2"></div>
+                                    <small class="fw-bold text-dark" style="font-size:0.7rem;">Modern</small>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="template-card text-center pb-2">
+                                    <div class="template-thumb mb-2"></div>
+                                    <small class="fw-bold text-dark" style="font-size:0.7rem;">Creative</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Accordion Forms -->
+                        <div class="accordion custom-accordion" id="resumeAccordion">
+                            
+                            <!-- Personal Info -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                        <i class="bi bi-person-badge me-2 text-primary"></i> Personal Information
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#resumeAccordion">
+                                    <div class="accordion-body">
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <label class="form-label small fw-bold">Full Name</label>
+                                                <input type="text" class="form-control" id="inpName" value="John Doe" placeholder="John Doe">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label small fw-bold">Email</label>
+                                                <input type="email" class="form-control" id="inpEmail" value="john.doe@example.com" placeholder="Email">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label small fw-bold">Phone</label>
+                                                <input type="text" class="form-control" id="inpPhone" value="+91 9876543210" placeholder="Phone">
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label small fw-bold">LinkedIn URL</label>
+                                                <input type="text" class="form-control" id="inpLinkedin" value="linkedin.com/in/johndoe" placeholder="LinkedIn URL">
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <label class="form-label small fw-bold mb-0">Professional Summary</label>
+                                                    <button class="btn btn-sm btn-link text-decoration-none ai-generate-btn" id="btnGenSummary"><i class="bi bi-stars"></i> Auto Generate</button>
+                                                </div>
+                                                <textarea class="form-control" id="inpSummary" rows="3" placeholder="Write a brief summary..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Education -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                        <i class="bi bi-mortarboard me-2 text-primary"></i> Education
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#resumeAccordion">
+                                    <div class="accordion-body">
+                                        <div class="bg-light p-3 rounded border mb-3">
+                                            <div class="row g-2">
+                                                <div class="col-12">
+                                                    <input type="text" class="form-control form-control-sm" value="SRM Institute of Science and Technology" placeholder="College Name">
+                                                </div>
+                                                <div class="col-12">
+                                                    <input type="text" class="form-control form-control-sm" value="B.Tech Computer Science and Engineering" placeholder="Degree & Dept">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control form-control-sm" value="8.5/10" placeholder="CGPA">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control form-control-sm" value="2022 - 2026" placeholder="Duration">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline-primary btn-sm w-100 rounded-pill"><i class="bi bi-plus-lg"></i> Add Education</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Skills -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                        <i class="bi bi-braces me-2 text-primary"></i> Skills
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#resumeAccordion">
+                                    <div class="accordion-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <label class="form-label small fw-bold mb-0">Technical Skills</label>
+                                            <button class="btn btn-sm btn-link text-decoration-none ai-generate-btn"><i class="bi bi-magic"></i> Suggest Skills</button>
+                                        </div>
+                                        <div class="d-flex flex-wrap gap-2 mb-3">
+                                            <div class="skill-tag">Java <i class="bi bi-x"></i></div>
+                                            <div class="skill-tag">Python <i class="bi bi-x"></i></div>
+                                            <div class="skill-tag">React <i class="bi bi-x"></i></div>
+                                            <div class="skill-tag">Node.js <i class="bi bi-x"></i></div>
+                                            <div class="skill-tag">SQL <i class="bi bi-x"></i></div>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" class="form-control" placeholder="Add a skill...">
+                                            <button class="btn btn-outline-secondary">Add</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Projects -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                        <i class="bi bi-folder me-2 text-primary"></i> Projects
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#resumeAccordion">
+                                    <div class="accordion-body">
+                                        <div class="bg-light p-3 rounded border mb-3">
+                                            <input type="text" class="form-control form-control-sm mb-2" value="E-Commerce Microservices" placeholder="Project Title">
+                                            <input type="text" class="form-control form-control-sm mb-2" value="Java, Spring Boot, MySQL" placeholder="Technologies">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <label class="small text-muted mb-0">Bullet Points</label>
+                                                <button class="btn btn-sm text-primary p-0 ai-generate-btn"><i class="bi bi-stars"></i> Improve</button>
+                                            </div>
+                                            <textarea class="form-control form-control-sm" rows="3">- Developed a scalable backend...&#10;- Implemented JWT authentication...</textarea>
+                                        </div>
+                                        <button class="btn btn-outline-primary btn-sm w-100 rounded-pill"><i class="bi bi-plus-lg"></i> Add Project</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Experience & Achievements omitted for brevity in placeholder -->
+                        </div>
+
+                        <!-- ATS Analysis Section -->
+                        <h6 class="fw-bold mt-4 mb-3">ATS Analysis</h6>
+                        <div class="ats-score-box p-4 mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <h5 class="fw-bold mb-1 text-dark">Overall ATS Score</h5>
+                                    <p class="small text-muted mb-0">Check if your resume is ready for product companies.</p>
+                                </div>
+                                <i class="bi bi-file-earmark-check fs-1 text-primary opacity-50"></i>
+                            </div>
+                            <button class="btn btn-primary w-100 rounded-pill fw-bold" id="analyzeAtsBtn">Analyze Resume</button>
+                            
+                            <!-- Mock Result (Hidden by default) -->
+                            <div class="mt-4 pt-3 border-top d-none" id="atsResult">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h2 class="fw-bold text-success mb-0">85%</h2>
+                                    <span class="badge bg-success">Great</span>
+                                </div>
+                                <ul class="small text-muted mb-0 ps-3">
+                                    <li>Missing Keywords: <span class="text-danger">Docker, AWS, Agile</span></li>
+                                    <li>Action verbs usage is good.</li>
+                                    <li>Formatting is ATS parsable.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right Column: Live Resume Preview -->
+                <div class="col-xl-7 col-lg-6">
+                    <div class="preview-sticky">
+                        
+                        <!-- Toolbar -->
+                        <div class="preview-toolbar d-flex justify-content-between align-items-center">
+                            <div class="d-flex gap-2 align-items-center">
+                                <button class="btn btn-light btn-sm border shadow-sm" id="zoomOutBtn"><i class="bi bi-zoom-out"></i></button>
+                                <span class="small fw-bold text-muted">Preview</span>
+                                <button class="btn btn-light btn-sm border shadow-sm" id="zoomInBtn"><i class="bi bi-zoom-in"></i></button>
+                                <button class="btn btn-link btn-sm text-decoration-none" id="zoomResetBtn">Reset</button>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill"><i class="bi bi-file-word"></i> DOCX</button>
+                                <button class="btn btn-primary btn-sm rounded-pill shadow-sm" id="downloadPdfBtn"><i class="bi bi-file-pdf"></i> Download PDF</button>
+                            </div>
+                        </div>
+
+                        <!-- Scalable Preview Wrapper -->
+                        <div class="resume-preview-wrapper" id="previewWrapper">
+                            
+                            <!-- The Resume Sheet (A4 Dimensions) -->
+                            <div class="resume-paper" id="resumePaper">
+                                
+                                <div class="res-header">
+                                    <div class="res-name" id="resName">John Doe</div>
+                                    <div class="res-contact">
+                                        <span id="resEmail">Email: john.doe@example.com</span> | 
+                                        <span id="resPhone">Phone: +91 9876543210</span> | 
+                                        <span id="resLinkedin">LinkedIn: linkedin.com/in/johndoe</span>
+                                    </div>
+                                </div>
+
+                                <div class="res-section">
+                                    <div class="res-section-title">Professional Summary</div>
+                                    <div class="res-list" style="list-style: none; padding-left: 0;">
+                                        <span id="resSummary">Write a brief summary...</span>
+                                    </div>
+                                </div>
+
+                                <div class="res-section">
+                                    <div class="res-section-title">Education</div>
+                                    <div class="res-item">
+                                        <div class="res-item-header">
+                                            <div class="res-item-title">SRM Institute of Science and Technology</div>
+                                            <div class="res-item-date">2022 - 2026</div>
+                                        </div>
+                                        <div class="res-item-subtitle">B.Tech Computer Science and Engineering | CGPA: 8.5/10</div>
+                                    </div>
+                                </div>
+
+                                <div class="res-section">
+                                    <div class="res-section-title">Skills</div>
+                                    <div class="res-skills">
+                                        <strong>Languages & Frameworks:</strong> Java, Python, React, Node.js, SQL
+                                    </div>
+                                    <div class="res-skills">
+                                        <strong>Tools:</strong> Git, Docker, Postman, VS Code
+                                    </div>
+                                </div>
+
+                                <div class="res-section">
+                                    <div class="res-section-title">Projects</div>
+                                    <div class="res-item">
+                                        <div class="res-item-header">
+                                            <div class="res-item-title">E-Commerce Microservices</div>
+                                            <div class="res-item-subtitle">Java, Spring Boot, MySQL</div>
+                                        </div>
+                                        <ul class="res-list">
+                                            <li>Developed a scalable backend architecture for an e-commerce platform using microservices pattern.</li>
+                                            <li>Implemented JWT authentication and authorization for secure API access.</li>
+                                            <li>Integrated payment gateway and optimized database queries reducing load time by 30%.</li>
+                                        </ul>
+                                    </div>
+                                    <div class="res-item">
+                                        <div class="res-item-header">
+                                            <div class="res-item-title">Real-time Chat App</div>
+                                            <div class="res-item-subtitle">React, Node.js, Socket.io</div>
+                                        </div>
+                                        <ul class="res-list">
+                                            <li>Built a full-stack real-time chat application supporting private and group messaging.</li>
+                                            <li>Managed global state using Redux and stored chat history in MongoDB.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="res-section">
+                                    <div class="res-section-title">Achievements</div>
+                                    <ul class="res-list">
+                                        <li>Secured Top 50 rank in national level hackathon organized by Smart India Hackathon.</li>
+                                        <li>Solved 300+ Data Structures and Algorithm problems on LeetCode.</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/resume.js"></script>
+</body>
+</html>

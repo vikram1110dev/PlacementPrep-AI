@@ -1,0 +1,134 @@
+/* Analytics Dashboard Styles */
+
+.analytics-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    height: 100%;
+    transition: all 0.3s ease;
+}
+.analytics-card:hover {
+    box-shadow: 0 8px 30px rgba(37,99,235,0.1);
+}
+
+/* Stat Cards */
+.stat-card {
+    background: #fff;
+    border-radius: 1rem;
+    border: 1px solid #e2e8f0;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s;
+    height: 100%;
+}
+.stat-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 10px 20px -5px rgba(37,99,235,0.15);
+    transform: translateY(-4px);
+}
+.stat-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+/* Chart Container */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    margin-top: 1rem;
+}
+.chart-container-small {
+    position: relative;
+    height: 220px;
+    width: 100%;
+}
+
+/* Detailed Stat Rows */
+.detail-stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+.detail-stat-row:last-child {
+    border-bottom: none;
+}
+
+/* Readiness Cards */
+.readiness-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    background: #fff;
+    text-align: center;
+    transition: all 0.2s;
+}
+.readiness-card:hover {
+    border-color: var(--primary-color);
+}
+.readiness-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Timeline */
+.analytics-timeline {
+    position: relative;
+    padding-left: 1.5rem;
+}
+.analytics-timeline::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e2e8f0;
+}
+.timeline-event {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+.timeline-event:last-child {
+    margin-bottom: 0;
+}
+.event-dot {
+    position: absolute;
+    left: -1.75rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: 2px solid #fff;
+    top: 5px;
+    z-index: 2;
+}
+
+/* Progress Section */
+.goal-progress-wrap {
+    margin-bottom: 1.25rem;
+}
+.goal-progress-wrap:last-child {
+    margin-bottom: 0;
+}
+
+/* Export Btn */
+.export-btn {
+    border-radius: 2rem;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
+}

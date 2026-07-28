@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body class="bg-light">
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand"><i class="bi bi-robot"></i> PlacementPrep AI</a>
+        </div>
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Learning</div>
+            <li class="sidebar-item"><a href="dsa.html" class="sidebar-link"><i class="bi bi-code-square"></i> DSA</a></li>
+            <li class="sidebar-item"><a href="coding.html" class="sidebar-link"><i class="bi bi-journal-code"></i> Coding</a></li>
+            <li class="sidebar-item"><a href="projects.html" class="sidebar-link"><i class="bi bi-folder-check"></i> Projects</a></li>
+            
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link active"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item"><a href="settings.html" class="sidebar-link"><i class="bi bi-gear"></i> Settings</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar bg-white border-bottom shadow-sm">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search profile...">
+            </div>
+            <div class="nav-actions">
+                <a href="settings.html" class="nav-action-btn"><i class="bi bi-gear"></i></a>
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile">
+                </div>
+            </div>
+        </header>
+
+        <main class="content-area pt-3 px-xl-5">
+            
+            <!-- Profile Header -->
+            <div class="profile-card p-0 overflow-hidden mb-4 border-0">
+                <div class="profile-header-banner"></div>
+                
+                <div class="d-flex flex-wrap justify-content-between align-items-end pe-4 pb-4">
+                    <div class="profile-avatar-container">
+                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=e2e8f0&color=333&size=256" alt="Profile Photo" class="profile-avatar">
+                        <div class="mb-3">
+                            <h3 class="fw-bold mb-1">John Doe</h3>
+                            <p class="text-muted mb-0"><i class="bi bi-mortarboard-fill me-1"></i> B.Tech CSE '26 | SRM University</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary rounded-pill px-4 fw-medium"><i class="bi bi-pencil-square me-1"></i> Edit Public Profile</button>
+                    </div>
+                </div>
+
+                <div class="px-4 pb-2">
+                    <div class="profile-stats-row">
+                        <div class="stat-box pe-4 border-end">
+                            <div class="stat-value text-primary">850</div>
+                            <div class="stat-label">Placement Score</div>
+                        </div>
+                        <div class="stat-box pe-4 border-end">
+                            <div class="stat-value text-warning">12,450</div>
+                            <div class="stat-label">Total XP</div>
+                        </div>
+                        <div class="stat-box pe-4 border-end">
+                            <div class="stat-value text-info">Lvl 12</div>
+                            <div class="stat-label">Current Level</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value text-success">14 <i class="bi bi-fire"></i></div>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                
+                <!-- Left Col (Forms) -->
+                <div class="col-xl-8">
+                    
+                    <form id="profileForm">
+                        
+                        <!-- Personal Info -->
+                        <div class="profile-card">
+                            <h5 class="fw-bold mb-4">Personal Information</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" value="John Doe">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" value="john.doe@example.com" disabled>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="text" class="form-control" value="+91 9876543210">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control" value="2003-05-15">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Gender</label>
+                                    <select class="form-select">
+                                        <option selected>Male</option>
+                                        <option>Female</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Location</label>
+                                    <input type="text" class="form-control" value="Chennai, India">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Bio</label>
+                                    <textarea class="form-control" rows="3">Aspiring Software Development Engineer with a strong foundation in Data Structures, Algorithms, and Full-Stack Development.</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Academic Details -->
+                        <div class="profile-card">
+                            <h5 class="fw-bold mb-4">Academic Details</h5>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">College / University</label>
+                                    <input type="text" class="form-control" value="SRM Institute of Science and Technology">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Degree & Department</label>
+                                    <input type="text" class="form-control" value="B.Tech Computer Science">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Current CGPA</label>
+                                    <input type="text" class="form-control" value="8.5">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Start Year</label>
+                                    <select class="form-select"><option>2022</option></select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Graduation Year</label>
+                                    <select class="form-select"><option>2026</option></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="profile-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="fw-bold mb-0">Technical Skills</h5>
+                                <button class="btn btn-sm btn-outline-primary rounded-pill"><i class="bi bi-plus"></i> Add Skill</button>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2">
+                                <div class="skill-tag-edit">Java <i class="bi bi-x"></i></div>
+                                <div class="skill-tag-edit">Python <i class="bi bi-x"></i></div>
+                                <div class="skill-tag-edit">C++ <i class="bi bi-x"></i></div>
+                                <div class="skill-tag-edit">React <i class="bi bi-x"></i></div>
+                                <div class="skill-tag-edit">Node.js <i class="bi bi-x"></i></div>
+                                <div class="skill-tag-edit">SQL <i class="bi bi-x"></i></div>
+                                <div class="skill-tag-edit">Data Structures <i class="bi bi-x"></i></div>
+                                <div class="skill-tag-edit">System Design <i class="bi bi-x"></i></div>
+                            </div>
+                        </div>
+
+                        <!-- Social Profiles -->
+                        <div class="profile-card">
+                            <h5 class="fw-bold mb-4">Social Profiles & Coding Links</h5>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="input-group social-input-group">
+                                        <span class="input-group-text"><i class="bi bi-github text-dark"></i></span>
+                                        <input type="text" class="form-control" placeholder="GitHub Username" value="johndoe-dev">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group social-input-group">
+                                        <span class="input-group-text"><i class="bi bi-linkedin text-primary"></i></span>
+                                        <input type="text" class="form-control" placeholder="LinkedIn Profile" value="linkedin.com/in/johndoe">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group social-input-group">
+                                        <span class="input-group-text"><i class="bi bi-code-square text-warning"></i></span>
+                                        <input type="text" class="form-control" placeholder="LeetCode Username" value="johndoe_lc">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group social-input-group">
+                                        <span class="input-group-text"><i class="bi bi-globe text-info"></i></span>
+                                        <input type="text" class="form-control" placeholder="Portfolio Website" value="https://johndoe.dev">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-end mb-5">
+                            <button type="button" class="btn btn-primary px-5 py-2 fw-bold rounded-pill" id="saveProfileBtn">Save Changes</button>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Right Col (Summary) -->
+                <div class="col-xl-4">
+                    
+                    <!-- Achievements Summary -->
+                    <div class="profile-card">
+                        <h6 class="fw-bold mb-3">Achievements</h6>
+                        <div class="d-flex align-items-center gap-3 mb-3 border-bottom pb-2">
+                            <i class="bi bi-award-fill fs-3 text-warning"></i>
+                            <div>
+                                <h6 class="fw-bold mb-0">Top 100 Rank</h6>
+                                <small class="text-muted">Global Coding Leaderboard</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3 mb-3 border-bottom pb-2">
+                            <i class="bi bi-patch-check-fill fs-3 text-primary"></i>
+                            <div>
+                                <h6 class="fw-bold mb-0">React Verified</h6>
+                                <small class="text-muted">Skill Assessment Passed</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <i class="bi bi-file-code-fill fs-3 text-success"></i>
+                            <div>
+                                <h6 class="fw-bold mb-0">3 Projects Deployed</h6>
+                                <small class="text-muted">Portfolio Milestone</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Learning Summary -->
+                    <div class="profile-card">
+                        <h6 class="fw-bold mb-3">Learning Summary</h6>
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span class="text-muted">Problems Solved</span>
+                            <span class="fw-bold text-dark">342</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span class="text-muted">Aptitude Progress</span>
+                            <span class="fw-bold text-dark">75%</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span class="text-muted">Mock Interviews</span>
+                            <span class="fw-bold text-dark">4</span>
+                        </div>
+                        <div class="d-flex justify-content-between small">
+                            <span class="text-muted">Study Hours</span>
+                            <span class="fw-bold text-dark">142 Hrs</span>
+                        </div>
+                        <hr>
+                        <a href="analytics.html" class="btn btn-outline-primary btn-sm w-100 rounded-pill">View Full Analytics</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Analytics - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/analytics.css">
+</head>
+<body class="bg-light" style="background-image: radial-gradient(#e2e8f0 1px, transparent 1px); background-size: 20px 20px;">
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand"><i class="bi bi-robot"></i> PlacementPrep AI</a>
+        </div>
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Learning</div>
+            <li class="sidebar-item"><a href="aptitude.html" class="sidebar-link"><i class="bi bi-calculator"></i> Aptitude</a></li>
+            <li class="sidebar-item"><a href="dsa.html" class="sidebar-link"><i class="bi bi-code-square"></i> DSA</a></li>
+            <li class="sidebar-item"><a href="coding.html" class="sidebar-link"><i class="bi bi-journal-code"></i> Coding</a></li>
+            <li class="sidebar-item"><a href="projects.html" class="sidebar-link"><i class="bi bi-folder-check"></i> Projects</a></li>
+            <li class="sidebar-item"><a href="company.html" class="sidebar-link"><i class="bi bi-building"></i> Company Prep</a></li>
+            
+            <div class="sidebar-menu-title">Assessments</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-camera-video"></i> Mock Interviews</a></li>
+            <li class="sidebar-item"><a href="ai-mentor.html" class="sidebar-link"><i class="bi bi-chat-dots"></i> AI Mentor</a></li>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link active"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-trophy"></i> Leaderboard</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar bg-white bg-opacity-75" style="backdrop-filter: blur(10px);">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search analytics...">
+            </div>
+            <div class="nav-actions">
+                <button class="nav-action-btn" title="Toggle Dark Mode"><i class="bi bi-moon"></i></button>
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile" data-bs-toggle="dropdown">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area pt-3">
+            
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1"><i class="bi bi-bar-chart-line text-primary me-2"></i>Learning Analytics</h2>
+                    <p class="text-muted mb-0">Track your placement journey with real-time insights and AI recommendations.</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <select class="form-select w-auto border-light shadow-sm fw-medium rounded-pill">
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days</option>
+                        <option>This Year</option>
+                    </select>
+                    <div class="dropdown">
+                        <button class="btn btn-primary rounded-pill fw-medium shadow-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-download me-1"></i> Export Report
+                        </button>
+                        <ul class="dropdown-menu border-0 shadow">
+                            <li><a class="dropdown-item export-action-btn" href="#"><i class="bi bi-file-pdf text-danger me-2"></i> PDF Report</a></li>
+                            <li><a class="dropdown-item export-action-btn" href="#"><i class="bi bi-file-excel text-success me-2"></i> Excel Report</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-share text-primary me-2"></i> Share Progress</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overview Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary bg-opacity-10 text-primary"><i class="bi bi-trophy"></i></div>
+                        <div>
+                            <small class="text-muted fw-bold text-uppercase d-block mb-1">Placement Score</small>
+                            <h3 class="fw-bold mb-0">850<span class="fs-6 text-muted">/1000</span></h3>
+                            <small class="text-success fw-medium"><i class="bi bi-arrow-up-short"></i> 5% this week</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning bg-opacity-10 text-warning"><i class="bi bi-lightning-charge"></i></div>
+                        <div>
+                            <small class="text-muted fw-bold text-uppercase d-block mb-1">Current XP</small>
+                            <h3 class="fw-bold mb-0">12,450</h3>
+                            <small class="text-muted fw-medium">Level 12 Coder</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card border-success border-opacity-50" style="background: rgba(236,253,245,0.5);">
+                        <div class="stat-icon bg-success text-white shadow-sm"><i class="bi bi-fire"></i></div>
+                        <div>
+                            <small class="text-success fw-bold text-uppercase d-block mb-1">Learning Streak</small>
+                            <h3 class="fw-bold mb-0 text-success">14 Days</h3>
+                            <small class="text-success fw-medium">Keep it up!</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info bg-opacity-10 text-info"><i class="bi bi-clock-history"></i></div>
+                        <div>
+                            <small class="text-muted fw-bold text-uppercase d-block mb-1">Total Study Hours</small>
+                            <h3 class="fw-bold mb-0">142h</h3>
+                            <small class="text-success fw-medium"><i class="bi bi-arrow-up-short"></i> 12h this week</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row 1 -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-6">
+                    <div class="analytics-card">
+                        <h6 class="fw-bold mb-1">Daily Learning Hours</h6>
+                        <small class="text-muted mb-3 d-block">Time spent on the platform over the last 7 days.</small>
+                        <div class="chart-container">
+                            <canvas id="learningHoursChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="analytics-card">
+                        <h6 class="fw-bold mb-1">Problems Solved (Weekly)</h6>
+                        <small class="text-muted mb-3 d-block">Number of coding and aptitude questions solved.</small>
+                        <div class="chart-container">
+                            <canvas id="problemsSolvedChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row 2 -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4">
+                    <div class="analytics-card">
+                        <h6 class="fw-bold mb-1">Learning Distribution</h6>
+                        <small class="text-muted mb-3 d-block">Where your time goes.</small>
+                        <div class="chart-container-small">
+                            <canvas id="learningDistChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="analytics-card">
+                        <h6 class="fw-bold mb-1">Skills Comparison</h6>
+                        <small class="text-muted mb-3 d-block">Your skills vs Target Goal.</small>
+                        <div class="chart-container-small">
+                            <canvas id="skillsRadarChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="analytics-card">
+                        <h6 class="fw-bold mb-1">Monthly Performance</h6>
+                        <small class="text-muted mb-3 d-block">Overall placement readiness growth.</small>
+                        <div class="chart-container-small">
+                            <canvas id="monthlyPerfChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Analytics Row -->
+            <div class="row g-4 mb-4">
+                
+                <!-- Coding Analytics -->
+                <div class="col-lg-4">
+                    <div class="analytics-card">
+                        <h5 class="fw-bold mb-3"><i class="bi bi-code-slash text-primary me-2"></i>Coding Analytics</h5>
+                        
+                        <div class="d-flex justify-content-between mb-4 mt-2">
+                            <div class="text-center">
+                                <h4 class="fw-bold text-success mb-0">82</h4>
+                                <small class="text-muted">Easy</small>
+                            </div>
+                            <div class="text-center">
+                                <h4 class="fw-bold text-warning mb-0">45</h4>
+                                <small class="text-muted">Medium</small>
+                            </div>
+                            <div class="text-center">
+                                <h4 class="fw-bold text-danger mb-0">18</h4>
+                                <small class="text-muted">Hard</small>
+                            </div>
+                        </div>
+
+                        <div class="detail-stat-row">
+                            <span class="text-muted fw-medium"><i class="bi bi-bullseye me-2"></i>Acceptance Rate</span>
+                            <span class="fw-bold">64.5%</span>
+                        </div>
+                        <div class="detail-stat-row">
+                            <span class="text-muted fw-medium"><i class="bi bi-stopwatch me-2"></i>Avg. Time / Question</span>
+                            <span class="fw-bold">12m 30s</span>
+                        </div>
+                        <div class="detail-stat-row">
+                            <span class="text-muted fw-medium"><i class="bi bi-lightning-charge me-2"></i>Fastest Submission</span>
+                            <span class="fw-bold text-success">1m 15s</span>
+                        </div>
+                        <div class="detail-stat-row">
+                            <span class="text-muted fw-medium"><i class="bi bi-calendar2-check me-2"></i>Longest Streak</span>
+                            <span class="fw-bold text-warning">21 Days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aptitude Analytics -->
+                <div class="col-lg-4">
+                    <div class="analytics-card">
+                        <h5 class="fw-bold mb-3"><i class="bi bi-calculator text-success me-2"></i>Aptitude Analytics</h5>
+                        
+                        <div class="d-flex align-items-center gap-3 mb-4 mt-2">
+                            <div class="progress-ring position-relative rounded-circle d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; background: conic-gradient(#10b981 75%, #e2e8f0 0deg);">
+                                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 55px; height: 55px;">75%</div>
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-0">450</h4>
+                                <small class="text-muted">Total Solved</small>
+                            </div>
+                        </div>
+
+                        <div class="detail-stat-row">
+                            <span class="text-muted fw-medium"><i class="bi bi-percent me-2"></i>Accuracy</span>
+                            <span class="fw-bold text-success">88%</span>
+                        </div>
+                        <div class="detail-stat-row">
+                            <span class="text-muted fw-medium"><i class="bi bi-arrow-up-right-square me-2"></i>Strongest Topic</span>
+                            <span class="fw-bold">Percentages</span>
+                        </div>
+                        <div class="detail-stat-row">
+                            <span class="text-muted fw-medium"><i class="bi bi-arrow-down-right-square me-2"></i>Weakest Topic</span>
+                            <span class="fw-bold text-danger">Probability</span>
+                        </div>
+                        <div class="detail-stat-row">
+                            <span class="text-muted fw-medium"><i class="bi bi-trophy me-2"></i>Average Mock Score</span>
+                            <span class="fw-bold">32/40</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaderboard & Goals -->
+                <div class="col-lg-4">
+                    <div class="analytics-card">
+                        <h5 class="fw-bold mb-3"><i class="bi bi-flag text-warning me-2"></i>Goals & Leaderboard</h5>
+                        
+                        <div class="bg-warning bg-opacity-10 border border-warning rounded p-3 mb-4 d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="fw-bold text-warning d-block text-uppercase">Your Rank</small>
+                                <h3 class="fw-bold text-dark mb-0">#42</h3>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted d-block">Top Rank: #1</small>
+                                <small class="fw-medium text-warning">2,400 XP to next rank</small>
+                            </div>
+                        </div>
+
+                        <div class="goal-progress-wrap">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span class="fw-medium">Daily Coding Goal</span>
+                                <span class="text-muted">3/5 Problems</span>
+                            </div>
+                            <div class="custom-progress" style="height: 6px;">
+                                <div class="custom-progress-bar bg-primary" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div class="goal-progress-wrap">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span class="fw-medium">Weekly Study Hours</span>
+                                <span class="text-muted">12/15 Hours</span>
+                            </div>
+                            <div class="custom-progress" style="height: 6px;">
+                                <div class="custom-progress-bar bg-success" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="goal-progress-wrap">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span class="fw-medium">Monthly Mock Tests</span>
+                                <span class="text-muted">1/4 Tests</span>
+                            </div>
+                            <div class="custom-progress" style="height: 6px;">
+                                <div class="custom-progress-bar bg-danger" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Readiness & AI Insights -->
+            <div class="row g-4 mb-5">
+                <!-- Company Readiness -->
+                <div class="col-xl-8">
+                    <div class="analytics-card">
+                        <h5 class="fw-bold mb-4">Company Readiness Meter</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="readiness-card">
+                                    <i class="bi bi-google readiness-icon text-danger"></i>
+                                    <h6 class="fw-bold mb-1">Google</h6>
+                                    <div class="custom-progress mb-2 mx-auto" style="height: 6px; width: 80%;">
+                                        <div class="custom-progress-bar bg-primary" style="width: 45%;"></div>
+                                    </div>
+                                    <small class="fw-bold text-primary d-block mb-1">45% Ready</small>
+                                    <small class="text-muted" style="font-size:0.7rem;">Needs more DP</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="readiness-card border-success">
+                                    <i class="bi bi-windows readiness-icon text-info"></i>
+                                    <h6 class="fw-bold mb-1">Microsoft</h6>
+                                    <div class="custom-progress mb-2 mx-auto" style="height: 6px; width: 80%;">
+                                        <div class="custom-progress-bar bg-success" style="width: 85%;"></div>
+                                    </div>
+                                    <small class="fw-bold text-success d-block mb-1">85% Ready</small>
+                                    <small class="text-muted" style="font-size:0.7rem;">Highly Confident</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="readiness-card">
+                                    <i class="bi bi-amazon readiness-icon text-warning"></i>
+                                    <h6 class="fw-bold mb-1">Amazon</h6>
+                                    <div class="custom-progress mb-2 mx-auto" style="height: 6px; width: 80%;">
+                                        <div class="custom-progress-bar bg-warning" style="width: 60%;"></div>
+                                    </div>
+                                    <small class="fw-bold text-warning d-block mb-1">60% Ready</small>
+                                    <small class="text-muted" style="font-size:0.7rem;">Focus on Graphs</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Insights -->
+                <div class="col-xl-4">
+                    <div class="analytics-card" style="background: linear-gradient(135deg, #eff6ff, #ffffff);">
+                        <div class="d-flex align-items-center gap-2 mb-4">
+                            <i class="bi bi-robot text-primary fs-4"></i>
+                            <h5 class="fw-bold mb-0 text-primary">AI Insights</h5>
+                        </div>
+                        <div class="mb-3">
+                            <small class="fw-bold text-muted text-uppercase d-block mb-1">Your Biggest Strength</small>
+                            <span class="badge bg-success bg-opacity-10 text-success border border-success"><i class="bi bi-code-slash me-1"></i> Data Structures</span>
+                        </div>
+                        <div class="mb-3">
+                            <small class="fw-bold text-muted text-uppercase d-block mb-1">Area of Improvement</small>
+                            <span class="badge bg-danger bg-opacity-10 text-danger border border-danger"><i class="bi bi-diagram-3 me-1"></i> System Design</span>
+                        </div>
+                        <div class="mb-4">
+                            <small class="fw-bold text-muted text-uppercase d-block mb-1">Today's Recommendation</small>
+                            <p class="small text-dark fw-medium border-start border-3 border-primary ps-2 mb-0">Take a full-length mock test for TCS NQT to evaluate time management.</p>
+                        </div>
+                        <button class="btn btn-outline-primary w-100 rounded-pill btn-sm fw-bold">Generate Custom Report</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Timeline -->
+            <h5 class="fw-bold mb-3">Milestones & Achievements</h5>
+            <div class="analytics-card mb-5">
+                <div class="analytics-timeline mt-2">
+                    <div class="timeline-event">
+                        <div class="event-dot"></div>
+                        <div class="ms-4">
+                            <h6 class="fw-bold mb-0">Resume Approved by AI</h6>
+                            <small class="text-muted">Oct 12, 2026 - Achieved 90% ATS Score.</small>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="event-dot bg-warning border-warning"></div>
+                        <div class="ms-4">
+                            <h6 class="fw-bold mb-0">100 Coding Problems Solved</h6>
+                            <small class="text-muted">Sep 28, 2026 - Reached a major coding milestone.</small>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <div class="event-dot bg-success border-success"></div>
+                        <div class="ms-4">
+                            <h6 class="fw-bold mb-0">First Full-Stack Project Completed</h6>
+                            <small class="text-muted">Sep 15, 2026 - 'E-Commerce Backend' added to portfolio.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mt-4 pt-4 border-top border-light d-flex flex-wrap justify-content-between align-items-center text-muted small pb-3">
+                <span class="fw-medium">&copy; 2026 PlacementPrep AI. All rights reserved.</span>
+                <span class="fw-medium">Version 1.0.0</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+/* Profile & Settings Shared Styles */
+
+/* Glassmorphism Profile Box */
+.profile-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    margin-bottom: 1.5rem;
+}
+
+/* Header Banner */
+.profile-header-banner {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    height: 150px;
+    border-radius: 1.25rem 1.25rem 0 0;
+    position: relative;
+    overflow: hidden;
+}
+.profile-header-banner::after {
+    content: '';
+    position: absolute;
+    right: -50px;
+    bottom: -50px;
+    width: 250px;
+    height: 250px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+}
+
+/* Avatar */
+.profile-avatar-container {
+    margin-top: -65px;
+    margin-left: 2rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+.profile-avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    background: #e2e8f0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    object-fit: cover;
+}
+
+/* Header Stats */
+.profile-stats-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    padding: 1rem 0;
+    border-top: 1px solid #f1f5f9;
+}
+.stat-box {
+    text-align: center;
+}
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+.stat-label {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+/* Input Fields overrides */
+.form-control, .form-select {
+    border-color: #cbd5e1;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+}
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    border-color: var(--primary-color);
+}
+.form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+}
+
+/* Social Links inputs */
+.social-input-group .input-group-text {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #64748b;
+    width: 45px;
+    justify-content: center;
+}
+
+/* Skills Tags */
+.skill-tag-edit {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 0.35rem 0.85rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+.skill-tag-edit i {
+    cursor: pointer;
+    color: #94a3b8;
+    transition: 0.2s;
+}
+.skill-tag-edit i:hover { color: #ef4444; }
+
+/* Settings Layout */
+.settings-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.settings-nav .nav-link {
+    color: #475569;
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.settings-nav .nav-link:hover {
+    background: #f1f5f9;
+}
+.settings-nav .nav-link.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Settings Sections */
+.settings-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+.settings-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Toggles & Lists */
+.settings-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+.settings-list-item:last-child {
+    border-bottom: none;
+}
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.form-switch .form-check-input {
+    width: 2.5em;
+    height: 1.25em;
+    cursor: pointer;
+}
+
+/* Theme Selector */
+.theme-selector {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+.theme-box {
+    width: 100px;
+    cursor: pointer;
+    text-align: center;
+}
+.theme-preview {
+    height: 70px;
+    border-radius: 0.5rem;
+    border: 2px solid #e2e8f0;
+    margin-bottom: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: 0.2s;
+}
+.theme-box.active .theme-preview {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(37,99,235,0.2);
+}
+.theme-light { background: #f8fafc; }
+.theme-dark { background: #0f172a; }
+.theme-dark::after {
+    content: ''; position: absolute; left: 10px; top: 10px; width: 30px; height: 10px; background: #334155; border-radius: 2px;
+}
+.theme-light::after {
+    content: ''; position: absolute; left: 10px; top: 10px; width: 30px; height: 10px; background: #cbd5e1; border-radius: 2px;
+}
+
+/* Device List */
+.device-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    background: #f8fafc;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 0.75rem;
+}
+.device-icon {
+    font-size: 1.5rem;
+    color: #64748b;
+}

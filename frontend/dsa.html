@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Learning - PlacementPrep AI</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dsa.css">
+</head>
+<body>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand">
+                <i class="bi bi-robot"></i> PlacementPrep AI
+            </a>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Learning</div>
+            <li class="sidebar-item"><a href="aptitude.html" class="sidebar-link"><i class="bi bi-calculator"></i> Aptitude</a></li>
+            <li class="sidebar-item"><a href="dsa.html" class="sidebar-link active"><i class="bi bi-code-square"></i> DSA</a></li>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-journal-code"></i> Coding Problems</a></li>
+            <li class="sidebar-item"><a href="projects.html" class="sidebar-link"><i class="bi bi-folder-check"></i> Projects</a></li>
+            <li class="sidebar-item"><a href="company.html" class="sidebar-link"><i class="bi bi-building"></i> Company Prep</a></li>
+            
+            <div class="sidebar-menu-title">Assessments</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-camera-video"></i> Mock Interviews</a></li>
+            <li class="sidebar-item"><a href="ai-mentor.html" class="sidebar-link"><i class="bi bi-chat-dots"></i> AI Mentor</a></li>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-trophy"></i> Leaderboard</a></li>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-award"></i> Certificates</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item"><a href="settings.html" class="sidebar-link"><i class="bi bi-gear"></i> Settings</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn">
+                <i class="bi bi-list"></i>
+            </button>
+            
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search problems, topics, companies...">
+            </div>
+            
+            <div class="nav-actions">
+                <button class="nav-action-btn" title="Toggle Dark Mode"><i class="bi bi-moon"></i></button>
+                <button class="nav-action-btn position-relative"><i class="bi bi-bell"></i><span class="badge-dot"></span></button>
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile" data-bs-toggle="dropdown" aria-expanded="false">
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2">
+                        <li><h6 class="dropdown-header">Hi, John Doe</h6></li>
+                        <li><a class="dropdown-item" href="profile.html"><i class="bi bi-person me-2"></i> My Profile</a></li>
+                        <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear me-2"></i> Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="login.html"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">Master Data Structures & Algorithms</h2>
+                    <p class="text-muted mb-0">Prepare for coding interviews with structured learning paths, coding challenges and AI guidance.</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <select class="form-select w-auto border-light shadow-sm fw-medium">
+                        <option value="">Difficulty: All</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <button class="btn btn-outline-secondary bg-white shadow-sm"><i class="bi bi-funnel"></i> Filters</button>
+                </div>
+            </div>
+
+            <!-- Top Row: Daily Challenge & Streak -->
+            <div class="row g-4 mb-5">
+                <!-- Daily Challenge -->
+                <div class="col-lg-8">
+                    <div class="daily-coding-card p-4 h-100 d-flex flex-column justify-content-center">
+                        <div class="position-relative z-1">
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                                <span class="badge bg-white text-primary mb-2"><i class="bi bi-calendar-event me-1"></i> Daily Coding Challenge</span>
+                                <span class="fw-medium text-white opacity-75 mb-2"><i class="bi bi-clock me-1"></i> Ends in: 14h 23m</span>
+                            </div>
+                            <h3 class="fw-bold mb-2">124. Binary Tree Maximum Path Sum</h3>
+                            <div class="d-flex align-items-center gap-3 text-white-50 mb-4 small fw-medium">
+                                <span class="badge bg-danger bg-opacity-25 text-white border border-danger border-opacity-50">Hard</span>
+                                <span><i class="bi bi-award me-1"></i> +250 XP</span>
+                                <span><i class="bi bi-building me-1"></i> Google, Meta</span>
+                            </div>
+                            <button class="btn btn-light rounded-pill px-4 fw-bold text-primary shadow-sm">Start Challenge</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Analytics & Streak Summary -->
+                <div class="col-lg-4">
+                    <div class="dash-card p-4 h-100">
+                        <h6 class="fw-bold mb-3">Your Progress</h6>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="text-center">
+                                <div class="progress-ring mb-2" data-percent="80" data-color="#059669">
+                                    <span class="progress-ring-value text-success">80</span>
+                                </div>
+                                <span class="small fw-semibold">Easy</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="progress-ring mb-2" data-percent="45" data-color="#d97706">
+                                    <span class="progress-ring-value text-warning">45</span>
+                                </div>
+                                <span class="small fw-semibold">Medium</span>
+                            </div>
+                            <div class="text-center">
+                                <div class="progress-ring mb-2" data-percent="15" data-color="#dc2626">
+                                    <span class="progress-ring-value text-danger">15</span>
+                                </div>
+                                <span class="small fw-semibold">Hard</span>
+                            </div>
+                        </div>
+                        <div class="bg-light rounded-3 p-3 text-center">
+                            <h6 class="fw-bold text-dark mb-1"><i class="bi bi-fire text-warning"></i> 14 Day Streak!</h6>
+                            <small class="text-muted">You're in the top 5% of active coders.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Company Tags -->
+            <div class="mb-5">
+                <h6 class="fw-bold mb-3 text-muted">Filter by Top Companies</h6>
+                <div class="company-tags-wrapper">
+                    <div class="company-pill active">All Companies</div>
+                    <div class="company-pill"><i class="bi bi-google text-primary me-1"></i> Google</div>
+                    <div class="company-pill"><i class="bi bi-windows text-info me-1"></i> Microsoft</div>
+                    <div class="company-pill"><i class="bi bi-amazon text-warning me-1"></i> Amazon</div>
+                    <div class="company-pill"><i class="bi bi-meta text-primary me-1"></i> Meta</div>
+                    <div class="company-pill">Adobe</div>
+                    <div class="company-pill">Flipkart</div>
+                    <div class="company-pill">Oracle</div>
+                    <div class="company-pill">Infosys</div>
+                    <div class="company-pill">TCS</div>
+                    <div class="company-pill">Accenture</div>
+                </div>
+            </div>
+
+            <!-- Learning Paths Grid -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="fw-bold mb-0">Structured Learning Paths</h5>
+                <a href="#" class="text-primary text-decoration-none small fw-semibold">View Roadmap</a>
+            </div>
+            
+            <div class="row g-4 mb-5">
+                <!-- Path 1 -->
+                <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="path-card p-4">
+                        <div class="icon-square bg-primary-light text-primary mb-3"><i class="bi bi-list-columns-reverse"></i></div>
+                        <h6 class="fw-bold">Arrays & Strings</h6>
+                        <div class="d-flex justify-content-between align-items-center small text-muted mb-3">
+                            <span>50 Problems</span>
+                            <span>2 Weeks</span>
+                        </div>
+                        <div class="custom-progress mb-3">
+                            <div class="custom-progress-bar bg-primary" style="width: 100%;"></div>
+                        </div>
+                        <button class="btn btn-outline-secondary w-100 rounded-pill btn-sm">Completed</button>
+                    </div>
+                </div>
+                <!-- Path 2 -->
+                <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="path-card p-4 border-primary shadow-sm">
+                        <div class="icon-square bg-warning bg-opacity-10 text-warning mb-3"><i class="bi bi-diagram-2"></i></div>
+                        <h6 class="fw-bold text-primary">Trees & BST</h6>
+                        <div class="d-flex justify-content-between align-items-center small text-muted mb-3">
+                            <span>35 Problems</span>
+                            <span>1.5 Weeks</span>
+                        </div>
+                        <div class="custom-progress mb-3">
+                            <div class="custom-progress-bar bg-warning" style="width: 45%;"></div>
+                        </div>
+                        <button class="btn btn-primary w-100 rounded-pill btn-sm shadow-sm">Continue</button>
+                    </div>
+                </div>
+                <!-- Path 3 -->
+                <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="path-card p-4">
+                        <div class="icon-square bg-danger bg-opacity-10 text-danger mb-3"><i class="bi bi-share"></i></div>
+                        <h6 class="fw-bold">Graph Algorithms</h6>
+                        <div class="d-flex justify-content-between align-items-center small text-muted mb-3">
+                            <span>40 Problems</span>
+                            <span>2 Weeks</span>
+                        </div>
+                        <div class="custom-progress mb-3">
+                            <div class="custom-progress-bar bg-danger" style="width: 10%;"></div>
+                        </div>
+                        <button class="btn btn-outline-primary w-100 rounded-pill btn-sm">Start Path</button>
+                    </div>
+                </div>
+                <!-- Path 4 -->
+                <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="path-card p-4">
+                        <div class="icon-square bg-info bg-opacity-10 text-info mb-3"><i class="bi bi-grid-3x3"></i></div>
+                        <h6 class="fw-bold">Dynamic Programming</h6>
+                        <div class="d-flex justify-content-between align-items-center small text-muted mb-3">
+                            <span>60 Problems</span>
+                            <span>3 Weeks</span>
+                        </div>
+                        <div class="custom-progress mb-3">
+                            <div class="custom-progress-bar bg-info" style="width: 0%;"></div>
+                        </div>
+                        <button class="btn btn-outline-primary w-100 rounded-pill btn-sm"><i class="bi bi-lock me-1"></i> Unlock</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout: Problems & Analytics -->
+            <div class="row g-4 mb-5">
+                
+                <!-- Left: Problem List -->
+                <div class="col-lg-8">
+                    <h5 class="fw-bold mb-3">Recommended Problems</h5>
+                    
+                    <div class="problem-list">
+                        <!-- Problem 1 -->
+                        <div class="problem-item p-3 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                            <div>
+                                <h6 class="fw-bold mb-1">1. Two Sum</h6>
+                                <div class="d-flex gap-3 text-muted small fw-medium">
+                                    <span class="badge badge-easy">Easy</span>
+                                    <span>Acc: 49.2%</span>
+                                    <span><i class="bi bi-google"></i> <i class="bi bi-amazon"></i></span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fw-bold text-warning small"><i class="bi bi-award"></i> 50 XP</span>
+                                <i class="bi bi-check-circle-fill text-success fs-5" title="Solved"></i>
+                            </div>
+                        </div>
+
+                        <!-- Problem 2 -->
+                        <div class="problem-item p-3 d-flex justify-content-between align-items-center flex-wrap gap-3 border-left-primary" style="border-left-color: var(--primary-color);">
+                            <div>
+                                <h6 class="fw-bold mb-1">200. Number of Islands</h6>
+                                <div class="d-flex gap-3 text-muted small fw-medium">
+                                    <span class="badge badge-medium">Medium</span>
+                                    <span>Acc: 56.4%</span>
+                                    <span><i class="bi bi-amazon"></i> <i class="bi bi-windows"></i></span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fw-bold text-warning small"><i class="bi bi-award"></i> 100 XP</span>
+                                <button class="btn btn-primary btn-sm px-4 rounded-pill">Solve</button>
+                            </div>
+                        </div>
+
+                        <!-- Problem 3 -->
+                        <div class="problem-item p-3 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                            <div>
+                                <h6 class="fw-bold mb-1">42. Trapping Rain Water</h6>
+                                <div class="d-flex gap-3 text-muted small fw-medium">
+                                    <span class="badge badge-hard">Hard</span>
+                                    <span>Acc: 59.8%</span>
+                                    <span><i class="bi bi-google"></i> <i class="bi bi-meta"></i></span>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fw-bold text-warning small"><i class="bi bi-award"></i> 150 XP</span>
+                                <i class="bi bi-bookmark text-muted fs-5" title="Bookmark"></i>
+                                <button class="btn btn-outline-primary btn-sm px-4 rounded-pill">Solve</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button class="btn btn-link text-decoration-none fw-semibold">Load More Problems <i class="bi bi-chevron-down"></i></button>
+                    </div>
+                </div>
+
+                <!-- Right: Streak & AI Mentor -->
+                <div class="col-lg-4">
+                    <!-- Coding Streak Heatmap -->
+                    <div class="dash-card p-4 mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="fw-bold mb-0">Coding Streak</h6>
+                            <span class="badge bg-success bg-opacity-10 text-success">14 Days</span>
+                        </div>
+                        <div class="heatmap-container" id="heatmapContainer">
+                            <div class="heatmap-grid" id="heatmapGrid">
+                                <!-- Generated via JS -->
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-3 small text-muted">
+                            <span>Less</span>
+                            <div class="d-flex gap-1">
+                                <div class="heatmap-cell"></div>
+                                <div class="heatmap-cell level-1"></div>
+                                <div class="heatmap-cell level-2"></div>
+                                <div class="heatmap-cell level-3"></div>
+                                <div class="heatmap-cell level-4"></div>
+                            </div>
+                            <span>More</span>
+                        </div>
+                    </div>
+
+                    <!-- Leaderboard Preview -->
+                    <div class="dash-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="fw-bold mb-0">DSA Leaderboard</h6>
+                            <i class="bi bi-trophy text-warning"></i>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center mb-3 p-2 rounded bg-light">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold text-muted" style="width: 20px;">1</span>
+                                <span class="fw-medium">Karthik R</span>
+                            </div>
+                            <span class="small fw-bold text-primary">500 Solved</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3 p-2 rounded bg-light">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold text-muted" style="width: 20px;">2</span>
+                                <span class="fw-medium">Anjali P</span>
+                            </div>
+                            <span class="small fw-bold text-primary">480 Solved</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-1 p-2 rounded bg-light border border-primary border-opacity-50">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold text-primary" style="width: 20px;">18</span>
+                                <span class="fw-bold text-primary">You</span>
+                            </div>
+                            <span class="small fw-bold text-primary">145 Solved</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coding Workspace Preview -->
+            <div class="mb-5">
+                <h5 class="fw-bold mb-3"><i class="bi bi-laptop text-primary me-2"></i> Coding Workspace Preview</h5>
+                <div class="workspace-container shadow-sm">
+                    <div class="workspace-header d-flex justify-content-between align-items-center p-3">
+                        <div class="d-flex align-items-center gap-3">
+                            <select class="form-select form-select-sm w-auto fw-medium">
+                                <option value="java">Java</option>
+                                <option value="python" selected>Python 3</option>
+                                <option value="cpp">C++</option>
+                                <option value="js">JavaScript</option>
+                            </select>
+                            <span class="text-muted small"><i class="bi bi-cloud-check text-success"></i> Saved</span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+                            <button class="btn btn-sm btn-light shadow-sm" id="runCodeBtn"><i class="bi bi-play-fill text-success"></i> Run Code</button>
+                            <button class="btn btn-sm btn-primary px-4 shadow-sm" id="submitCodeBtn">Submit</button>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-lg-4 border-end bg-light p-4 overflow-auto" style="height: 520px;">
+                            <h6 class="fw-bold mb-2">200. Number of Islands</h6>
+                            <div class="d-flex gap-2 mb-3">
+                                <span class="badge badge-medium">Medium</span>
+                                <span class="badge bg-secondary bg-opacity-10 text-secondary">Graphs</span>
+                            </div>
+                            <p class="small text-muted mb-4">Given an <code>m x n</code> 2D binary grid <code>grid</code> which represents a map of '1's (land) and '0's (water), return the number of islands.</p>
+                            <p class="small text-muted mb-2">An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.</p>
+                            
+                            <hr>
+                            <div class="ai-mentor-widget p-3 mt-4">
+                                <h6 class="fw-bold text-primary mb-2"><i class="bi bi-robot"></i> AI Mentor Hints</h6>
+                                <p class="small text-dark mb-2">Try using DFS or BFS. When you see a '1', initiate a search to mark all connected '1's as visited.</p>
+                                <button class="btn btn-sm btn-outline-primary w-100 rounded-pill">Explain Solution</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 d-flex flex-column">
+                            <textarea class="code-editor flex-grow-1" spellcheck="false">
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:
+            return 0
+            
+        count = 0
+        rows, cols = len(grid), len(grid[0])
+        
+        def dfs(r, c):
+            if r < 0 or c < 0 or r >= rows or c >= cols or grid[r][c] == '0':
+                return
+            grid[r][c] = '0' # mark visited
+            dfs(r+1, c)
+            dfs(r-1, c)
+            dfs(r, c+1)
+            dfs(r, c-1)
+            
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == '1':
+                    count += 1
+                    dfs(r, c)
+                    
+        return count
+                            </textarea>
+                            <div class="code-console" id="consoleOutput">
+                                <span class="text-white-50">Console output will appear here after execution...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements -->
+            <div class="mb-5">
+                <h5 class="fw-bold mb-3">Badges & Achievements</h5>
+                <div class="row g-3">
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center">
+                            <div class="achievement-icon bg-warning bg-opacity-10 text-warning mb-2 border border-warning shadow-sm"><i class="bi bi-star-fill"></i></div>
+                            <small class="fw-semibold lh-sm">First Acceptance</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center">
+                            <div class="achievement-icon bg-success bg-opacity-10 text-success mb-2 border border-success shadow-sm"><i class="bi bi-shield-check"></i></div>
+                            <small class="fw-semibold lh-sm">50 Solved</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center">
+                            <div class="achievement-icon bg-danger bg-opacity-10 text-danger mb-2 border border-danger shadow-sm"><i class="bi bi-fire"></i></div>
+                            <small class="fw-semibold lh-sm">7-Day Streak</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center bg-light border opacity-75">
+                            <div class="achievement-icon bg-secondary bg-opacity-10 text-secondary mb-2"><i class="bi bi-lock-fill"></i></div>
+                            <small class="fw-semibold lh-sm text-muted">100 Solved</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center bg-light border opacity-75">
+                            <div class="achievement-icon bg-secondary bg-opacity-10 text-secondary mb-2"><i class="bi bi-lock-fill"></i></div>
+                            <small class="fw-semibold lh-sm text-muted">DP Master</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center bg-light border opacity-75">
+                            <div class="achievement-icon bg-secondary bg-opacity-10 text-secondary mb-2"><i class="bi bi-lock-fill"></i></div>
+                            <small class="fw-semibold lh-sm text-muted">Graph Expert</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="mt-4 pt-4 border-top border-light d-flex flex-wrap justify-content-between align-items-center text-muted small pb-3">
+                <span class="fw-medium">&copy; 2026 PlacementPrep AI. All rights reserved.</span>
+                <span class="fw-medium">Version 1.0.0</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/dsa.js"></script>
+</body>
+</html>

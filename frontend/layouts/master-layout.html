@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Layout Reference | PlacementPrep AI</title>
+    <!-- Meta Tags -->
+    <meta name="description" content="AI-powered Placement Preparation Platform">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Modular CSS System -->
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/utilities.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+
+    <!-- Specific Page CSS (If Any) -->
+    <!-- <link rel="stylesheet" href="../assets/css/dashboard.css"> -->
+</head>
+<body>
+
+    <!-- 1. Page Loader -->
+    <div id="loader-container"></div>
+
+    <!-- 2. Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- 3. Main Wrapper -->
+    <div class="main-wrapper">
+        
+        <!-- 4. Top Navbar -->
+        <div id="navbar-container"></div>
+
+        <!-- 5. Page Content -->
+        <main class="content-area pt-3 px-xl-5">
+            
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h3 class="fw-bold mb-0">Page Title</h3>
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0 fs-sm">
+                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Current Page</li>
+                        </ol>
+                    </nav>
+                </div>
+                <button class="btn btn-primary-custom" onclick="showToast('success', 'Action completed successfully!')">
+                    Test Toast
+                </button>
+            </div>
+
+            <!-- Content Goes Here -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-glass p-4" id="contentCard">
+                        <h5 class="fw-bold">Welcome to the Modular Layout</h5>
+                        <p class="text-muted">This page dynamically loads the sidebar, navbar, and applies the global CSS design system.</p>
+                        <button class="btn btn-outline-primary" onclick="Loader.showSkeleton('contentCard', 'card'); setTimeout(() => Loader.hideSkeleton('contentCard'), 2000)">Test Skeleton Loader</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        
+        <!-- 6. Footer (Optional) -->
+        <div id="footer-container"></div>
+    </div>
+
+    <!-- 7. Toasts -->
+    <div id="toast-container"></div>
+
+    <!-- Modular JS System -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/helpers.js"></script>
+    <script src="../assets/js/theme.js"></script>
+    <script src="../assets/js/loader.js"></script>
+    <script src="../assets/js/notifications.js"></script>
+    <script src="../assets/js/navigation.js"></script>
+</body>
+</html>

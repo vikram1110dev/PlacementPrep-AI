@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Management - Admin | PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <aside class="admin-sidebar shadow">
+        <a href="admin-dashboard.html" class="admin-brand"><i class="bi bi-robot text-primary"></i> PlacementPrep Admin</a>
+        <div class="admin-nav">
+            <a href="admin-dashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="admin-users.html" class="nav-link"><i class="bi bi-people"></i> Users</a>
+            <a href="admin-companies.html" class="nav-link active"><i class="bi bi-building"></i> Companies</a>
+            <a href="admin-questions.html" class="nav-link"><i class="bi bi-journal-code"></i> Question Bank</a>
+            <a href="admin-settings.html" class="nav-link"><i class="bi bi-gear"></i> Settings</a>
+        </div>
+    </aside>
+
+    <div class="admin-main">
+        <header class="admin-topbar shadow-sm">
+            <h5 class="mb-0 fw-bold">Company Profiles</h5>
+            <button class="btn btn-primary btn-sm"><i class="bi bi-plus-lg"></i> Add Company</button>
+        </header>
+
+        <div class="admin-content">
+            <div class="admin-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <input type="text" class="form-control form-control-sm w-25" placeholder="Search companies...">
+                </div>
+                <div class="admin-table-wrapper">
+                    <table class="table admin-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>Logo</th>
+                                <th>Company Name</th>
+                                <th>Category</th>
+                                <th>Avg Package (LPA)</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i class="bi bi-google fs-3 text-danger"></i></td>
+                                <td><span class="fw-bold">Google</span></td>
+                                <td>Product Based</td>
+                                <td>24.0</td>
+                                <td><span class="badge badge-soft-success">Active</span></td>
+                                <td>
+                                    <button class="btn btn-light btn-sm text-primary"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-light btn-sm text-danger mock-action" data-action="delete"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><i class="bi bi-windows fs-3 text-info"></i></td>
+                                <td><span class="fw-bold">Microsoft</span></td>
+                                <td>Product Based</td>
+                                <td>40.0</td>
+                                <td><span class="badge badge-soft-success">Active</span></td>
+                                <td>
+                                    <button class="btn btn-light btn-sm text-primary"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-light btn-sm text-danger mock-action" data-action="delete"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:30px;height:30px;font-weight:bold;">T</div></td>
+                                <td><span class="fw-bold">TCS</span></td>
+                                <td>Service Based</td>
+                                <td>3.3 - 7.0</td>
+                                <td><span class="badge badge-soft-success">Active</span></td>
+                                <td>
+                                    <button class="btn btn-light btn-sm text-primary"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-light btn-sm text-danger mock-action" data-action="delete"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

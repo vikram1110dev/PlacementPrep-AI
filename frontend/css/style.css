@@ -1,0 +1,206 @@
+/* Base Styles */
+:root {
+    --primary-color: #2563EB;
+    --primary-hover: #1d4ed8;
+    --bg-light: #f8f9fa;
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Typography Utilities */
+.fw-bold { font-weight: 700 !important; }
+.fw-semibold { font-weight: 600 !important; }
+.fw-medium { font-weight: 500 !important; }
+.py-6 { padding-top: 5rem; padding-bottom: 5rem; }
+.text-primary { color: var(--primary-color) !important; }
+.bg-primary { background-color: var(--primary-color) !important; }
+.border-primary { border-color: var(--primary-color) !important; }
+
+/* Navbar */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+.navbar.scrolled {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+}
+.nav-link {
+    color: var(--text-dark);
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem !important;
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+.btn-light {
+    transition: all 0.3s ease;
+}
+.btn-light:hover {
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 100vh;
+    padding-top: 100px;
+    background: radial-gradient(circle at top right, rgba(37,99,235,0.08) 0%, rgba(255,255,255,1) 50%);
+}
+.hero-image-placeholder {
+    height: 400px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 2px dashed #e5e7eb;
+    transition: transform 0.5s ease;
+}
+.hero-image-placeholder:hover {
+    transform: translateY(-10px) scale(1.02);
+}
+
+/* Section Title Utility */
+.section-title {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* Features */
+.icon-box {
+    width: 65px;
+    height: 65px;
+    transition: all 0.4s ease;
+}
+.feature-card {
+    transition: all 0.4s ease;
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1.5rem 3rem rgba(0,0,0,.08) !important;
+}
+.feature-card:hover .icon-box {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Companies */
+.company-card {
+    transition: all 0.4s ease;
+}
+.company-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.08) !important;
+}
+.company-logo {
+    width: 90px;
+    height: 90px;
+    transition: all 0.3s ease;
+}
+.company-card:hover .company-logo {
+    transform: scale(1.1);
+}
+
+/* Timeline */
+.timeline-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 1.25rem;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+.timeline-step:hover .timeline-icon {
+    transform: scale(1.1);
+}
+.border-dashed {
+    border-top-style: dashed !important;
+    opacity: 0.5;
+}
+
+/* Testimonials */
+.testimonial-card {
+    transition: all 0.4s ease;
+}
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.08) !important;
+}
+
+/* Pricing */
+.pricing-card {
+    transition: all 0.4s ease;
+}
+.pricing-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 1.5rem 3rem rgba(0,0,0,.1) !important;
+}
+
+/* Footer */
+.footer-links a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+.footer-links a:hover {
+    color: white;
+    transform: translateX(5px);
+}
+.transition {
+    transition: all 0.3s ease;
+}
+.text-white-hover:hover {
+    color: white !important;
+}
+
+/* Base Animation Classes for JS */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

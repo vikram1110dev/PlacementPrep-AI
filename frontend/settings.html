@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body class="bg-light">
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand"><i class="bi bi-robot"></i> PlacementPrep AI</a>
+        </div>
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item"><a href="settings.html" class="sidebar-link active"><i class="bi bi-gear"></i> Settings</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-navbar bg-white border-bottom shadow-sm">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search settings...">
+            </div>
+            <div class="nav-actions">
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile">
+                </div>
+            </div>
+        </header>
+
+        <main class="content-area pt-4 px-xl-5">
+            
+            <div class="mb-4">
+                <h3 class="fw-bold mb-1">Account Settings</h3>
+                <p class="text-muted">Manage your preferences, security, and profile visibility.</p>
+            </div>
+
+            <div class="row g-4 mb-5">
+                
+                <!-- Left Nav -->
+                <div class="col-lg-3">
+                    <div class="profile-card p-3">
+                        <nav class="settings-nav">
+                            <a href="#" class="nav-link active" data-target="secNotifications">
+                                <i class="bi bi-bell"></i> Notifications
+                            </a>
+                            <a href="#" class="nav-link" data-target="secAppearance">
+                                <i class="bi bi-palette"></i> Appearance
+                            </a>
+                            <a href="#" class="nav-link" data-target="secPrivacy">
+                                <i class="bi bi-shield-lock"></i> Privacy
+                            </a>
+                            <a href="#" class="nav-link" data-target="secSecurity">
+                                <i class="bi bi-key"></i> Security
+                            </a>
+                            <a href="#" class="nav-link text-danger mt-2" data-target="secAccount">
+                                <i class="bi bi-exclamation-triangle"></i> Account
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="col-lg-9">
+                    
+                    <!-- Notifications Section -->
+                    <div class="settings-section active" id="secNotifications">
+                        <div class="profile-card">
+                            <h5 class="fw-bold mb-4">Notification Preferences</h5>
+                            
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Email Notifications</h6>
+                                    <small class="text-muted">Receive major updates and announcements via email.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Push Notifications</h6>
+                                    <small class="text-muted">Allow browser push notifications for reminders.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Placement Alerts</h6>
+                                    <small class="text-muted">Get notified when dream companies start hiring.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Daily AI Reminders</h6>
+                                    <small class="text-muted">AI Mentor's daily nudge to complete study goals.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Weekly Analytics Report</h6>
+                                    <small class="text-muted">A summary of your performance sent to email every Sunday.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance Section -->
+                    <div class="settings-section" id="secAppearance">
+                        <div class="profile-card">
+                            <h5 class="fw-bold mb-4">Appearance</h5>
+                            
+                            <h6 class="fw-bold mb-2">Theme Preference</h6>
+                            <small class="text-muted d-block">Choose how PlacementPrep AI looks to you.</small>
+                            <div class="theme-selector border-bottom pb-4 mb-4">
+                                <div class="theme-box active">
+                                    <div class="theme-preview theme-light"></div>
+                                    <small class="fw-medium text-dark">Light</small>
+                                </div>
+                                <div class="theme-box">
+                                    <div class="theme-preview theme-dark"></div>
+                                    <small class="fw-medium text-dark">Dark</small>
+                                </div>
+                                <div class="theme-box">
+                                    <div class="theme-preview theme-light" style="background: linear-gradient(90deg, #f8fafc 50%, #0f172a 50%);"></div>
+                                    <small class="fw-medium text-dark">System</small>
+                                </div>
+                            </div>
+
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Reduce Animations</h6>
+                                    <small class="text-muted">Disable UI animations for better performance.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Section -->
+                    <div class="settings-section" id="secPrivacy">
+                        <div class="profile-card">
+                            <h5 class="fw-bold mb-4">Privacy & Visibility</h5>
+                            
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Public Profile</h6>
+                                    <small class="text-muted">Allow your profile to be discovered on the leaderboard.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Recruiter Visibility</h6>
+                                    <small class="text-muted">Allow partnered recruiters to view your resume and stats.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Show GitHub & LinkedIn Links</h6>
+                                    <small class="text-muted">Display social links on your public recruiter view.</small>
+                                </div>
+                                <div class="form-check form-switch fs-5">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Security Section -->
+                    <div class="settings-section" id="secSecurity">
+                        <div class="profile-card mb-4">
+                            <h5 class="fw-bold mb-4">Change Password</h5>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Current Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter current password">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">New Password</label>
+                                    <input type="password" class="form-control" placeholder="New password">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" placeholder="Confirm new password">
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button class="btn btn-primary rounded-pill px-4 fw-medium">Update Password</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="profile-card">
+                            <h5 class="fw-bold mb-4">Active Devices</h5>
+                            <div class="device-item">
+                                <i class="bi bi-laptop device-icon"></i>
+                                <div class="flex-grow-1">
+                                    <h6 class="fw-bold mb-0">Windows 11 • Chrome</h6>
+                                    <small class="text-muted">Chennai, India • Active Now</small>
+                                </div>
+                                <span class="badge bg-success bg-opacity-10 text-success border border-success">Current</span>
+                            </div>
+                            <div class="device-item">
+                                <i class="bi bi-phone device-icon"></i>
+                                <div class="flex-grow-1">
+                                    <h6 class="fw-bold mb-0">iPhone 13 • Safari</h6>
+                                    <small class="text-muted">Chennai, India • Yesterday at 4:30 PM</small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger">Log Out</button>
+                            </div>
+                            <div class="mt-3 text-end">
+                                <button class="btn btn-outline-danger btn-sm fw-medium">Log out of all devices</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Management -->
+                    <div class="settings-section" id="secAccount">
+                        <div class="profile-card border-danger border-opacity-50">
+                            <h5 class="fw-bold mb-4 text-danger">Danger Zone</h5>
+                            
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1">Export My Data</h6>
+                                    <small class="text-muted">Download a copy of all your learning progress and code submissions.</small>
+                                </div>
+                                <button class="btn btn-outline-primary fw-medium px-4">Download Data</button>
+                            </div>
+                            <div class="settings-list-item">
+                                <div>
+                                    <h6 class="fw-bold mb-1 text-danger">Delete Account</h6>
+                                    <small class="text-muted">Permanently remove your account, data, and active subscriptions.</small>
+                                </div>
+                                <button class="btn btn-danger fw-bold px-4 shadow-sm" id="btnDeleteAccount">Delete Account</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

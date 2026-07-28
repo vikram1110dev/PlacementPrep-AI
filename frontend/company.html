@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Preparation - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/company.css">
+</head>
+<body>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand">
+                <i class="bi bi-robot"></i> PlacementPrep AI
+            </a>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Learning</div>
+            <li class="sidebar-item"><a href="aptitude.html" class="sidebar-link"><i class="bi bi-calculator"></i> Aptitude</a></li>
+            <li class="sidebar-item"><a href="dsa.html" class="sidebar-link"><i class="bi bi-code-square"></i> DSA</a></li>
+            <li class="sidebar-item"><a href="coding.html" class="sidebar-link"><i class="bi bi-journal-code"></i> Coding Problems</a></li>
+            <li class="sidebar-item"><a href="projects.html" class="sidebar-link"><i class="bi bi-folder-check"></i> Projects</a></li>
+            <li class="sidebar-item"><a href="company.html" class="sidebar-link active"><i class="bi bi-building"></i> Company Prep</a></li>
+            
+            <div class="sidebar-menu-title">Assessments</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-camera-video"></i> Mock Interviews</a></li>
+            <li class="sidebar-item"><a href="ai-mentor.html" class="sidebar-link"><i class="bi bi-chat-dots"></i> AI Mentor</a></li>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-trophy"></i> Leaderboard</a></li>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-award"></i> Certificates</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item"><a href="settings.html" class="sidebar-link"><i class="bi bi-gear"></i> Settings</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search companies (e.g. Google, TCS)...">
+            </div>
+            <div class="nav-actions">
+                <button class="nav-action-btn" title="Toggle Dark Mode"><i class="bi bi-moon"></i></button>
+                <button class="nav-action-btn position-relative"><i class="bi bi-bell"></i><span class="badge-dot"></span></button>
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile" data-bs-toggle="dropdown">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">Company Preparation</h2>
+                    <p class="text-muted mb-0">Prepare company-wise with curated learning paths, interview experiences and coding questions.</p>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filter-wrapper mb-4">
+                <div class="filter-pill active">All Companies</div>
+                <div class="filter-pill">Product Based</div>
+                <div class="filter-pill">Service Based</div>
+                <div class="filter-pill">Startup</div>
+                <div class="filter-pill">Dream Company (<i class="bi bi-star-fill text-warning"></i>)</div>
+            </div>
+
+            <!-- Featured Companies Grid -->
+            <h5 class="fw-bold mb-3">Top Companies</h5>
+            <div class="companies-grid mb-5">
+                
+                <!-- Google Card (Active) -->
+                <div class="company-card active">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="company-logo" style="background-color: #ea4335;"><i class="bi bi-google"></i></div>
+                        <span class="badge bg-warning text-dark"><i class="bi bi-star-fill me-1"></i> Dream</span>
+                    </div>
+                    <h5 class="fw-bold mb-1">Google</h5>
+                    <p class="text-muted small mb-3">Product Based • SDE</p>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="small fw-semibold"><i class="bi bi-cash-stack text-success me-1"></i> ₹15L - ₹40L</div>
+                        <div class="small fw-semibold text-danger"><i class="bi bi-bar-chart me-1"></i> Hard</div>
+                    </div>
+                    <button class="btn btn-primary w-100 rounded-pill btn-sm">View Roadmap</button>
+                </div>
+                
+                <!-- Microsoft Card -->
+                <div class="company-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="company-logo" style="background-color: #00a4ef;"><i class="bi bi-windows"></i></div>
+                        <span class="badge bg-warning text-dark"><i class="bi bi-star-fill me-1"></i> Dream</span>
+                    </div>
+                    <h5 class="fw-bold mb-1">Microsoft</h5>
+                    <p class="text-muted small mb-3">Product Based • SDE</p>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="small fw-semibold"><i class="bi bi-cash-stack text-success me-1"></i> ₹15L - ₹45L</div>
+                        <div class="small fw-semibold text-danger"><i class="bi bi-bar-chart me-1"></i> Hard</div>
+                    </div>
+                    <button class="btn btn-outline-primary w-100 rounded-pill btn-sm">View Roadmap</button>
+                </div>
+                
+                <!-- Amazon Card -->
+                <div class="company-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="company-logo" style="background-color: #ff9900;"><i class="bi bi-amazon"></i></div>
+                    </div>
+                    <h5 class="fw-bold mb-1">Amazon</h5>
+                    <p class="text-muted small mb-3">Product Based • SDE</p>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="small fw-semibold"><i class="bi bi-cash-stack text-success me-1"></i> ₹18L - ₹45L</div>
+                        <div class="small fw-semibold text-danger"><i class="bi bi-bar-chart me-1"></i> Hard</div>
+                    </div>
+                    <button class="btn btn-outline-primary w-100 rounded-pill btn-sm">View Roadmap</button>
+                </div>
+
+                <!-- TCS Card -->
+                <div class="company-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="company-logo" style="background-color: #1e3a8a;">TCS</div>
+                    </div>
+                    <h5 class="fw-bold mb-1">TCS</h5>
+                    <p class="text-muted small mb-3">Service Based • Ninja/Digital</p>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="small fw-semibold"><i class="bi bi-cash-stack text-success me-1"></i> ₹3.3L - ₹7L</div>
+                        <div class="small fw-semibold text-success"><i class="bi bi-bar-chart me-1"></i> Easy</div>
+                    </div>
+                    <button class="btn btn-outline-primary w-100 rounded-pill btn-sm">View Roadmap</button>
+                </div>
+                
+                <!-- Zoho Card -->
+                <div class="company-card">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="company-logo" style="background-color: #f0483e;">Zoho</div>
+                    </div>
+                    <h5 class="fw-bold mb-1">Zoho</h5>
+                    <p class="text-muted small mb-3">Product Based • Developer</p>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="small fw-semibold"><i class="bi bi-cash-stack text-success me-1"></i> ₹6L - ₹12L</div>
+                        <div class="small fw-semibold text-warning"><i class="bi bi-bar-chart me-1"></i> Medium</div>
+                    </div>
+                    <button class="btn btn-outline-primary w-100 rounded-pill btn-sm">View Roadmap</button>
+                </div>
+
+            </div>
+
+            <hr class="mb-5 text-muted">
+
+            <!-- Dynamic Company Details Section -->
+            <div class="company-details-section">
+                
+                <!-- Company Header -->
+                <div class="company-header-bg d-flex justify-content-between align-items-center flex-wrap gap-4">
+                    <div class="d-flex align-items-center gap-4">
+                        <div class="company-logo shadow" style="background-color: #ea4335; width: 80px; height: 80px; font-size: 3rem;"><i class="bi bi-google"></i></div>
+                        <div>
+                            <h2 class="fw-bold mb-1" id="detailsCompanyTitle">Google Preparation Hub</h2>
+                            <p class="text-muted mb-2">Detailed syllabus, coding questions, and mock tests to crack <span id="detailsCompanyName" class="fw-bold text-dark">Google</span>.</p>
+                            <div class="d-flex gap-2">
+                                <span class="badge bg-primary bg-opacity-10 text-primary border border-primary">Product Based</span>
+                                <span class="badge bg-success bg-opacity-10 text-success border border-success">Hiring: SDE, STEP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary px-4 py-2 rounded-pill fw-bold shadow-sm"><i class="bi bi-bell-fill me-1"></i> Alert Me for Hiring</button>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    
+                    <!-- Left Column: Overview, Roadmap, Checker -->
+                    <div class="col-xl-8">
+                        
+                        <!-- Company Statistics -->
+                        <h5 class="fw-bold mb-3">Company Statistics</h5>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-3 col-6">
+                                <div class="stat-box">
+                                    <h4 class="fw-bold text-primary mb-1">₹35L</h4>
+                                    <small class="text-muted fw-medium">Avg Package</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-box">
+                                    <h4 class="fw-bold text-success mb-1">High</h4>
+                                    <small class="text-muted fw-medium">Competition</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-box">
+                                    <h4 class="fw-bold text-warning mb-1">3%</h4>
+                                    <small class="text-muted fw-medium">Success Rate</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="stat-box">
+                                    <h4 class="fw-bold text-info mb-1">Off-Campus</h4>
+                                    <small class="text-muted fw-medium">Hiring Mode</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Eligibility Checker -->
+                        <h5 class="fw-bold mb-3">Am I Eligible?</h5>
+                        <div class="eligibility-checker mb-5">
+                            <div class="row g-3 align-items-end">
+                                <div class="col-md-4">
+                                    <label class="form-label small fw-semibold text-muted">Current CGPA</label>
+                                    <input type="number" step="0.1" class="form-control bg-light" id="cgpaInput" placeholder="e.g. 8.5">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label small fw-semibold text-muted">Active Backlogs</label>
+                                    <input type="number" class="form-control bg-light" id="backlogsInput" placeholder="e.g. 0">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary w-100 fw-medium" id="checkEligibilityBtn">Check Eligibility</button>
+                                </div>
+                            </div>
+                            <div id="eligibilityResult">
+                                <div id="eligibilityContent"></div>
+                            </div>
+                        </div>
+
+                        <!-- Preparation Roadmap -->
+                        <h5 class="fw-bold mb-4">Preparation Roadmap & Rounds</h5>
+                        <div class="roadmap-timeline mb-5">
+                            <div class="timeline-item">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h6 class="fw-bold text-primary mb-1">Round 1: Online Assessment</h6>
+                                    <p class="small text-muted mb-2">90 minutes coding round usually on HackerEarth or similar platform. Contains 2 medium-to-hard coding questions.</p>
+                                    <span class="badge bg-light text-dark border">Focus: Arrays, Trees, DP</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h6 class="fw-bold text-primary mb-1">Round 2: Technical Interview 1</h6>
+                                    <p class="small text-muted mb-2">45 minutes problem solving round. The interviewer will ask 1-2 DSA questions and expect you to write clean, optimal code.</p>
+                                    <span class="badge bg-light text-dark border">Focus: Graphs, System Design (Basic)</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h6 class="fw-bold text-primary mb-1">Round 3: Technical Interview 2</h6>
+                                    <p class="small text-muted mb-2">Deep dive into your resume, projects, and advanced data structures. Often includes OS and DBMS questions.</p>
+                                    <span class="badge bg-light text-dark border">Focus: Projects, Core CS Subjects</span>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <h6 class="fw-bold text-primary mb-1">Round 4: Googliness / HR Round</h6>
+                                    <p class="small text-muted mb-2">Behavioral round focusing on cultural fit, leadership principles, and situational questions.</p>
+                                    <span class="badge bg-light text-dark border">Focus: Soft Skills, Communication</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Column: Resources, AI Mentor, Mock Tests -->
+                    <div class="col-xl-4">
+                        
+                        <!-- AI Mentor Card -->
+                        <div class="ai-mentor-company mb-4 shadow-sm">
+                            <div class="position-relative z-1">
+                                <div class="d-flex align-items-center gap-2 mb-3">
+                                    <i class="bi bi-robot fs-4"></i>
+                                    <h6 class="fw-bold mb-0">AI Company Mentor</h6>
+                                </div>
+                                <p class="small fw-medium mb-3 opacity-75">Generate a personalized 30-day prep plan for Google based on your current skills.</p>
+                                <button class="btn btn-light w-100 rounded-pill fw-bold text-primary btn-sm mb-2">Generate Plan</button>
+                                <button class="btn btn-outline-light w-100 rounded-pill fw-bold btn-sm">Ask Question</button>
+                            </div>
+                        </div>
+
+                        <!-- Company Resources -->
+                        <h6 class="fw-bold mb-3">Study Resources</h6>
+                        <div class="d-flex flex-column gap-3 mb-5">
+                            <div class="resource-card">
+                                <div class="resource-icon bg-primary bg-opacity-10 text-primary"><i class="bi bi-journal-code"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Top 50 Coding Questions</h6>
+                                    <small class="text-muted d-block">Frequently asked in OA.</small>
+                                </div>
+                            </div>
+                            <div class="resource-card">
+                                <div class="resource-icon bg-success bg-opacity-10 text-success"><i class="bi bi-chat-quote"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Interview Experiences</h6>
+                                    <small class="text-muted d-block">Read 150+ student stories.</small>
+                                </div>
+                            </div>
+                            <div class="resource-card">
+                                <div class="resource-icon bg-warning bg-opacity-10 text-warning"><i class="bi bi-file-earmark-person"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Resume Templates</h6>
+                                    <small class="text-muted d-block">ATS-friendly templates.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mock Tests -->
+                        <h6 class="fw-bold mb-3">Company Specific Mocks</h6>
+                        <div class="mock-card bg-light mb-3">
+                            <h6 class="fw-bold mb-2">Google OA Mock Test 1</h6>
+                            <div class="d-flex justify-content-between text-muted small fw-medium mb-3">
+                                <span>2 Questions</span>
+                                <span>90 Mins</span>
+                            </div>
+                            <button class="btn btn-primary w-100 rounded-pill btn-sm">Start Test</button>
+                        </div>
+                        <div class="mock-card bg-light mb-4">
+                            <h6 class="fw-bold mb-2">Google OA Mock Test 2</h6>
+                            <div class="d-flex justify-content-between text-muted small fw-medium mb-3">
+                                <span>2 Questions</span>
+                                <span>90 Mins</span>
+                            </div>
+                            <button class="btn btn-outline-primary w-100 rounded-pill btn-sm">Start Test</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Bottom Sections: Experiences & Hiring Table -->
+                <div class="row g-4 border-top pt-4">
+                    <div class="col-lg-6">
+                        <h5 class="fw-bold mb-3">Recent Interview Experiences</h5>
+                        
+                        <div class="exp-card">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h6 class="fw-bold mb-0">Software Engineer (SDE 1)</h6>
+                                    <small class="text-muted">by Rahul K. • Selected</small>
+                                </div>
+                                <span class="badge bg-success bg-opacity-10 text-success">Off-Campus</span>
+                            </div>
+                            <p class="small text-dark mb-2">"The first round was totally focused on DP and Graphs. I managed to solve 1 completely and 1 partially..."</p>
+                            <button class="btn btn-link p-0 text-decoration-none small fw-semibold">Read Full Experience</button>
+                        </div>
+                        
+                        <div class="exp-card" style="border-left-color: #f59e0b;">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div>
+                                    <h6 class="fw-bold mb-0">STEP Intern</h6>
+                                    <small class="text-muted">by Priya M. • Rejected in Tech 2</small>
+                                </div>
+                                <span class="badge bg-primary bg-opacity-10 text-primary">On-Campus</span>
+                            </div>
+                            <p class="small text-dark mb-2">"They asked a lot of questions on OS and my 3rd-year project. Make sure you know your resume inside out..."</p>
+                            <button class="btn btn-link p-0 text-decoration-none small fw-semibold">Read Full Experience</button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <h5 class="fw-bold mb-3">Upcoming Hiring Drives</h5>
+                        <div class="table-responsive bg-white border rounded-3">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Role</th>
+                                        <th>Location</th>
+                                        <th>Expected Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-medium small">Software Engineer 2026</td>
+                                        <td class="small text-muted">Bangalore/Hyd</td>
+                                        <td class="small fw-semibold text-danger">Aug 2026</td>
+                                        <td><button class="btn btn-sm btn-outline-primary btn-apply-mock">Apply</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium small">STEP Intern</td>
+                                        <td class="small text-muted">Remote/Bangalore</td>
+                                        <td class="small fw-semibold text-warning">Sep 2026</td>
+                                        <td><button class="btn btn-sm btn-outline-primary btn-apply-mock">Apply</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-medium small">Cloud Support Engg.</td>
+                                        <td class="small text-muted">Pune</td>
+                                        <td class="small fw-semibold text-success">Nov 2026</td>
+                                        <td><button class="btn btn-sm btn-outline-primary btn-apply-mock">Apply</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- End Company Details Section -->
+
+            <footer class="mt-4 pt-4 border-top border-light d-flex flex-wrap justify-content-between align-items-center text-muted small pb-3">
+                <span class="fw-medium">&copy; 2026 PlacementPrep AI. All rights reserved.</span>
+                <span class="fw-medium">Version 1.0.0</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/company.js"></script>
+</body>
+</html>

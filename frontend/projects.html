@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects Portfolio - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/projects.css">
+</head>
+<body>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand">
+                <i class="bi bi-robot"></i> PlacementPrep AI
+            </a>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Learning</div>
+            <li class="sidebar-item"><a href="aptitude.html" class="sidebar-link"><i class="bi bi-calculator"></i> Aptitude</a></li>
+            <li class="sidebar-item"><a href="dsa.html" class="sidebar-link"><i class="bi bi-code-square"></i> DSA</a></li>
+            <li class="sidebar-item"><a href="coding.html" class="sidebar-link"><i class="bi bi-journal-code"></i> Coding</a></li>
+            <li class="sidebar-item"><a href="projects.html" class="sidebar-link active"><i class="bi bi-folder-check"></i> Projects</a></li>
+            <li class="sidebar-item"><a href="company.html" class="sidebar-link"><i class="bi bi-building"></i> Company Prep</a></li>
+            
+            <div class="sidebar-menu-title">Assessments</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-camera-video"></i> Mock Interviews</a></li>
+            <li class="sidebar-item"><a href="ai-mentor.html" class="sidebar-link"><i class="bi bi-chat-dots"></i> AI Mentor</a></li>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-trophy"></i> Leaderboard</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search projects by name, tech stack...">
+            </div>
+            <div class="nav-actions">
+                <button class="nav-action-btn" title="Toggle Dark Mode"><i class="bi bi-moon"></i></button>
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile" data-bs-toggle="dropdown">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">Projects Portfolio</h2>
+                    <p class="text-muted mb-0">Build real-world projects and showcase your skills to recruiters.</p>
+                </div>
+            </div>
+
+            <!-- Filters -->
+            <div class="mb-4">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                    <span class="small fw-bold text-muted text-uppercase">Difficulty</span>
+                    <div class="filter-wrapper m-0 pb-0">
+                        <div class="filter-pill active">All</div>
+                        <div class="filter-pill">Beginner</div>
+                        <div class="filter-pill">Intermediate</div>
+                        <div class="filter-pill">Advanced</div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="small fw-bold text-muted text-uppercase">Category</span>
+                    <div class="filter-wrapper m-0">
+                        <div class="filter-pill active">All</div>
+                        <div class="filter-pill">Web Dev</div>
+                        <div class="filter-pill">Python</div>
+                        <div class="filter-pill">AI/ML</div>
+                        <div class="filter-pill">Java</div>
+                        <div class="filter-pill">Cloud</div>
+                        <div class="filter-pill">Android</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Projects (Glassmorphism Cards) -->
+            <div class="row g-4 mb-5">
+                
+                <!-- Project 1 -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="glass-card project-card p-0">
+                        <div class="project-thumbnail" style="background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);">
+                            <i class="bi bi-cart3 text-primary opacity-25"></i>
+                            <span class="badge bg-danger position-absolute top-0 end-0 m-3 shadow-sm">Advanced</span>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <h5 class="fw-bold mb-2">E-Commerce Microservices</h5>
+                            <p class="small text-muted mb-3 flex-grow-1">A scalable e-commerce backend built with Spring Boot, Docker, and Kafka.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="tech-tag">Java</span>
+                                <span class="tech-tag">Spring Boot</span>
+                                <span class="tech-tag">Microservices</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-light">
+                                <span class="small fw-bold text-warning"><i class="bi bi-award"></i> 500 XP</span>
+                                <span class="small text-muted"><i class="bi bi-clock"></i> 4 Weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="glass-card project-card p-0 border-primary" style="background: rgba(239, 246, 255, 0.7);">
+                        <div class="project-thumbnail" style="background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);">
+                            <i class="bi bi-chat-square-dots text-primary opacity-25"></i>
+                            <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3 shadow-sm">Intermediate</span>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <h5 class="fw-bold mb-2">Real-time Chat App</h5>
+                            <p class="small text-muted mb-3 flex-grow-1">A MERN stack chat application with Socket.io for real-time messaging.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">Socket.io</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-light">
+                                <span class="small fw-bold text-warning"><i class="bi bi-award"></i> 300 XP</span>
+                                <span class="small text-muted"><i class="bi bi-clock"></i> 2 Weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="glass-card project-card p-0">
+                        <div class="project-thumbnail" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <i class="bi bi-clipboard-data text-success opacity-25"></i>
+                            <span class="badge bg-success position-absolute top-0 end-0 m-3 shadow-sm">Beginner</span>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <h5 class="fw-bold mb-2">Stock Price Predictor</h5>
+                            <p class="small text-muted mb-3 flex-grow-1">Machine Learning model to predict stock prices using historical data.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Scikit-Learn</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-light">
+                                <span class="small fw-bold text-warning"><i class="bi bi-award"></i> 200 XP</span>
+                                <span class="small text-muted"><i class="bi bi-clock"></i> 1 Week</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="col-xl-3 col-md-6">
+                    <div class="glass-card project-card p-0">
+                        <div class="project-thumbnail" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+                            <i class="bi bi-cloud-arrow-up text-info opacity-25"></i>
+                            <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3 shadow-sm">Intermediate</span>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <h5 class="fw-bold mb-2">Serverless API</h5>
+                            <p class="small text-muted mb-3 flex-grow-1">AWS Lambda based serverless REST API with DynamoDB integration.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="tech-tag">AWS</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">DynamoDB</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-auto pt-3 border-top border-light">
+                                <span class="small fw-bold text-warning"><i class="bi bi-award"></i> 350 XP</span>
+                                <span class="small text-muted"><i class="bi bi-clock"></i> 2 Weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <hr class="mb-5 border-light">
+
+            <!-- Active Project Details Workspace -->
+            <div id="projectWorkspace" class="scroll-mt">
+                <div class="workspace-banner mb-4">
+                    <div class="position-relative z-1 d-flex justify-content-between align-items-start flex-wrap gap-3">
+                        <div>
+                            <span class="badge bg-white text-primary mb-3">Active Workspace</span>
+                            <h2 class="fw-bold mb-2" id="activeProjectTitle">Real-time Chat App</h2>
+                            <p class="text-white-50 mb-0">Build a fully functional MERN stack chat application from scratch.</p>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-light rounded-circle shadow-sm btn-save-project" style="width: 40px; height: 40px;"><i class="bi bi-bookmark"></i></button>
+                            <button class="btn btn-light rounded-pill px-4 fw-bold text-primary shadow-sm"><i class="bi bi-github me-1"></i> View Code</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    
+                    <!-- Left Col: Details & Resources -->
+                    <div class="col-xl-8">
+                        
+                        <!-- Progress -->
+                        <div class="glass-panel p-4 mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="fw-bold mb-0">Project Progress</h6>
+                                <span class="small fw-bold text-primary">65% Completed</span>
+                            </div>
+                            <div class="custom-progress mb-3" style="height: 10px;">
+                                <div class="custom-progress-bar bg-primary" id="projectProgressBar" style="width: 0%; transition: width 1s ease;"></div>
+                            </div>
+                            <div class="d-flex justify-content-between text-muted small">
+                                <span><i class="bi bi-check-circle text-success me-1"></i> 5/8 Milestones</span>
+                                <span><i class="bi bi-calendar me-1"></i> Deadline: Oct 15</span>
+                            </div>
+                        </div>
+
+                        <!-- Overview & Objective -->
+                        <h5 class="fw-bold mb-3">Project Overview</h5>
+                        <div class="bg-white p-4 rounded-4 border shadow-sm mb-4">
+                            <h6 class="fw-bold text-dark">Objective</h6>
+                            <p class="small text-muted mb-4">To build a scalable real-time chat application where users can create rooms, send messages instantly, and see online status. This project demonstrates proficiency in WebSockets, state management, and NoSQL databases.</p>
+                            
+                            <h6 class="fw-bold text-dark">Learning Outcomes</h6>
+                            <ul class="small text-muted mb-4">
+                                <li>Understanding WebSocket protocol and bidirectional communication.</li>
+                                <li>Managing complex React state with Redux/Context API.</li>
+                                <li>Designing MongoDB schemas for users, chats, and messages.</li>
+                                <li>Implementing JWT based authentication.</li>
+                            </ul>
+
+                            <h6 class="fw-bold text-dark mb-3">Recommended Folder Structure</h6>
+                            <div class="folder-structure">
+backend/
+├── controllers/
+├── models/
+│   ├── userModel.js
+│   └── messageModel.js
+├── routes/
+├── config/
+│   └── db.js
+└── server.js
+frontend/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── context/
+│   └── App.js
+                            </div>
+                        </div>
+
+                        <!-- Roadmap Timeline -->
+                        <h5 class="fw-bold mb-3">Development Milestones</h5>
+                        <div class="glass-panel p-4 mb-4">
+                            <div class="project-timeline">
+                                <div class="pt-item completed">
+                                    <div class="pt-icon"><i class="bi bi-check text-white" style="font-size: 10px; position: absolute; top: -1px; left: 0px;"></i></div>
+                                    <div class="pt-content shadow-sm">
+                                        <h6 class="fw-bold mb-1">1. Environment Setup & DB Design</h6>
+                                        <p class="small text-muted mb-0">Initialize Node.js and React apps. Design MongoDB schemas.</p>
+                                    </div>
+                                </div>
+                                <div class="pt-item completed">
+                                    <div class="pt-icon"><i class="bi bi-check text-white" style="font-size: 10px; position: absolute; top: -1px; left: 0px;"></i></div>
+                                    <div class="pt-content shadow-sm">
+                                        <h6 class="fw-bold mb-1">2. Authentication APIs</h6>
+                                        <p class="small text-muted mb-0">Implement Register/Login with JWT and bcrypt.</p>
+                                    </div>
+                                </div>
+                                <div class="pt-item active">
+                                    <div class="pt-icon"></div>
+                                    <div class="pt-content shadow-sm border-primary">
+                                        <h6 class="fw-bold text-primary mb-1">3. Socket.io Integration</h6>
+                                        <p class="small text-muted mb-0">Setup WebSocket connection. Handle connect, disconnect, and broadcast events.</p>
+                                    </div>
+                                </div>
+                                <div class="pt-item">
+                                    <div class="pt-icon"></div>
+                                    <div class="pt-content">
+                                        <h6 class="fw-bold mb-1 text-muted">4. Frontend UI & State</h6>
+                                        <p class="small text-muted mb-0 opacity-50">Build chat interface, integrate Context API, and connect to backend.</p>
+                                    </div>
+                                </div>
+                                <div class="pt-item">
+                                    <div class="pt-icon"></div>
+                                    <div class="pt-content">
+                                        <h6 class="fw-bold mb-1 text-muted">5. Deployment</h6>
+                                        <p class="small text-muted mb-0 opacity-50">Deploy backend to Render/Heroku and frontend to Vercel/Netlify.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submission Form -->
+                        <h5 class="fw-bold mb-3">Submit Project</h5>
+                        <div class="bg-white p-4 rounded-4 border shadow-sm mb-4">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">GitHub Repository URL <span class="text-danger">*</span></label>
+                                    <input type="url" class="form-control" id="githubUrl" placeholder="https://github.com/username/repo">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-bold">Live Demo URL (Optional)</label>
+                                    <input type="url" class="form-control" placeholder="https://myapp.vercel.app">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small fw-bold">Project Description & Learnings</label>
+                                    <textarea class="form-control" rows="3" placeholder="Briefly describe what you learned..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-primary px-4 fw-medium" id="submitProjectBtn">Submit for Review</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mock Review Section (Hidden by default) -->
+                        <div class="bg-white p-4 rounded-4 border shadow-sm mb-4 border-success d-none" id="projectReviewSection">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="fw-bold mb-0"><i class="bi bi-star-fill text-warning me-2"></i>AI Code Review Result</h5>
+                                <span class="badge bg-success bg-opacity-10 text-success border border-success">Passed</span>
+                            </div>
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-3 col-6">
+                                    <div class="review-box">
+                                        <div class="review-score text-success">92/100</div>
+                                        <small class="fw-bold text-muted">Overall</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="review-box">
+                                        <div class="review-score text-primary">A</div>
+                                        <small class="fw-bold text-muted">Code Quality</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="review-box">
+                                        <div class="review-score text-info">B+</div>
+                                        <small class="fw-bold text-muted">UI/UX</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-6">
+                                    <div class="review-box">
+                                        <div class="review-score text-warning">A-</div>
+                                        <small class="fw-bold text-muted">Documentation</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <h6 class="fw-bold text-dark">AI Suggestions:</h6>
+                            <ul class="small text-muted mb-0">
+                                <li>Great use of modular components in React.</li>
+                                <li>Consider adding error handling in your Redux actions.</li>
+                                <li>Your README is well formatted, but adding screenshots would make it perfect for recruiters.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Col: AI Mentor & Resources -->
+                    <div class="col-xl-4">
+                        
+                        <!-- AI Mentor Widget -->
+                        <div class="glass-panel p-4 mb-4 border-primary border-opacity-50" style="background: linear-gradient(to bottom right, #ffffff, #eff6ff);">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <div class="bg-primary text-white rounded-circle p-2 fs-5">
+                                    <i class="bi bi-robot"></i>
+                                </div>
+                                <h6 class="fw-bold mb-0 text-primary">AI Project Mentor</h6>
+                            </div>
+                            <p class="small text-dark fw-medium mb-3">Stuck on a bug? Need help writing the README? I'm here to help.</p>
+                            <div class="d-flex flex-column gap-2 mb-3">
+                                <button class="btn btn-sm btn-outline-primary bg-white text-start"><i class="bi bi-bug me-2"></i> Debug my code</button>
+                                <button class="btn btn-sm btn-outline-primary bg-white text-start"><i class="bi bi-file-text me-2"></i> Generate README.md</button>
+                                <button class="btn btn-sm btn-outline-primary bg-white text-start"><i class="bi bi-lightbulb me-2"></i> Suggest new features</button>
+                            </div>
+                            <button class="btn btn-primary w-100 btn-sm rounded-pill">Ask Custom Question</button>
+                        </div>
+
+                        <!-- Learning Resources -->
+                        <h6 class="fw-bold mb-3">Helpful Resources</h6>
+                        <div class="d-flex flex-column gap-3 mb-5">
+                            <a href="#" class="res-card text-decoration-none text-dark">
+                                <div class="res-icon bg-danger bg-opacity-10 text-danger"><i class="bi bi-youtube"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-0 small">Socket.io Crash Course</h6>
+                                    <small class="text-muted d-block" style="font-size: 0.75rem;">1h 20m Video Tutorial</small>
+                                </div>
+                            </a>
+                            <a href="#" class="res-card text-decoration-none text-dark">
+                                <div class="res-icon bg-dark bg-opacity-10 text-dark"><i class="bi bi-github"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-0 small">Reference Architecture</h6>
+                                    <small class="text-muted d-block" style="font-size: 0.75rem;">Sample GitHub Repo</small>
+                                </div>
+                            </a>
+                            <a href="#" class="res-card text-decoration-none text-dark">
+                                <div class="res-icon bg-info bg-opacity-10 text-info"><i class="bi bi-book"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-0 small">MERN Auth Docs</h6>
+                                    <small class="text-muted d-block" style="font-size: 0.75rem;">Step-by-step guide</small>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Achievements -->
+                        <h6 class="fw-bold mb-3">Earn Badges</h6>
+                        <div class="row g-2 mb-4">
+                            <div class="col-4 text-center">
+                                <div class="bg-white border rounded p-2 opacity-50">
+                                    <i class="bi bi-hdd-network fs-3 text-secondary mb-1 d-block"></i>
+                                    <small class="fw-semibold" style="font-size: 0.65rem;">Full Stack</small>
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <div class="bg-white border rounded p-2 opacity-50">
+                                    <i class="bi bi-code-slash fs-3 text-secondary mb-1 d-block"></i>
+                                    <small class="fw-semibold" style="font-size: 0.65rem;">Clean Coder</small>
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <div class="bg-white border border-warning shadow-sm rounded p-2">
+                                    <i class="bi bi-rocket-takeoff-fill fs-3 text-warning mb-1 d-block"></i>
+                                    <small class="fw-semibold" style="font-size: 0.65rem;">Deployed</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Recruiter Portfolio Preview -->
+                <h5 class="fw-bold mb-3">Recruiter Portfolio Preview <span class="badge bg-primary ms-2 small">Your Public Profile</span></h5>
+                <div class="profile-preview mb-5">
+                    <div class="profile-cover"></div>
+                    <div class="px-4 pb-4">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="profile-avatar shadow-sm"></div>
+                            <button class="btn btn-outline-primary btn-sm mt-3 fw-bold rounded-pill"><i class="bi bi-download me-1"></i> Resume</button>
+                        </div>
+                        <h4 class="fw-bold mt-3 mb-1">John Doe</h4>
+                        <p class="text-muted small mb-3">Computer Science Undergrad | Aspiring SDE</p>
+                        <div class="d-flex gap-2 mb-4">
+                            <span class="badge bg-light text-dark border">React</span>
+                            <span class="badge bg-light text-dark border">Node.js</span>
+                            <span class="badge bg-light text-dark border">Python</span>
+                            <span class="badge bg-light text-dark border">AWS</span>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6 border-end">
+                                <h6 class="fw-bold text-muted small text-uppercase">Top Projects</h6>
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <i class="bi bi-check-circle-fill text-success small"></i>
+                                    <span class="fw-medium small">E-Commerce Microservices</span>
+                                </div>
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-check-circle-fill text-success small"></i>
+                                    <span class="fw-medium small">Real-time Chat App</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ps-md-4">
+                                <h6 class="fw-bold text-muted small text-uppercase">Links</h6>
+                                <div class="d-flex gap-3 mt-2">
+                                    <a href="#" class="text-dark fs-5"><i class="bi bi-github"></i></a>
+                                    <a href="#" class="text-primary fs-5"><i class="bi bi-linkedin"></i></a>
+                                    <a href="#" class="text-info fs-5"><i class="bi bi-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="mt-4 pt-4 border-top border-light d-flex flex-wrap justify-content-between align-items-center text-muted small pb-3">
+                <span class="fw-medium">&copy; 2026 PlacementPrep AI. All rights reserved.</span>
+                <span class="fw-medium">Version 1.0.0</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+</html>

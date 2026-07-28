@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar shadow">
+        <a href="admin-dashboard.html" class="admin-brand">
+            <i class="bi bi-robot text-primary"></i> PlacementPrep Admin
+        </a>
+        <div class="admin-nav">
+            <div class="nav-title">Core</div>
+            <a href="admin-dashboard.html" class="nav-link active"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="admin-analytics.html" class="nav-link"><i class="bi bi-graph-up"></i> Analytics</a>
+            
+            <div class="nav-title">Management</div>
+            <a href="admin-users.html" class="nav-link"><i class="bi bi-people"></i> Users</a>
+            <a href="admin-companies.html" class="nav-link"><i class="bi bi-building"></i> Companies</a>
+            <a href="admin-questions.html" class="nav-link"><i class="bi bi-journal-code"></i> Question Bank</a>
+            <a href="admin-projects.html" class="nav-link"><i class="bi bi-folder"></i> Projects</a>
+            <a href="admin-mocktests.html" class="nav-link"><i class="bi bi-laptop"></i> Mock Tests</a>
+            <a href="admin-resumes.html" class="nav-link"><i class="bi bi-file-earmark-person"></i> Resume Templates</a>
+            
+            <div class="nav-title">System</div>
+            <a href="admin-ai.html" class="nav-link"><i class="bi bi-magic"></i> AI Prompts</a>
+            <a href="admin-settings.html" class="nav-link"><i class="bi bi-gear"></i> Settings</a>
+            <a href="login.html" class="nav-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+        
+        <!-- Topbar -->
+        <header class="admin-topbar shadow-sm">
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-light d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+                <div class="admin-search d-none d-md-block">
+                    <i class="bi bi-search"></i>
+                    <input type="text" class="form-control" placeholder="Search globally...">
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-light rounded-circle position-relative">
+                    <i class="bi bi-bell"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                </button>
+                <div class="dropdown">
+                    <img src="https://ui-avatars.com/api/?name=Admin&background=1e293b&color=fff" alt="Admin" class="rounded-circle" width="40" height="40" data-bs-toggle="dropdown" style="cursor:pointer;">
+                </div>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="admin-content">
+            
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <h3 class="fw-bold mb-1">Dashboard Overview</h3>
+                    <p class="text-muted mb-0">Welcome back, Super Admin.</p>
+                </div>
+                <button class="btn btn-primary"><i class="bi bi-cloud-download me-2"></i>Generate Report</button>
+            </div>
+
+            <!-- Stat Cards Row -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="admin-card admin-stat-card">
+                        <div class="stat-icon bg-primary bg-opacity-10 text-primary"><i class="bi bi-people-fill"></i></div>
+                        <div>
+                            <h3 class="fw-bold mb-0">12,450</h3>
+                            <small class="text-muted fw-medium text-uppercase">Total Users</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="admin-card admin-stat-card">
+                        <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-currency-dollar"></i></div>
+                        <div>
+                            <h3 class="fw-bold mb-0">$45,200</h3>
+                            <small class="text-muted fw-medium text-uppercase">Monthly Revenue</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="admin-card admin-stat-card">
+                        <div class="stat-icon bg-warning bg-opacity-10 text-warning"><i class="bi bi-buildings"></i></div>
+                        <div>
+                            <h3 class="fw-bold mb-0">254</h3>
+                            <small class="text-muted fw-medium text-uppercase">Companies</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="admin-card admin-stat-card">
+                        <div class="stat-icon bg-info bg-opacity-10 text-info"><i class="bi bi-magic"></i></div>
+                        <div>
+                            <h3 class="fw-bold mb-0">1.2M</h3>
+                            <small class="text-muted fw-medium text-uppercase">AI Sessions</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="admin-card">
+                        <h6 class="fw-bold mb-4">Revenue Growth</h6>
+                        <div style="height: 300px;"><canvas id="revenueChart"></canvas></div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="admin-card">
+                        <h6 class="fw-bold mb-4">User Acquisition</h6>
+                        <div style="height: 300px;"><canvas id="usersChart"></canvas></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Table -->
+            <div class="admin-card">
+                <h6 class="fw-bold mb-4">Recent Subscriptions</h6>
+                <div class="admin-table-wrapper">
+                    <table class="table admin-table mb-0">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Plan</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;">A</div>
+                                        <span class="fw-medium">Arjun Kumar</span>
+                                    </div>
+                                </td>
+                                <td>Premium Yearly</td>
+                                <td>$120.00</td>
+                                <td>Oct 15, 2026</td>
+                                <td><span class="badge badge-soft-success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;">S</div>
+                                        <span class="fw-medium">Sarah Jenkins</span>
+                                    </div>
+                                </td>
+                                <td>Pro Monthly</td>
+                                <td>$15.00</td>
+                                <td>Oct 14, 2026</td>
+                                <td><span class="badge badge-soft-success">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:32px;height:32px;">V</div>
+                                        <span class="fw-medium">Vikram Singh</span>
+                                    </div>
+                                </td>
+                                <td>Basic Monthly</td>
+                                <td>$5.00</td>
+                                <td>Oct 13, 2026</td>
+                                <td><span class="badge badge-soft-danger">Failed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

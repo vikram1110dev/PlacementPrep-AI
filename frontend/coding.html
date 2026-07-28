@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Practice - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/coding.css">
+</head>
+<body>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand">
+                <i class="bi bi-robot"></i> PlacementPrep AI
+            </a>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Learning</div>
+            <li class="sidebar-item"><a href="aptitude.html" class="sidebar-link"><i class="bi bi-calculator"></i> Aptitude</a></li>
+            <li class="sidebar-item"><a href="dsa.html" class="sidebar-link"><i class="bi bi-code-square"></i> DSA</a></li>
+            <li class="sidebar-item"><a href="coding.html" class="sidebar-link active"><i class="bi bi-journal-code"></i> Coding Problems</a></li>
+            <li class="sidebar-item"><a href="projects.html" class="sidebar-link"><i class="bi bi-folder-check"></i> Projects</a></li>
+            <li class="sidebar-item"><a href="company.html" class="sidebar-link"><i class="bi bi-building"></i> Company Prep</a></li>
+            
+            <div class="sidebar-menu-title">Assessments</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-camera-video"></i> Mock Interviews</a></li>
+            <li class="sidebar-item"><a href="ai-mentor.html" class="sidebar-link"><i class="bi bi-chat-dots"></i> AI Mentor</a></li>
+            <li class="sidebar-item"><a href="analytics.html" class="sidebar-link"><i class="bi bi-graph-up"></i> Analytics</a></li>
+            
+            <div class="sidebar-menu-title">Community & Profile</div>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-trophy"></i> Leaderboard</a></li>
+            <li class="sidebar-item"><a href="#" class="sidebar-link"><i class="bi bi-award"></i> Certificates</a></li>
+            <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person-circle"></i> Profile</a></li>
+            <li class="sidebar-item"><a href="settings.html" class="sidebar-link"><i class="bi bi-gear"></i> Settings</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <div class="search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search problems, topics, companies...">
+            </div>
+            <div class="nav-actions">
+                <button class="nav-action-btn" title="Toggle Dark Mode"><i class="bi bi-moon"></i></button>
+                <button class="nav-action-btn position-relative"><i class="bi bi-bell"></i><span class="badge-dot"></span></button>
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" alt="Profile" data-bs-toggle="dropdown">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            
+            <!-- Header Section -->
+            <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">Online Coding Practice</h2>
+                    <p class="text-muted mb-0">Solve coding problems and improve your interview skills.</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <select class="form-select w-auto border-light shadow-sm fw-medium">
+                        <option value="">Difficulty</option>
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                    <select class="form-select w-auto border-light shadow-sm fw-medium">
+                        <option value="">Company</option>
+                        <option value="google">Google</option>
+                        <option value="amazon">Amazon</option>
+                        <option value="tcs">TCS</option>
+                    </select>
+                    <select class="form-select w-auto border-light shadow-sm fw-medium">
+                        <option value="">Topic</option>
+                        <option value="arrays">Arrays</option>
+                        <option value="strings">Strings</option>
+                        <option value="dp">DP</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dashboard Row -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-7">
+                    <div class="dash-card p-4 h-100">
+                        <h6 class="fw-bold mb-3">Progress Dashboard</h6>
+                        <div class="d-flex align-items-center mb-4 text-center row g-0">
+                            <div class="col-3 progress-stat">
+                                <h3 class="fw-bold text-primary mb-0">145</h3>
+                                <small class="text-muted fw-semibold">Solved</small>
+                            </div>
+                            <div class="col-3 progress-stat">
+                                <h3 class="fw-bold text-success mb-0">82</h3>
+                                <small class="text-muted fw-semibold">Easy</small>
+                            </div>
+                            <div class="col-3 progress-stat">
+                                <h3 class="fw-bold text-warning mb-0">45</h3>
+                                <small class="text-muted fw-semibold">Medium</small>
+                            </div>
+                            <div class="col-3 progress-stat border-0">
+                                <h3 class="fw-bold text-danger mb-0">18</h3>
+                                <small class="text-muted fw-semibold">Hard</small>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="bi bi-fire text-warning fs-4"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0">14 Day Streak</h6>
+                                    <small class="text-muted">Keep it up! Accuracy: 78%</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="badge bg-primary rounded-pill px-3 py-2">Lvl 12 (1,450 XP)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-5">
+                    <div class="dash-card p-4 h-100 bg-primary text-white position-relative overflow-hidden" style="background: linear-gradient(135deg, #1e3a8a, #2563eb);">
+                        <i class="bi bi-star-fill position-absolute opacity-10 display-1" style="right: -20px; bottom: -20px;"></i>
+                        <h6 class="fw-bold text-white-50 mb-3"><i class="bi bi-calendar-event me-2"></i>Daily Coding Challenge</h6>
+                        <h4 class="fw-bold mb-2">#32. Longest Valid Parentheses</h4>
+                        <div class="d-flex gap-3 text-white-50 small mb-4 fw-medium">
+                            <span class="badge bg-danger bg-opacity-25 border border-danger border-opacity-50">Hard</span>
+                            <span><i class="bi bi-clock me-1"></i> Ends in 4h 30m</span>
+                            <span class="text-warning"><i class="bi bi-award me-1"></i> +300 XP</span>
+                        </div>
+                        <button class="btn btn-light rounded-pill px-4 fw-bold text-primary">Start Challenge</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workspace Row -->
+            <div class="row g-4">
+                
+                <!-- Left Col: Problem List -->
+                <div class="col-xl-4 col-lg-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Problem List</h5>
+                        <button class="btn btn-sm btn-outline-secondary rounded-pill"><i class="bi bi-shuffle"></i> Pick One</button>
+                    </div>
+                    
+                    <div class="problem-list-container pe-2">
+                        <!-- Problem 1 (Active) -->
+                        <div class="problem-card p-3 active">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="fw-bold mb-0">1. Two Sum</h6>
+                                <i class="bi bi-check-circle-fill text-success"></i>
+                            </div>
+                            <div class="d-flex gap-2 text-muted small fw-medium mb-3">
+                                <span class="badge badge-easy">Easy</span>
+                                <span>Acc: 49.2%</span>
+                                <span class="text-warning"><i class="bi bi-award"></i> 50 XP</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex gap-1 text-muted small">
+                                    <span class="badge bg-light text-dark border">Arrays</span>
+                                    <span class="badge bg-light text-dark border">Hash Table</span>
+                                </div>
+                                <i class="bi bi-bookmark-fill text-primary"></i>
+                            </div>
+                        </div>
+
+                        <!-- Problem 2 -->
+                        <div class="problem-card p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="fw-bold mb-0">2. Add Two Numbers</h6>
+                                <i class="bi bi-dash-circle text-muted"></i>
+                            </div>
+                            <div class="d-flex gap-2 text-muted small fw-medium mb-3">
+                                <span class="badge badge-medium">Medium</span>
+                                <span>Acc: 40.8%</span>
+                                <span class="text-warning"><i class="bi bi-award"></i> 100 XP</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex gap-1 text-muted small">
+                                    <span class="badge bg-light text-dark border">Linked List</span>
+                                    <span class="badge bg-light text-dark border">Math</span>
+                                </div>
+                                <i class="bi bi-bookmark text-muted"></i>
+                            </div>
+                        </div>
+
+                        <!-- Problem 3 -->
+                        <div class="problem-card p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="fw-bold mb-0">42. Trapping Rain Water</h6>
+                                <i class="bi bi-dash-circle text-muted"></i>
+                            </div>
+                            <div class="d-flex gap-2 text-muted small fw-medium mb-3">
+                                <span class="badge badge-hard">Hard</span>
+                                <span>Acc: 59.8%</span>
+                                <span class="text-warning"><i class="bi bi-award"></i> 150 XP</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex gap-1 text-muted small">
+                                    <span class="badge bg-light text-dark border">Two Pointers</span>
+                                    <span class="badge bg-light text-dark border">DP</span>
+                                </div>
+                                <i class="bi bi-bookmark text-muted"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Problem 4 -->
+                        <div class="problem-card p-3">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="fw-bold mb-0">121. Best Time to Buy and Sell Stock</h6>
+                                <i class="bi bi-check-circle-fill text-success"></i>
+                            </div>
+                            <div class="d-flex gap-2 text-muted small fw-medium mb-3">
+                                <span class="badge badge-easy">Easy</span>
+                                <span>Acc: 54.4%</span>
+                                <span class="text-warning"><i class="bi bi-award"></i> 50 XP</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex gap-1 text-muted small">
+                                    <span class="badge bg-light text-dark border">Arrays</span>
+                                    <span class="badge bg-light text-dark border">DP</span>
+                                </div>
+                                <i class="bi bi-bookmark text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Col: Active Workspace -->
+                <div class="col-xl-8 col-lg-7">
+                    
+                    <div class="workspace-card h-100 shadow-sm">
+                        <!-- Top Tabs for Details, Discuss, AI -->
+                        <ul class="nav nav-tabs workspace-header-tabs" id="workspaceTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="desc-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">Description</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="ai-tab" data-bs-toggle="tab" data-bs-target="#ai-mentor" type="button" role="tab"><i class="bi bi-robot text-primary me-1"></i> AI Assistant</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="discuss-tab" data-bs-toggle="tab" data-bs-target="#discussion" type="button" role="tab">Discussion (45)</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="hints-tab" data-bs-toggle="tab" data-bs-target="#hints" type="button" role="tab">Hints (3)</button>
+                            </li>
+                        </ul>
+                        
+                        <!-- Tab Content for Top Half -->
+                        <div class="tab-content p-4 workspace-scroll" style="height: 300px; overflow-y: auto;" id="workspaceTabContent">
+                            
+                            <!-- Problem Description -->
+                            <div class="tab-pane fade show active" id="description" role="tabpanel">
+                                <div class="d-flex gap-2 align-items-center mb-3">
+                                    <h4 class="fw-bold mb-0">1. Two Sum</h4>
+                                </div>
+                                <div class="d-flex gap-3 text-muted small fw-medium mb-4">
+                                    <span class="badge badge-easy">Easy</span>
+                                    <span class="text-primary"><i class="bi bi-building"></i> Google, Amazon, Microsoft</span>
+                                </div>
+                                
+                                <p>Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>
+                                <p>You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the <em>same</em> element twice.</p>
+                                <p>You can return the answer in any order.</p>
+                                
+                                <h6 class="fw-bold mt-4">Example 1:</h6>
+                                <div class="test-case-box">
+                                    <strong>Input:</strong> nums = [2,7,11,15], target = 9<br>
+                                    <strong>Output:</strong> [0,1]<br>
+                                    <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].
+                                </div>
+                                
+                                <h6 class="fw-bold mt-4">Constraints:</h6>
+                                <ul class="small text-muted">
+                                    <li><code>2 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>
+                                    <li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>
+                                    <li><code>-10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></code></li>
+                                    <li><strong>Only one valid answer exists.</strong></li>
+                                </ul>
+                            </div>
+                            
+                            <!-- AI Assistant -->
+                            <div class="tab-pane fade" id="ai-mentor" role="tabpanel">
+                                <div class="ai-assistant-card p-4">
+                                    <div class="d-flex align-items-center gap-3 mb-4">
+                                        <div class="bg-primary text-white rounded-circle p-2 fs-4">
+                                            <i class="bi bi-robot"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="fw-bold mb-0 text-primary">AI Coding Assistant</h5>
+                                            <small class="text-muted">How can I help you with this problem?</small>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="d-flex flex-wrap gap-2 mb-4">
+                                        <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="bi bi-lightbulb"></i> Give me a hint</button>
+                                        <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="bi bi-lightning"></i> Optimize my solution</button>
+                                        <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="bi bi-clock"></i> Explain Time Complexity</button>
+                                        <button class="btn btn-outline-primary btn-sm rounded-pill"><i class="bi bi-bug"></i> Find bugs in my code</button>
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-white" placeholder="Ask anything about this problem...">
+                                        <button class="btn btn-primary px-4"><i class="bi bi-send"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hints -->
+                            <div class="tab-pane fade" id="hints" role="tabpanel">
+                                <h6 class="fw-bold mb-3">Problem Hints</h6>
+                                <div class="mb-3">
+                                    <div class="fw-semibold mb-2">Hint 1</div>
+                                    <button class="btn btn-sm btn-light border btn-reveal-hint">Reveal Hint</button>
+                                    <div class="alert alert-primary d-none small">A really brute force way would be to search for all possible pairs of numbers but that would be too slow. Again, it's best to try out brute force solutions for just for completeness. It is from these brute force solutions that you can come up with optimizations.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="fw-semibold mb-2">Hint 2</div>
+                                    <button class="btn btn-sm btn-light border btn-reveal-hint">Reveal Hint</button>
+                                    <div class="alert alert-primary d-none small">So, if we fix one of the numbers, say `x`, we have to scan the entire array to find the next number `y` which is `value - x` where value is the input parameter. Can we change our array keeping how it's represented, so as to reduce the search time from O(n) to O(1)?</div>
+                                </div>
+                            </div>
+
+                            <!-- Discussion -->
+                            <div class="tab-pane fade" id="discussion" role="tabpanel">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h6 class="fw-bold mb-0">Community Discussions</h6>
+                                    <button class="btn btn-sm btn-primary">New Post</button>
+                                </div>
+                                <div class="border-bottom pb-3 mb-3">
+                                    <div class="d-flex gap-2 align-items-center mb-1">
+                                        <span class="fw-bold small text-primary">@python_master</span>
+                                        <span class="text-muted small">2 days ago</span>
+                                    </div>
+                                    <p class="small fw-semibold mb-1">O(n) Python solution using HashMap. Beats 99%</p>
+                                    <div class="d-flex gap-3 small text-muted">
+                                        <span><i class="bi bi-hand-thumbs-up"></i> 1.2k</span>
+                                        <span><i class="bi bi-chat"></i> 45</span>
+                                    </div>
+                                </div>
+                                <div class="border-bottom pb-3 mb-3">
+                                    <div class="d-flex gap-2 align-items-center mb-1">
+                                        <span class="fw-bold small text-primary">@java_dev</span>
+                                        <span class="text-muted small">5 days ago</span>
+                                    </div>
+                                    <p class="small fw-semibold mb-1">Java Solution | O(n) Time | O(n) Space | Detailed Explanation</p>
+                                    <div class="d-flex gap-3 small text-muted">
+                                        <span><i class="bi bi-hand-thumbs-up"></i> 890</span>
+                                        <span><i class="bi bi-chat"></i> 12</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <!-- Editor Section -->
+                        <div class="editor-toolbar d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <div class="d-flex align-items-center gap-3">
+                                <select class="form-select form-select-sm w-auto fw-medium border-0 bg-white">
+                                    <option value="java">Java</option>
+                                    <option value="python" selected>Python 3</option>
+                                    <option value="cpp">C++</option>
+                                    <option value="javascript">JavaScript</option>
+                                </select>
+                                <span class="text-muted small"><i class="bi bi-cloud-check text-success"></i> Saved to cloud</span>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-secondary border-0" id="formatCodeBtn" title="Format Code"><i class="bi bi-justify-left"></i></button>
+                                <button class="btn btn-sm btn-outline-secondary border-0" id="resetCodeBtn" title="Reset Code"><i class="bi bi-arrow-counterclockwise"></i></button>
+                                <button class="btn btn-sm btn-outline-secondary border-0" id="copyCodeBtn" title="Copy Code"><i class="bi bi-copy"></i></button>
+                            </div>
+                        </div>
+                        
+                        <textarea class="code-editor" id="codeEditor" spellcheck="false">
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # Hash map to store the value and its index
+        num_map = {}
+        
+        for i, num in enumerate(nums):
+            complement = target - num
+            
+            # If complement exists, we found our pair
+            if complement in num_map:
+                return [num_map[complement], i]
+                
+            # Otherwise add current number to map
+            num_map[num] = i
+            
+        return []
+                        </textarea>
+
+                        <!-- Bottom Tabs (Testcases, Console, Submission) -->
+                        <ul class="nav nav-tabs workspace-header-tabs" id="consoleTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="testcases-tab" data-bs-toggle="tab" data-bs-target="#testcases" type="button" role="tab"><i class="bi bi-list-check me-1"></i> Testcases</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="submission-tab" data-bs-toggle="tab" data-bs-target="#submission" type="button" role="tab"><i class="bi bi-clock-history me-1"></i> Submission Result</button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content" id="consoleTabContent">
+                            <!-- Test Cases & Console -->
+                            <div class="tab-pane fade show active position-relative" id="testcases" role="tabpanel">
+                                <div class="console-panel" id="consoleOutput">
+                                    <div class="d-flex gap-3 mb-3">
+                                        <button class="btn btn-sm btn-secondary active">Case 1</button>
+                                        <button class="btn btn-sm btn-outline-secondary text-white">Case 2</button>
+                                        <button class="btn btn-sm btn-outline-secondary text-white">Case 3</button>
+                                    </div>
+                                    <div class="mb-2">
+                                        <small class="text-white-50 d-block mb-1">Input:</small>
+                                        <div class="bg-dark p-2 rounded text-light">nums = [2,7,11,15], target = 9</div>
+                                    </div>
+                                    <div>
+                                        <small class="text-white-50 d-block mb-1">Expected Output:</small>
+                                        <div class="bg-dark p-2 rounded text-light">[0,1]</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Submission Result -->
+                            <div class="tab-pane fade" id="submission" role="tabpanel">
+                                <div class="console-panel bg-white text-dark" style="border-top: none;">
+                                    <div class="result-success" style="display: none;">
+                                        <h4 class="fw-bold mb-3"><i class="bi bi-check-circle-fill me-2"></i>Accepted</h4>
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <small class="d-block text-muted fw-semibold">Runtime</small>
+                                                <div class="fs-5 fw-bold">64 ms</div>
+                                                <small class="text-success"><i class="bi bi-graph-up"></i> Beats 85.2%</small>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <small class="d-block text-muted fw-semibold">Memory</small>
+                                                <div class="fs-5 fw-bold">17.3 MB</div>
+                                                <small class="text-success"><i class="bi bi-graph-up"></i> Beats 45.1%</small>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <small class="d-block text-muted fw-semibold">Reward</small>
+                                                <div class="fs-5 fw-bold text-warning">+50 XP</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center text-muted py-5" id="submissionPlaceholder">
+                                        <i class="bi bi-clock-history display-4 mb-2 d-block opacity-25"></i>
+                                        Submit your code to see the results.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end gap-2 p-3 bg-white border-top">
+                            <button class="btn btn-light shadow-sm" id="runCodeBtn"><i class="bi bi-play-fill text-success"></i> Run Code</button>
+                            <button class="btn btn-primary px-4 shadow-sm" id="submitCodeBtn">Submit</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Footer Row -->
+            <div class="mt-5 mb-3">
+                <h6 class="fw-bold mb-3">Recent Achievements</h6>
+                <div class="row g-3">
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center">
+                            <div class="achievement-icon bg-warning bg-opacity-10 text-warning mb-2 border border-warning"><i class="bi bi-star-fill"></i></div>
+                            <small class="fw-semibold lh-sm">First Acceptance</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center">
+                            <div class="achievement-icon bg-success bg-opacity-10 text-success mb-2 border border-success"><i class="bi bi-shield-check"></i></div>
+                            <small class="fw-semibold lh-sm">10 Accepted</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center">
+                            <div class="achievement-icon bg-primary bg-opacity-10 text-primary mb-2 border border-primary"><i class="bi bi-lightning-charge-fill"></i></div>
+                            <small class="fw-semibold lh-sm">Fast Coder</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center opacity-50">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center bg-light">
+                            <div class="achievement-icon bg-secondary bg-opacity-10 text-secondary mb-2"><i class="bi bi-lock-fill"></i></div>
+                            <small class="fw-semibold lh-sm">50 Accepted</small>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-4 text-center opacity-50">
+                        <div class="dash-card p-3 d-flex flex-column align-items-center bg-light">
+                            <div class="achievement-icon bg-secondary bg-opacity-10 text-secondary mb-2"><i class="bi bi-lock-fill"></i></div>
+                            <small class="fw-semibold lh-sm">Bug Hunter</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mt-4 pt-4 border-top border-light d-flex flex-wrap justify-content-between align-items-center text-muted small pb-3">
+                <span class="fw-medium">&copy; 2026 PlacementPrep AI. All rights reserved.</span>
+                <span class="fw-medium">Version 1.0.0</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/coding.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+/* Global Variables & Design Tokens */
+
+:root {
+    /* Brand Colors */
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-light: #eff6ff;
+    
+    --secondary-color: #3b82f6;
+    --accent-color: #8b5cf6;
+    
+    /* Functional Colors */
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --info: #0ea5e9;
+
+    /* Neutrals / Grayscale (Light Theme Defaults) */
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+
+    /* Typography */
+    --font-primary: 'Poppins', sans-serif;
+    
+    /* Layout & Spacing */
+    --sidebar-width: 250px;
+    --sidebar-width-collapsed: 70px;
+    --topbar-height: 70px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    /* Z-index layers */
+    --z-sidebar: 1000;
+    --z-topbar: 999;
+    --z-toast: 1050;
+    --z-loader: 2000;
+}

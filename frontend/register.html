@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="container auth-container register-container">
+        <div class="auth-card">
+            <div class="text-center">
+                <a href="index.html" class="brand-logo">
+                    <i class="bi bi-robot"></i> PlacementPrep AI
+                </a>
+                <h3 class="fw-bold mb-2">Create an Account</h3>
+                <p class="text-muted mb-4">Join thousands of students preparing for their dream jobs.</p>
+            </div>
+
+            <form id="registerForm" novalidate>
+                <div class="row g-3">
+                    <div class="col-md-6 mb-2">
+                        <label for="fullName" class="form-label fw-medium">Full Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control border-start-0" id="fullName" placeholder="John Doe" required>
+                            <div class="invalid-feedback">Name is required.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-2">
+                        <label for="regEmail" class="form-label fw-medium">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control border-start-0" id="regEmail" placeholder="john@example.com" required>
+                            <div class="invalid-feedback">Valid email is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <label for="phone" class="form-label fw-medium">Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-telephone"></i></span>
+                            <input type="tel" class="form-control border-start-0" id="phone" placeholder="9876543210" pattern="[0-9]{10}" required>
+                            <div class="invalid-feedback">Enter a valid 10-digit phone number.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <label for="college" class="form-label fw-medium">College Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-building"></i></span>
+                            <input type="text" class="form-control border-start-0" id="college" placeholder="XYZ Engineering College" required>
+                            <div class="invalid-feedback">College name is required.</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <label for="department" class="form-label fw-medium">Department</label>
+                        <select class="form-select" id="department" required>
+                            <option value="" disabled selected>Select Department</option>
+                            <option value="CSE">Computer Science</option>
+                            <option value="IT">Information Technology</option>
+                            <option value="ECE">Electronics & Communication</option>
+                            <option value="EEE">Electrical & Electronics</option>
+                            <option value="MECH">Mechanical Engineering</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                        <div class="invalid-feedback">Please select a department.</div>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <label for="year" class="form-label fw-medium">Year of Passing</label>
+                        <select class="form-select" id="year" required>
+                            <option value="" disabled selected>Select Year</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                        </select>
+                        <div class="invalid-feedback">Please select your passing year.</div>
+                    </div>
+
+                    <div class="col-md-6 mb-2">
+                        <label for="regPassword" class="form-label fw-medium">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-lock"></i></span>
+                            <input type="password" class="form-control border-start-0 border-end-0" id="regPassword" placeholder="Create password" required minlength="6">
+                            <span class="input-group-text bg-transparent border-start-0 password-toggle" onclick="togglePassword('regPassword', this)">
+                                <i class="bi bi-eye-slash"></i>
+                            </span>
+                            <div class="invalid-feedback">Password must be at least 6 characters.</div>
+                        </div>
+                        <div class="password-strength-meter">
+                            <div class="strength-bar" id="strengthBar"></div>
+                        </div>
+                        <span class="text-muted strength-text" id="strengthText">Password strength</span>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <label for="confirmPassword" class="form-label fw-medium">Confirm Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-lock-fill"></i></span>
+                            <input type="password" class="form-control border-start-0 border-end-0" id="confirmPassword" placeholder="Confirm password" required>
+                            <span class="input-group-text bg-transparent border-start-0 password-toggle" onclick="togglePassword('confirmPassword', this)">
+                                <i class="bi bi-eye-slash"></i>
+                            </span>
+                            <div class="invalid-feedback">Passwords do not match.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                    <label class="form-check-label text-muted small" for="termsCheck">
+                        I agree to the <a href="#" class="text-primary-link">Terms of Service</a> and <a href="#" class="text-primary-link">Privacy Policy</a>
+                    </label>
+                    <div class="invalid-feedback">You must agree before submitting.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3" id="registerBtn">
+                    <span class="btn-text">Register Now</span>
+                    <span class="spinner-border spinner-border-sm d-none ms-2" role="status" aria-hidden="true"></span>
+                </button>
+
+                <p class="text-center text-muted small mb-0">
+                    Already have an account? <a href="login.html" class="text-primary-link fw-semibold">Sign In</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
