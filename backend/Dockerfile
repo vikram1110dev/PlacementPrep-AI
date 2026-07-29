@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     default-libmysqlclient-dev \
     pkg-config \
-    wkhtmltopdf \
     && rm -rf /var/lib/apt/lists/*
 
 # Install python dependencies
@@ -30,7 +29,6 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Install runtime dependencies for wkhtmltopdf and mysql
 RUN apt-get update && apt-get install -y \
     default-libmysqlclient-dev \
-    wkhtmltopdf \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy project

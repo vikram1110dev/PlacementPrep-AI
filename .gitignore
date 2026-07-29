@@ -48,3 +48,10 @@ docker-compose.override.yml
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+backend/logs/

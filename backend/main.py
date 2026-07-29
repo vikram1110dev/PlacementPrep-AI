@@ -63,6 +63,10 @@ def create_app() -> FastAPI:
     app.include_router(resume_router, prefix=settings.API_V1_STR)
     app.include_router(admin_router, prefix=settings.API_V1_STR)
     
+    # Automatically create tables on startup
+    from app.database.connection import engine, Base
+    Base.metadata.create_all(bind=engine)
+    
     # --- Health Check ---
     @app.get("/health", tags=["System"])
     def health_check():
