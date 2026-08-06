@@ -478,6 +478,42 @@
         </main>
     </div>
 
+    <!-- Test Setup Modal -->
+    <div class="modal fade" id="testSetupModal" tabindex="-1" aria-labelledby="testSetupModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="testSetupModalLabel">Start Aptitude Test</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="testSetupForm">
+              <div class="mb-3">
+                <label class="form-label fw-medium">Topic (Optional)</label>
+                <select class="form-select" id="setupTopic">
+                  <option value="">All Topics (Mixed)</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-medium">Difficulty</label>
+                <select class="form-select" id="setupDifficulty">
+                  <option value="">Mixed Difficulty</option>
+                  <option value="EASY">Easy</option>
+                  <option value="MEDIUM">Medium</option>
+                  <option value="HARD">Hard</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label class="form-label fw-medium">Number of Questions</label>
+                <input type="number" class="form-control" id="setupCount" value="10" min="5" max="50">
+              </div>
+              <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold" id="startTestSubmitBtn">Start Test</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->

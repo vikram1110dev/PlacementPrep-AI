@@ -155,7 +155,166 @@ class AptitudeService:
     def get_topics(self, category_id: int = None):
         return self.repo.get_topics(category_id)
 
-    # --- Practice Sessions ---
+    # --- Test Engine ---
+    def start_test_session(self, user_id: str, request: dict):
+        topic_id = request.get('topic_id')
+        difficulty = request.get('difficulty')
+        count = request.get('question_count', 10)
+        
+        session = self.repo.create_test_session(user_id, topic_id, difficulty, count)
+        if session.total_questions == 0:
+            raise HTTPException(status_code=400, detail="No questions found for the selected criteria.")
+            
+        return session
+
+    def get_test_session(self, session_id: str, user_id: str):
+        session = self.repo.get_test_session(session_id)
+        if not session or session.user_id != user_id:
+            raise HTTPException(status_code=404, detail="Session not found")
+            
+        import random
+        questions = []
+        for attempt in session.attempts:
+            q = attempt.question
+            options = [q.option_a, q.option_b, q.option_c, q.option_d]
+            random.shuffle(options)
+            questions.append({
+                "id": q.id,
+                "question_text": q.question_text,
+                "options": options,
+                "time_limit_seconds": q.estimated_time_seconds,
+                "attempt_state": {
+                    "selected_answer": attempt.selected_answer,
+                    "visited": attempt.visited,
+                    "marked_for_review": attempt.marked_for_review
+                }
+            })
+            
+        return {
+            "session_id": session.id,
+            "started_at": session.started_at,
+            "status": session.status,
+            "total_questions": session.total_questions,
+            "questions": questions
+        }
+
+    def answer_test_question(self, session_id: str, user_id: str, request: dict):
+        session = self.repo.get_test_session(session_id)
+        if not session or session.user_id != user_id:
+            raise HTTPException(status_code=404, detail="Session not found")
+        if session.status == 'COMPLETED':
+            raise HTTPException(status_code=400, detail="Test is already completed")
+            
+        q_id = request.get('question_id')
+        selected_answer = request.get('selected_answer')
+        
+        attempt = next((a for a in session.attempts if a.question_id == q_id), None)
+        if not attempt:
+            raise HTTPException(status_code=404, detail="Question not part of this session")
+            
+        is_correct = False
+        if selected_answer and selected_answer.strip().lower() == attempt.question.correct_answer.strip().lower():
+            is_correct = True
+            
+        self.repo.update_question_attempt(
+            session_id=session_id,
+            question_id=q_id,
+            selected_answer=selected_answer,
+            is_correct=is_correct,
+            time_taken=attempt.time_taken_seconds + request.get('time_taken_seconds', 0),
+            visited=request.get('visited', True),
+            marked=request.get('marked_for_review', False)
+        )
+        return {"message": "Answer recorded successfully"}
+
+    def submit_test_session(self, session_id: str, user_id: str):
+        session = self.repo.get_test_session(session_id)
+        if not session or session.user_id != user_id:
+            raise HTTPException(status_code=404, detail="Session not found")
+        if session.status == 'COMPLETED':
+            raise HTTPException(status_code=400, detail="Test is already completed")
+            
+        score = Decimal("0.0")
+        correct = 0
+        wrong = 0
+        skipped = 0
+        total_time = 0
+        
+        for attempt in session.attempts:
+            q = attempt.question
+            total_time += (attempt.time_taken_seconds or 0)
+            if not attempt.selected_answer:
+                skipped += 1
+            elif attempt.is_correct:
+                correct += 1
+                score += Decimal(str(q.marks))
+            else:
+                wrong += 1
+                score -= Decimal(str(q.negative_marks))
+                
+        total_attempted = correct + wrong
+        accuracy = Decimal("0.0")
+        if total_attempted > 0:
+            accuracy = (Decimal(correct) / Decimal(total_attempted)) * Decimal("100.0")
+            
+        self.repo.finalize_test_session(session_id, float(score), float(accuracy), total_time)
+        
+        return {
+            "session_id": session_id,
+            "score": float(score),
+            "accuracy_percentage": float(accuracy),
+            "total_questions": session.total_questions,
+            "correct_answers": correct,
+            "wrong_answers": wrong,
+            "skipped_answers": skipped,
+            "time_taken_seconds": total_time
+        }
+
+    def get_test_result(self, session_id: str, user_id: str):
+        session = self.repo.get_test_session(session_id)
+        if not session or session.user_id != user_id:
+            raise HTTPException(status_code=404, detail="Session not found")
+            
+        correct = 0
+        wrong = 0
+        skipped = 0
+        
+        questions = []
+        for a in session.attempts:
+            if not a.selected_answer: skipped += 1
+            elif a.is_correct: correct += 1
+            else: wrong += 1
+            
+            questions.append({
+                "question": {
+                    "text": a.question.question_text,
+                    "option_a": a.question.option_a,
+                    "option_b": a.question.option_b,
+                    "option_c": a.question.option_c,
+                    "option_d": a.question.option_d,
+                    "correct_answer": a.question.correct_answer,
+                    "explanation": a.question.explanation
+                },
+                "attempt": {
+                    "selected_answer": a.selected_answer,
+                    "is_correct": a.is_correct,
+                    "time_taken_seconds": a.time_taken_seconds
+                }
+            })
+            
+        return {
+            "session_id": session.id,
+            "score": float(session.score),
+            "accuracy_percentage": float(session.accuracy),
+            "total_questions": session.total_questions,
+            "correct_answers": correct,
+            "wrong_answers": wrong,
+            "skipped_answers": skipped,
+            "time_taken_seconds": session.time_taken_seconds,
+            "questions": questions
+        }
+
+    # --- Practice Sessions (Legacy) ---
     def start_practice(self, user_id: str):
         return self.repo.create_practice_session(user_id)
         

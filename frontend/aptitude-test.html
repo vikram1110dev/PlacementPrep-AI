@@ -9,33 +9,118 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <style>
-        .test-container { max-width: 800px; margin: auto; }
-        .question-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; background: #fff; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .option-label { display: block; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-        .option-label:hover { border-color: #2563EB; background: #f0fdf4; }
+        body { background-color: #f8fafc; }
+        .test-header { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .timer-box { background: #fee2e2; color: #b91c1c; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; }
+        
+        .main-container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; display: grid; grid-template-columns: 1fr 300px; gap: 2rem; }
+        @media (max-width: 991px) {
+            .main-container { grid-template-columns: 1fr; }
+            .nav-panel { order: -1; }
+        }
+        
+        .question-card { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        
+        .option-label { display: block; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.2s; margin-bottom: 1rem; }
+        .option-label:hover { border-color: #93c5fd; background: #f0fdf4; }
         input[type="radio"]:checked + .option-label { border-color: #2563EB; background: #eff6ff; font-weight: 600; }
-        .timer { font-size: 1.5rem; font-weight: bold; color: #DC2626; }
+        
+        .nav-panel { background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); height: fit-content; }
+        .q-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 1rem; }
+        .q-btn { width: 100%; aspect-ratio: 1; border-radius: 8px; border: 1px solid #cbd5e1; background: #fff; font-weight: 600; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+        .q-btn:hover { background: #f1f5f9; }
+        .q-btn.active { border-color: #2563EB; border-width: 2px; }
+        .q-btn.answered { background: #22c55e; color: #fff; border-color: #22c55e; }
+        .q-btn.review { background: #f59e0b; color: #fff; border-color: #f59e0b; }
+        .q-btn.visited:not(.answered):not(.review) { background: #ef4444; color: #fff; border-color: #ef4444; }
+        
+        .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; margin-bottom: 4px; }
+        .legend-box { width: 16px; height: 16px; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <!-- Top Navbar Minimal -->
-    <header class="top-navbar justify-content-between px-4 py-3 bg-white shadow-sm d-flex align-items-center">
-        <div class="fw-bold fs-5 text-primary"><i class="bi bi-robot"></i> PlacementPrep Test</div>
-        <div class="timer" id="overallTimer"><i class="bi bi-clock"></i> 00:00</div>
-        <button class="btn btn-danger rounded-pill" id="endTestBtn">End Test</button>
+    <header class="test-header px-4 py-3 d-flex justify-content-between align-items-center">
+        <div class="fw-bold fs-5 text-primary"><i class="bi bi-robot"></i> PlacementPrep AI</div>
+        <div class="timer-box" id="overallTimer">
+            <i class="bi bi-clock"></i> <span>00:00:00</span>
+        </div>
+        <button class="btn btn-danger fw-bold rounded-pill px-4" id="submitTestBtnTop">Submit Test</button>
     </header>
 
-    <!-- Main Content -->
-    <main class="container py-5">
-        <div class="test-container" id="testContainer">
-            <!-- Questions will be injected here via JS -->
-            <div class="text-center mt-5" id="loader">
-                <div class="spinner-border text-primary" role="status"></div>
-                <p class="mt-2 text-muted">Loading Questions...</p>
+    <div class="main-container" id="loadingContainer">
+        <div class="col-12 text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-3 fw-medium text-muted">Loading your test session...</p>
+        </div>
+    </div>
+
+    <div class="main-container d-none" id="testUI">
+        <!-- Question Area -->
+        <div class="question-area">
+            <div class="question-card" id="questionCard">
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                    <h5 class="mb-0 fw-bold text-primary" id="qNumberDisplay">Question 1</h5>
+                    <div class="badge bg-light text-dark border"><i class="bi bi-stopwatch"></i> <span id="qTimerDisplay">0s</span> spent</div>
+                </div>
+                
+                <h4 class="mb-4 lh-base" id="qText">Question text goes here...</h4>
+                
+                <div class="options-container" id="optionsContainer">
+                    <!-- Options injected here -->
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top">
+                    <button class="btn btn-outline-secondary px-4 rounded-pill" id="btnPrev"><i class="bi bi-chevron-left"></i> Previous</button>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-warning px-4 rounded-pill" id="btnReview"><i class="bi bi-bookmark-star"></i> Mark Review</button>
+                        <button class="btn btn-outline-danger px-4 rounded-pill" id="btnClear"><i class="bi bi-eraser"></i> Clear</button>
+                    </div>
+                    <button class="btn btn-primary px-4 rounded-pill" id="btnNext">Save & Next <i class="bi bi-chevron-right"></i></button>
+                </div>
             </div>
         </div>
-    </main>
+
+        <!-- Right Navigation Panel -->
+        <div class="nav-panel">
+            <h6 class="fw-bold mb-3 border-bottom pb-2">Question Palette</h6>
+            
+            <div class="d-flex flex-wrap gap-3 mb-4">
+                <div class="legend-item"><div class="legend-box" style="background: #22c55e;"></div> Answered</div>
+                <div class="legend-item"><div class="legend-box" style="background: #ef4444;"></div> Not Answered</div>
+                <div class="legend-item"><div class="legend-box" style="background: #f59e0b;"></div> Marked for Review</div>
+                <div class="legend-item"><div class="legend-box" style="background: #fff; border: 1px solid #cbd5e1;"></div> Not Visited</div>
+            </div>
+            
+            <div class="q-grid" id="qGrid">
+                <!-- Grid buttons injected here -->
+            </div>
+            
+            <div class="mt-5 pt-3 border-top text-center">
+                <button class="btn btn-danger w-100 fw-bold rounded-pill" id="submitTestBtnSide">Submit Test</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Submit Confirmation Modal -->
+    <div class="modal fade" id="submitModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center pb-4">
+            <i class="bi bi-exclamation-circle text-warning" style="font-size: 4rem;"></i>
+            <h4 class="fw-bold mt-3">Submit Test?</h4>
+            <p class="text-muted" id="submitStats">You have answered 0 out of 10 questions.</p>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button type="button" class="btn btn-light px-4 rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary px-4 rounded-pill" id="confirmSubmitBtn">Yes, Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -47,81 +132,178 @@
             }
 
             const urlParams = new URLSearchParams(window.location.search);
-            const topicId = urlParams.get('topic');
-            const difficulty = urlParams.get('difficulty');
+            const sessionId = urlParams.get('session');
+            if(!sessionId) {
+                alert("Invalid test session");
+                window.location.href = 'aptitude.html';
+                return;
+            }
+
+            let sessionData = null;
             let questions = [];
-            let currentQIndex = 0;
-            let sessionId = '';
+            let currentIndex = 0;
+            let overallTime = 0;
+            let timerInterval = null;
             
+            // Per question timer state
+            let questionTimeStart = null;
+
             try {
-                // Fetch Questions
-                const res = await fetch(`http://localhost:1111/api/v1/aptitude/questions?topic_id=${topicId}&difficulty=${difficulty}&limit=10`, {
+                const res = await fetch(`http://localhost:1111/api/v1/aptitude/test/${sessionId}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
-                if(data.success && data.data.length > 0) {
-                    questions = data.data;
-                    // Start Session
-                    const sessionRes = await fetch('http://localhost:1111/api/v1/aptitude/practice/start', {
-                        method: 'POST',
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    });
-                    const sessionData = await sessionRes.json();
-                    sessionId = sessionData.data.session_id;
+                
+                if (data.success) {
+                    sessionData = data.data;
+                    questions = sessionData.questions;
                     
-                    renderQuestion();
-                    startTimer();
+                    if(sessionData.status === 'COMPLETED') {
+                        window.location.href = `aptitude-result.html?session=${sessionId}`;
+                        return;
+                    }
+                    
+                    document.getElementById('loadingContainer').classList.add('d-none');
+                    document.getElementById('testUI').classList.remove('d-none');
+                    
+                    // Initialize state
+                    questions.forEach(q => {
+                        if(!q.attempt_state) {
+                            q.attempt_state = { selected_answer: null, visited: false, marked_for_review: false };
+                        }
+                    });
+                    
+                    buildGrid();
+                    renderQuestion(0);
+                    startOverallTimer();
+                    
                 } else {
-                    document.getElementById('testContainer').innerHTML = `<div class="alert alert-warning">No questions found for this topic/difficulty. <a href="aptitude.html">Go back</a></div>`;
+                    alert("Error loading test: " + data.message);
+                    window.location.href = 'aptitude.html';
                 }
             } catch (error) {
                 console.error(error);
+                alert("Failed to load test session.");
+            }
+            
+            function startOverallTimer() {
+                // Determine elapsed time if started earlier
+                const startTime = new Date(sessionData.started_at).getTime();
+                const now = new Date().getTime();
+                overallTime = Math.floor((now - startTime) / 1000);
+                if(overallTime < 0) overallTime = 0;
+                
+                const timerEl = document.querySelector('#overallTimer span');
+                
+                timerInterval = setInterval(() => {
+                    overallTime++;
+                    const h = Math.floor(overallTime / 3600).toString().padStart(2, '0');
+                    const m = Math.floor((overallTime % 3600) / 60).toString().padStart(2, '0');
+                    const s = (overallTime % 60).toString().padStart(2, '0');
+                    timerEl.textContent = `${h}:${m}:${s}`;
+                    
+                    // Update current question timer display dynamically
+                    if(questionTimeStart) {
+                        const qElapsed = Math.floor((new Date().getTime() - questionTimeStart) / 1000);
+                        document.getElementById('qTimerDisplay').textContent = `${qElapsed}s`;
+                    }
+                }, 1000);
             }
 
-            function renderQuestion() {
-                if(currentQIndex >= questions.length) {
-                    finishTest();
-                    return;
-                }
-                const q = questions[currentQIndex];
-                const html = `
-                    <div class="question-card shadow-sm">
-                        <div class="d-flex justify-content-between mb-3">
-                            <span class="badge bg-primary">Question ${currentQIndex + 1} of ${questions.length}</span>
-                            <span class="badge bg-secondary">${q.difficulty}</span>
-                        </div>
-                        <h4 class="mb-4">${q.question_text}</h4>
-                        <div class="options">
-                            <div class="form-check mb-3 p-0">
-                                <input class="form-check-input d-none" type="radio" name="answer" id="optA" value="A">
-                                <label class="option-label" for="optA">A. ${q.option_a}</label>
-                            </div>
-                            <div class="form-check mb-3 p-0">
-                                <input class="form-check-input d-none" type="radio" name="answer" id="optB" value="B">
-                                <label class="option-label" for="optB">B. ${q.option_b}</label>
-                            </div>
-                            <div class="form-check mb-3 p-0">
-                                <input class="form-check-input d-none" type="radio" name="answer" id="optC" value="C">
-                                <label class="option-label" for="optC">C. ${q.option_c}</label>
-                            </div>
-                            <div class="form-check mb-3 p-0">
-                                <input class="form-check-input d-none" type="radio" name="answer" id="optD" value="D">
-                                <label class="option-label" for="optD">D. ${q.option_d}</label>
-                            </div>
-                        </div>
-                        <div class="mt-4 text-end">
-                            <button class="btn btn-primary px-4" id="nextBtn">Next / Submit</button>
-                        </div>
-                    </div>
-                `;
-                document.getElementById('testContainer').innerHTML = html;
-                
-                document.getElementById('nextBtn').addEventListener('click', async () => {
-                    const selected = document.querySelector('input[name="answer"]:checked');
-                    const answerVal = selected ? selected.value : null;
+            function buildGrid() {
+                const grid = document.getElementById('qGrid');
+                grid.innerHTML = '';
+                questions.forEach((q, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'q-btn';
+                    btn.textContent = idx + 1;
+                    btn.onclick = () => saveAndNavigate(idx);
                     
-                    // Submit answer
-                    await fetch(`http://localhost:1111/api/v1/aptitude/practice/${sessionId}/submit`, {
+                    updateBtnStyle(btn, q);
+                    if(idx === currentIndex) btn.classList.add('active');
+                    
+                    grid.appendChild(btn);
+                });
+            }
+            
+            function updateBtnStyle(btn, q) {
+                btn.className = 'q-btn';
+                if(q.attempt_state.marked_for_review) {
+                    btn.classList.add('review');
+                } else if(q.attempt_state.selected_answer) {
+                    btn.classList.add('answered');
+                } else if(q.attempt_state.visited) {
+                    btn.classList.add('visited');
+                }
+            }
+
+            function renderQuestion(index) {
+                currentIndex = index;
+                const q = questions[index];
+                
+                // Track visit
+                if(!q.attempt_state.visited) {
+                    q.attempt_state.visited = true;
+                }
+                
+                questionTimeStart = new Date().getTime();
+                
+                document.getElementById('qNumberDisplay').textContent = `Question ${index + 1}`;
+                document.getElementById('qText').innerHTML = q.question_text.replace(/\n/g, '<br>');
+                
+                const optsContainer = document.getElementById('optionsContainer');
+                optsContainer.innerHTML = '';
+                
+                q.options.forEach((opt, oIdx) => {
+                    const wrap = document.createElement('div');
+                    wrap.className = 'form-check p-0';
+                    const input = document.createElement('input');
+                    input.className = 'form-check-input d-none';
+                    input.type = 'radio';
+                    input.name = 'answerOptions';
+                    input.id = `opt_${oIdx}`;
+                    input.value = opt;
+                    
+                    if(q.attempt_state.selected_answer === opt) {
+                        input.checked = true;
+                    }
+                    
+                    const label = document.createElement('label');
+                    label.className = 'option-label';
+                    label.htmlFor = `opt_${oIdx}`;
+                    label.textContent = opt;
+                    
+                    wrap.appendChild(input);
+                    wrap.appendChild(label);
+                    optsContainer.appendChild(wrap);
+                });
+                
+                // Highlight grid
+                Array.from(document.getElementById('qGrid').children).forEach((btn, i) => {
+                    updateBtnStyle(btn, questions[i]);
+                    if(i === index) btn.classList.add('active');
+                });
+                
+                // Toggle Prev/Next
+                document.getElementById('btnPrev').disabled = (index === 0);
+                if(index === questions.length - 1) {
+                    document.getElementById('btnNext').innerHTML = 'Save <i class="bi bi-check2"></i>';
+                    document.getElementById('btnNext').classList.replace('btn-primary', 'btn-success');
+                } else {
+                    document.getElementById('btnNext').innerHTML = 'Save & Next <i class="bi bi-chevron-right"></i>';
+                    document.getElementById('btnNext').classList.replace('btn-success', 'btn-primary');
+                }
+                
+                if(q.attempt_state.marked_for_review) {
+                    document.getElementById('btnReview').innerHTML = '<i class="bi bi-bookmark-check-fill"></i> Unmark';
+                } else {
+                    document.getElementById('btnReview').innerHTML = '<i class="bi bi-bookmark-star"></i> Mark Review';
+                }
+            }
+
+            async function syncAnswer(q, timeTaken) {
+                try {
+                    await fetch(`http://localhost:1111/api/v1/aptitude/test/${sessionId}/answer`, {
                         method: 'POST',
                         headers: { 
                             'Authorization': `Bearer ${token}`,
@@ -129,41 +311,100 @@
                         },
                         body: JSON.stringify({
                             question_id: q.id,
-                            selected_answer: answerVal,
-                            time_taken_seconds: 30 // hardcoded for MVP
+                            selected_answer: q.attempt_state.selected_answer,
+                            time_taken_seconds: timeTaken,
+                            visited: q.attempt_state.visited,
+                            marked_for_review: q.attempt_state.marked_for_review
                         })
                     });
-                    
-                    currentQIndex++;
-                    renderQuestion();
-                });
+                } catch (e) { console.error("Sync failed", e); }
             }
 
-            async function finishTest() {
-                await fetch(`http://localhost:1111/api/v1/aptitude/practice/${sessionId}/finish`, {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                window.location.href = `aptitude-result.html?session=${sessionId}`;
-            }
-
-            document.getElementById('endTestBtn').addEventListener('click', () => {
-                if(confirm("Are you sure you want to end the test early?")) {
-                    finishTest();
+            async function saveAndNavigate(targetIndex) {
+                const q = questions[currentIndex];
+                const selected = document.querySelector('input[name="answerOptions"]:checked');
+                
+                if(selected) {
+                    q.attempt_state.selected_answer = selected.value;
                 }
+                
+                const timeTaken = Math.floor((new Date().getTime() - questionTimeStart) / 1000);
+                
+                // Fire and forget sync
+                syncAnswer(q, timeTaken);
+                
+                if(targetIndex >= 0 && targetIndex < questions.length) {
+                    renderQuestion(targetIndex);
+                } else {
+                    // It was the last question, just stay or prompt submit
+                    renderQuestion(currentIndex);
+                }
+            }
+
+            document.getElementById('btnNext').addEventListener('click', () => {
+                saveAndNavigate(currentIndex + 1);
+            });
+            
+            document.getElementById('btnPrev').addEventListener('click', () => {
+                saveAndNavigate(currentIndex - 1);
+            });
+            
+            document.getElementById('btnClear').addEventListener('click', () => {
+                const selected = document.querySelector('input[name="answerOptions"]:checked');
+                if(selected) selected.checked = false;
+                questions[currentIndex].attempt_state.selected_answer = null;
+                saveAndNavigate(currentIndex);
+            });
+            
+            document.getElementById('btnReview').addEventListener('click', () => {
+                const q = questions[currentIndex];
+                q.attempt_state.marked_for_review = !q.attempt_state.marked_for_review;
+                saveAndNavigate(currentIndex);
             });
 
-            // Timer Logic
-            let time = 0;
-            const timerEl = document.getElementById('overallTimer');
-            function startTimer() {
-                setInterval(() => {
-                    time++;
-                    const m = Math.floor(time / 60).toString().padStart(2, '0');
-                    const s = (time % 60).toString().padStart(2, '0');
-                    timerEl.innerHTML = `<i class="bi bi-clock"></i> ${m}:${s}`;
-                }, 1000);
+            // Submission Logic
+            const submitModal = new bootstrap.Modal(document.getElementById('submitModal'));
+            
+            function showSubmitPrompt() {
+                // save current
+                const q = questions[currentIndex];
+                const selected = document.querySelector('input[name="answerOptions"]:checked');
+                if(selected) q.attempt_state.selected_answer = selected.value;
+                const timeTaken = Math.floor((new Date().getTime() - questionTimeStart) / 1000);
+                syncAnswer(q, timeTaken);
+                
+                let answered = 0;
+                questions.forEach(q => { if(q.attempt_state.selected_answer) answered++; });
+                
+                document.getElementById('submitStats').textContent = `You have answered ${answered} out of ${questions.length} questions.`;
+                submitModal.show();
             }
+            
+            document.getElementById('submitTestBtnTop').addEventListener('click', showSubmitPrompt);
+            document.getElementById('submitTestBtnSide').addEventListener('click', showSubmitPrompt);
+            
+            document.getElementById('confirmSubmitBtn').addEventListener('click', async () => {
+                document.getElementById('confirmSubmitBtn').disabled = true;
+                document.getElementById('confirmSubmitBtn').innerHTML = '<span class="spinner-border spinner-border-sm"></span> Submitting...';
+                
+                try {
+                    const res = await fetch(`http://localhost:1111/api/v1/aptitude/test/${sessionId}/submit`, {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    const data = await res.json();
+                    if(data.success) {
+                        window.location.href = `aptitude-result.html?session=${sessionId}`;
+                    } else {
+                        alert("Submission failed: " + data.message);
+                        document.getElementById('confirmSubmitBtn').disabled = false;
+                    }
+                } catch(e) {
+                    console.error(e);
+                    alert("Error during submission");
+                    document.getElementById('confirmSubmitBtn').disabled = false;
+                }
+            });
         });
     </script>
 </body>

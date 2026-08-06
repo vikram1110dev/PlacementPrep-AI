@@ -136,7 +136,46 @@ def get_questions_search(filters: QuestionFilter, db: Session = Depends(get_db))
     questions = service.get_questions(filters)
     return StandardResponse(success=True, message="Questions fetched", data=questions)
 
-# --- Practice ---
+# --- Test Engine ---
+@router.post("/test/start", response_model=StandardResponse)
+def start_test(request: dict, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    service = AptitudeService(db)
+    session = service.start_test_session(current_user.id, request)
+    return StandardResponse(success=True, message="Test started", data={"session_id": session.id})
+
+@router.get("/test/{session_id}", response_model=StandardResponse)
+def get_test(session_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    service = AptitudeService(db)
+    data = service.get_test_session(session_id, current_user.id)
+    return StandardResponse(success=True, message="Test session fetched", data=data)
+
+@router.post("/test/{session_id}/answer", response_model=StandardResponse)
+def answer_test_question(session_id: str, request: dict, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    service = AptitudeService(db)
+    result = service.answer_test_question(session_id, current_user.id, request)
+    return StandardResponse(success=True, message=result["message"])
+
+@router.post("/test/{session_id}/submit", response_model=StandardResponse)
+def submit_test(session_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    service = AptitudeService(db)
+    result = service.submit_test_session(session_id, current_user.id)
+    return StandardResponse(success=True, message="Test submitted", data=result)
+
+@router.get("/result/{session_id}", response_model=StandardResponse)
+def get_test_result(session_id: str, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    service = AptitudeService(db)
+    result = service.get_test_result(session_id, current_user.id)
+    return StandardResponse(success=True, message="Test result fetched", data=result)
+
+@router.get("/test/history", response_model=StandardResponse)
+def get_test_history(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    # We can reuse the same get_user_history but format it for the frontend
+    service = AptitudeService(db)
+    history = service.get_user_history(current_user.id)
+    return StandardResponse(success=True, message="History fetched", data=history)
+
+
+# --- Practice (Legacy) ---
 @router.post("/practice/start", response_model=StandardResponse)
 def start_practice(current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     service = AptitudeService(db)

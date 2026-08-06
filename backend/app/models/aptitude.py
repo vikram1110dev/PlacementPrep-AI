@@ -71,6 +71,11 @@ class PracticeSession(Base):
     __tablename__ = 'aptitude_practice_sessions'
     id = Column(String(36), primary_key=True, default=generate_uuid)
     user_id = Column(String(36), ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    status = Column(String(50), default='IN_PROGRESS') # IN_PROGRESS, COMPLETED
+    total_questions = Column(Integer, default=0)
+    score = Column(Numeric(5,2), default=0.0)
+    accuracy = Column(Numeric(5,2), default=0.0)
+    time_taken_seconds = Column(Integer, default=0)
     started_at = Column(DateTime, server_default=func.now())
     ended_at = Column(DateTime, nullable=True)
     
@@ -83,8 +88,10 @@ class QuestionAttempt(Base):
     user_id = Column(String(36), ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     question_id = Column(String(36), ForeignKey('aptitude_questions.id', ondelete='CASCADE'), nullable=False)
     selected_answer = Column(String(255), nullable=True)
-    is_correct = Column(Boolean, nullable=False)
-    time_taken_seconds = Column(Integer)
+    is_correct = Column(Boolean, nullable=True, default=False)
+    time_taken_seconds = Column(Integer, default=0)
+    visited = Column(Boolean, default=False)
+    marked_for_review = Column(Boolean, default=False)
     attempted_at = Column(DateTime, server_default=func.now())
     
     session = relationship("PracticeSession", back_populates="attempts")

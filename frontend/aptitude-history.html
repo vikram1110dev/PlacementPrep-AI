@@ -54,7 +54,7 @@
             }
 
             try {
-                const res = await fetch(`http://localhost:1111/api/v1/aptitude/history`, {
+                const res = await fetch(`http://localhost:1111/api/v1/aptitude/test/history`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();

@@ -111,6 +111,48 @@ class MockTestResult(BaseModel):
     skipped_answers: int
     accuracy_percentage: Decimal
 
+# --- Test Engine ---
+class TestSetupRequest(BaseModel):
+    topic_id: Optional[int] = None
+    difficulty: Optional[DifficultyEnum] = None
+    question_count: int = 10
+
+class TestQuestionResponse(BaseModel):
+    id: str
+    question_text: str
+    options: List[str] # Array of options, randomized by backend
+    time_limit_seconds: int
+
+class TestSessionResponse(BaseModel):
+    session_id: str
+    started_at: datetime
+    questions: List[TestQuestionResponse]
+
+class AnswerSubmitRequest(BaseModel):
+    question_id: str
+    selected_answer: Optional[str] = None
+    time_taken_seconds: int
+    visited: bool = True
+    marked_for_review: bool = False
+
+class TestResultResponse(BaseModel):
+    session_id: str
+    score: Decimal
+    accuracy_percentage: Decimal
+    total_questions: int
+    correct_answers: int
+    wrong_answers: int
+    skipped_answers: int
+    time_taken_seconds: int
+    
+class TestHistoryResponse(BaseModel):
+    session_id: str
+    started_at: datetime
+    status: str
+    score: Decimal
+    accuracy_percentage: Decimal
+    total_questions: int
+
 # --- Analytics ---
 class WeakTopicAnalysis(BaseModel):
     topic_name: str

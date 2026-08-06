@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.sql.expression import func
 from typing import List, Optional
 from datetime import datetime
 
@@ -164,6 +165,63 @@ class AptitudeRepository:
         )
         self.db.add(attempt)
         self.db.commit()
+
+    # --- Test Engine ---
+    def create_test_session(self, user_id: str, topic_id: Optional[int], difficulty: Optional[str], count: int) -> PracticeSession:
+        query = self.db.query(AptitudeQuestion).filter(AptitudeQuestion.is_active == True, AptitudeQuestion.deleted_at == None)
+        if topic_id:
+            query = query.filter(AptitudeQuestion.topic_id == topic_id)
+        if difficulty:
+            query = query.filter(AptitudeQuestion.difficulty == difficulty)
+            
+        questions = query.order_by(func.random()).limit(count).all()
+        
+        session = PracticeSession(user_id=user_id, status='IN_PROGRESS', total_questions=len(questions))
+        self.db.add(session)
+        self.db.flush() # get session ID
+        
+        for q in questions:
+            attempt = QuestionAttempt(
+                session_id=session.id,
+                user_id=user_id,
+                question_id=q.id,
+                is_correct=False
+            )
+            self.db.add(attempt)
+            
+        self.db.commit()
+        self.db.refresh(session)
+        return session
+
+    def get_test_session(self, session_id: str) -> Optional[PracticeSession]:
+        return self.db.query(PracticeSession).options(
+            joinedload(PracticeSession.attempts).joinedload(QuestionAttempt.question)
+        ).filter(PracticeSession.id == session_id).first()
+
+    def update_question_attempt(self, session_id: str, question_id: str, selected_answer: Optional[str], is_correct: bool, time_taken: int, visited: bool, marked: bool):
+        attempt = self.db.query(QuestionAttempt).filter(
+            QuestionAttempt.session_id == session_id,
+            QuestionAttempt.question_id == question_id
+        ).first()
+        
+        if attempt:
+            attempt.selected_answer = selected_answer
+            attempt.is_correct = is_correct
+            attempt.time_taken_seconds = time_taken
+            attempt.visited = visited
+            attempt.marked_for_review = marked
+            attempt.attempted_at = datetime.utcnow()
+            self.db.commit()
+            
+    def finalize_test_session(self, session_id: str, score: float, accuracy: float, total_time: int):
+        session = self.db.query(PracticeSession).filter(PracticeSession.id == session_id).first()
+        if session:
+            session.status = 'COMPLETED'
+            session.ended_at = datetime.utcnow()
+            session.score = score
+            session.accuracy = accuracy
+            session.time_taken_seconds = total_time
+            self.db.commit()
 
     # --- Mock Tests ---
     def get_mock_tests(self) -> List[MockTest]:
