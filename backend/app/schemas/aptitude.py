@@ -21,47 +21,62 @@ class TopicResponse(TopicBase):
     category: CategoryResponse
     class Config: from_attributes = True
 
-# --- Options & Questions ---
-class OptionBase(BaseModel):
-    option_text: str
-    is_correct: bool = False
 
-class OptionResponse(OptionBase):
-    id: int
-    class Config: from_attributes = True
 
 class QuestionCreate(BaseModel):
     topic_id: int
     question_text: str
     difficulty: DifficultyEnum
+    option_a: str
+    option_b: str
+    option_c: str
+    option_d: str
+    correct_answer: str
     explanation: Optional[str] = None
     marks: int = 1
     negative_marks: Decimal = 0.0
     estimated_time_seconds: int = 60
-    options: List[OptionBase] = Field(..., min_items=2, max_items=5)
+    company: Optional[str] = None
+    tags: Optional[str] = None
 
 class QuestionResponse(BaseModel):
     id: str
     topic_id: int
     question_text: str
     difficulty: DifficultyEnum
+    option_a: str
+    option_b: str
+    option_c: str
+    option_d: str
+    correct_answer: str
     explanation: Optional[str] = None
     marks: int
     negative_marks: Decimal
     estimated_time_seconds: int
-    options: List[OptionResponse]
+    is_active: bool
+    company: Optional[str] = None
+    tags: Optional[str] = None
+    created_by: Optional[str] = None
+    deleted_at: Optional[datetime] = None
+    created_at: datetime
+    updated_at: datetime
     class Config: from_attributes = True
 
 class QuestionFilter(BaseModel):
     topic_id: Optional[int] = None
     difficulty: Optional[DifficultyEnum] = None
+    company: Optional[str] = None
+    tags: Optional[str] = None
+    is_active: Optional[bool] = None
+    search: Optional[str] = None
+    include_deleted: bool = False
     skip: int = 0
     limit: int = 20
 
 # --- Practice Sessions ---
 class SubmitAnswerRequest(BaseModel):
     question_id: str
-    selected_option_id: Optional[int] = None # None means skipped
+    selected_answer: Optional[str] = None # None means skipped
     time_taken_seconds: int
 
 class PracticeSessionResponse(BaseModel):
@@ -101,3 +116,20 @@ class WeakTopicAnalysis(BaseModel):
     topic_name: str
     accuracy_percentage: Decimal
     total_attempts: int
+
+class HistoryResponse(BaseModel):
+    session_id: str
+    started_at: datetime
+    ended_at: Optional[datetime]
+    total_questions: int
+    correct_answers: int
+    score: Decimal
+    accuracy_percentage: Decimal
+
+class ProgressResponse(BaseModel):
+    total_tests_taken: int
+    overall_accuracy: Decimal
+    average_score: Decimal
+    strongest_topic: Optional[str]
+    weakest_topic: Optional[str]
+    time_spent_minutes: int

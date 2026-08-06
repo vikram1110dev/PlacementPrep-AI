@@ -55,4 +55,4 @@ python -m http.server 8000
 # Using Node.js
 npx serve
 ```
-Then navigate to `http://localhost:8000/pages/dashboard.html`
+Then navigate to `http://localhost:1111/pages/dashboard.html`

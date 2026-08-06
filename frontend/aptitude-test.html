@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude Test - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .test-container { max-width: 800px; margin: auto; }
+        .question-card { border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; background: #fff; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .option-label { display: block; padding: 15px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option-label:hover { border-color: #2563EB; background: #f0fdf4; }
+        input[type="radio"]:checked + .option-label { border-color: #2563EB; background: #eff6ff; font-weight: 600; }
+        .timer { font-size: 1.5rem; font-weight: bold; color: #DC2626; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Top Navbar Minimal -->
+    <header class="top-navbar justify-content-between px-4 py-3 bg-white shadow-sm d-flex align-items-center">
+        <div class="fw-bold fs-5 text-primary"><i class="bi bi-robot"></i> PlacementPrep Test</div>
+        <div class="timer" id="overallTimer"><i class="bi bi-clock"></i> 00:00</div>
+        <button class="btn btn-danger rounded-pill" id="endTestBtn">End Test</button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container py-5">
+        <div class="test-container" id="testContainer">
+            <!-- Questions will be injected here via JS -->
+            <div class="text-center mt-5" id="loader">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2 text-muted">Loading Questions...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const topicId = urlParams.get('topic');
+            const difficulty = urlParams.get('difficulty');
+            let questions = [];
+            let currentQIndex = 0;
+            let sessionId = '';
+            
+            try {
+                // Fetch Questions
+                const res = await fetch(`http://localhost:1111/api/v1/aptitude/questions?topic_id=${topicId}&difficulty=${difficulty}&limit=10`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                if(data.success && data.data.length > 0) {
+                    questions = data.data;
+                    // Start Session
+                    const sessionRes = await fetch('http://localhost:1111/api/v1/aptitude/practice/start', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    const sessionData = await sessionRes.json();
+                    sessionId = sessionData.data.session_id;
+                    
+                    renderQuestion();
+                    startTimer();
+                } else {
+                    document.getElementById('testContainer').innerHTML = `<div class="alert alert-warning">No questions found for this topic/difficulty. <a href="aptitude.html">Go back</a></div>`;
+                }
+            } catch (error) {
+                console.error(error);
+            }
+
+            function renderQuestion() {
+                if(currentQIndex >= questions.length) {
+                    finishTest();
+                    return;
+                }
+                const q = questions[currentQIndex];
+                const html = `
+                    <div class="question-card shadow-sm">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="badge bg-primary">Question ${currentQIndex + 1} of ${questions.length}</span>
+                            <span class="badge bg-secondary">${q.difficulty}</span>
+                        </div>
+                        <h4 class="mb-4">${q.question_text}</h4>
+                        <div class="options">
+                            <div class="form-check mb-3 p-0">
+                                <input class="form-check-input d-none" type="radio" name="answer" id="optA" value="A">
+                                <label class="option-label" for="optA">A. ${q.option_a}</label>
+                            </div>
+                            <div class="form-check mb-3 p-0">
+                                <input class="form-check-input d-none" type="radio" name="answer" id="optB" value="B">
+                                <label class="option-label" for="optB">B. ${q.option_b}</label>
+                            </div>
+                            <div class="form-check mb-3 p-0">
+                                <input class="form-check-input d-none" type="radio" name="answer" id="optC" value="C">
+                                <label class="option-label" for="optC">C. ${q.option_c}</label>
+                            </div>
+                            <div class="form-check mb-3 p-0">
+                                <input class="form-check-input d-none" type="radio" name="answer" id="optD" value="D">
+                                <label class="option-label" for="optD">D. ${q.option_d}</label>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-end">
+                            <button class="btn btn-primary px-4" id="nextBtn">Next / Submit</button>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('testContainer').innerHTML = html;
+                
+                document.getElementById('nextBtn').addEventListener('click', async () => {
+                    const selected = document.querySelector('input[name="answer"]:checked');
+                    const answerVal = selected ? selected.value : null;
+                    
+                    // Submit answer
+                    await fetch(`http://localhost:1111/api/v1/aptitude/practice/${sessionId}/submit`, {
+                        method: 'POST',
+                        headers: { 
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            question_id: q.id,
+                            selected_answer: answerVal,
+                            time_taken_seconds: 30 // hardcoded for MVP
+                        })
+                    });
+                    
+                    currentQIndex++;
+                    renderQuestion();
+                });
+            }
+
+            async function finishTest() {
+                await fetch(`http://localhost:1111/api/v1/aptitude/practice/${sessionId}/finish`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                window.location.href = `aptitude-result.html?session=${sessionId}`;
+            }
+
+            document.getElementById('endTestBtn').addEventListener('click', () => {
+                if(confirm("Are you sure you want to end the test early?")) {
+                    finishTest();
+                }
+            });
+
+            // Timer Logic
+            let time = 0;
+            const timerEl = document.getElementById('overallTimer');
+            function startTimer() {
+                setInterval(() => {
+                    time++;
+                    const m = Math.floor(time / 60).toString().padStart(2, '0');
+                    const s = (time % 60).toString().padStart(2, '0');
+                    timerEl.innerHTML = `<i class="bi bi-clock"></i> ${m}:${s}`;
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

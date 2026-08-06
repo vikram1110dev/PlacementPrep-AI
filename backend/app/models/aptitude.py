@@ -47,21 +47,25 @@ class AptitudeQuestion(Base):
     marks = Column(Integer, default=1)
     negative_marks = Column(Numeric(4,2), default=0.0)
     estimated_time_seconds = Column(Integer, default=60)
+    option_a = Column(String(255), nullable=False)
+    option_b = Column(String(255), nullable=False)
+    option_c = Column(String(255), nullable=False)
+    option_d = Column(String(255), nullable=False)
+    correct_answer = Column(String(255), nullable=False) # Store 'A', 'B', 'C', 'D' or the exact text
+    is_active = Column(Boolean, default=True)
+    company = Column(String(255), nullable=True)
+    tags = Column(String(255), nullable=True)
+    created_by = Column(String(36), ForeignKey('users.id', ondelete='SET NULL'), nullable=True)
+    deleted_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
     
     topic = relationship("AptitudeTopic", back_populates="questions")
-    options = relationship("AptitudeOption", back_populates="question", cascade="all, delete-orphan")
     
     # We will relate to Company model later, but for now we create the bridge setup.
     # companies = relationship("Company", secondary=company_question_tags)
 
-class AptitudeOption(Base):
-    __tablename__ = 'aptitude_options'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    question_id = Column(String(36), ForeignKey('aptitude_questions.id', ondelete='CASCADE'), nullable=False)
-    option_text = Column(Text, nullable=False)
-    is_correct = Column(Boolean, default=False)
-    
-    question = relationship("AptitudeQuestion", back_populates="options")
+
 
 class PracticeSession(Base):
     __tablename__ = 'aptitude_practice_sessions'
@@ -78,14 +82,13 @@ class QuestionAttempt(Base):
     session_id = Column(String(36), ForeignKey('aptitude_practice_sessions.id', ondelete='CASCADE'), nullable=False)
     user_id = Column(String(36), ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     question_id = Column(String(36), ForeignKey('aptitude_questions.id', ondelete='CASCADE'), nullable=False)
-    selected_option_id = Column(Integer, ForeignKey('aptitude_options.id', ondelete='SET NULL'), nullable=True)
+    selected_answer = Column(String(255), nullable=True)
     is_correct = Column(Boolean, nullable=False)
     time_taken_seconds = Column(Integer)
     attempted_at = Column(DateTime, server_default=func.now())
     
     session = relationship("PracticeSession", back_populates="attempts")
     question = relationship("AptitudeQuestion")
-    selected_option = relationship("AptitudeOption")
 
 class MockTest(Base):
     __tablename__ = 'mock_tests'

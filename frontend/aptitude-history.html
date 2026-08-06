@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude History - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="bg-light">
+    <!-- Top Navbar Minimal -->
+    <header class="top-navbar justify-content-between px-4 py-3 bg-white shadow-sm d-flex align-items-center">
+        <div class="fw-bold fs-5 text-primary"><a href="aptitude.html" class="text-decoration-none"><i class="bi bi-arrow-left"></i> Back to Dashboard</a></div>
+        <div class="fw-bold fs-5">Practice History</div>
+    </header>
+
+    <main class="container py-5">
+        <div class="card border-0 shadow-sm p-4">
+            <h4 class="fw-bold mb-4">Your Past Sessions</h4>
+            
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Total Questions</th>
+                            <th>Correct</th>
+                            <th>Accuracy</th>
+                            <th>Score</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <tr>
+                            <td colspan="6" class="text-center py-4">
+                                <div class="spinner-border text-primary" role="status"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const res = await fetch(`http://localhost:1111/api/v1/aptitude/history`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await res.json();
+                
+                const tbody = document.getElementById('historyTableBody');
+                tbody.innerHTML = '';
+                
+                if(data.success && data.data && data.data.length > 0) {
+                    data.data.forEach(session => {
+                        const dateStr = new Date(session.started_at).toLocaleString();
+                        const accBadge = session.accuracy_percentage >= 75 ? 'bg-success' : (session.accuracy_percentage >= 50 ? 'bg-warning text-dark' : 'bg-danger');
+                        
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><span class="fw-medium">${dateStr}</span></td>
+                            <td>${session.total_questions}</td>
+                            <td>${session.correct_answers}</td>
+                            <td><span class="badge ${accBadge}">${session.accuracy_percentage.toFixed(0)}%</span></td>
+                            <td><span class="fw-bold text-primary">${session.score}</span></td>
+                            <td><a href="aptitude-result.html?session=${session.session_id}" class="btn btn-sm btn-outline-primary">View</a></td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">No practice history found.</td></tr>`;
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('historyTableBody').innerHTML = `<tr><td colspan="6" class="text-center py-4 text-danger">Failed to load history.</td></tr>`;
+            }
+        });
+    </script>
+</body>
+</html>
