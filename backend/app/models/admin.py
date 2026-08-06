@@ -15,6 +15,8 @@ class Company(Base):
     website_url = Column(String(255))
     hiring_process = Column(JSON) # e.g. ["Aptitude", "Technical", "HR"]
     eligibility_criteria = Column(Text)
+    industry_type = Column(String(100), default="Product Based") # e.g. "Product Based", "Service Based"
+    tier = Column(String(50), default="Standard") # e.g. "Dream", "Standard"
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, server_default=func.now())
 
