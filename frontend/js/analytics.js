@@ -37,51 +37,84 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 2. Bar Chart - Problems Solved Per Week
+    // 2. Bar Chart - Problems Solved Per Week (Now dynamically fetched)
     const ctxProblems = document.getElementById('problemsSolvedChart').getContext('2d');
-    new Chart(ctxProblems, {
-        type: 'bar',
-        data: {
-            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-            datasets: [{
-                label: 'Problems Solved',
-                data: [15, 28, 22, 45],
-                backgroundColor: '#10b981',
-                borderRadius: 4
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-                y: { beginAtZero: true, grid: { borderDash: [5, 5] } },
-                x: { grid: { display: false } }
-            }
-        }
-    });
+    let problemsChart;
 
-    // 3. Doughnut Chart - Learning Distribution
+    // 3. Doughnut Chart - Learning Distribution (Now dynamically fetched)
     const ctxDist = document.getElementById('learningDistChart').getContext('2d');
-    new Chart(ctxDist, {
-        type: 'doughnut',
-        data: {
-            labels: ['DSA', 'Aptitude', 'Core Subjects', 'Projects'],
-            datasets: [{
-                data: [45, 25, 15, 15],
-                backgroundColor: ['#2563EB', '#f59e0b', '#10b981', '#8b5cf6'],
-                borderWidth: 0,
-                cutout: '70%'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'right' }
+    let distChart;
+    
+    // Fetch Chart Data
+    const loadCharts = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        
+        try {
+            // Fetch Weekly Data
+            const weeklyRes = await fetch('http://localhost:1111/api/v1/analytics/weekly', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const weeklyData = await weeklyRes.json();
+            
+            if (weeklyData.success) {
+                problemsChart = new Chart(ctxProblems, {
+                    type: 'bar',
+                    data: {
+                        labels: weeklyData.data.labels,
+                        datasets: [{
+                            label: 'Problems Solved',
+                            data: weeklyData.data.datasets[0].data,
+                            backgroundColor: '#10b981',
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, grid: { borderDash: [5, 5] } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
             }
+
+            // Fetch Distribution
+            const distRes = await fetch('http://localhost:1111/api/v1/analytics/distribution', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const distData = await distRes.json();
+            
+            if (distData.success) {
+                distChart = new Chart(ctxDist, {
+                    type: 'doughnut',
+                    data: {
+                        labels: distData.data.labels,
+                        datasets: [{
+                            data: distData.data.datasets[0].data,
+                            backgroundColor: ['#2563EB', '#f59e0b', '#10b981', '#8b5cf6', '#ef4444', '#14b8a6'],
+                            borderWidth: 0,
+                            cutout: '70%'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'right' }
+                        }
+                    }
+                });
+            }
+            
+        } catch(error) {
+            console.error("Failed to load chart data:", error);
         }
-    });
+    };
+    
+    loadCharts();
 
     // 4. Radar Chart - Skills Comparison
     const ctxSkills = document.getElementById('skillsRadarChart').getContext('2d');

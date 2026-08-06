@@ -176,8 +176,8 @@
                     <div class="dash-card p-4">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
-                                <h6 class="text-muted mb-1 fw-medium">Study Time (Today)</h6>
-                                <h3 class="fw-bold mb-0">2.5 hrs</h3>
+                                <h6 class="text-muted mb-1 fw-medium">Study Time</h6>
+                                <h3 class="fw-bold mb-0"><span id="dashStudyTime">0</span> mins</h3>
                             </div>
                             <div class="icon-square bg-primary-light text-primary">
                                 <i class="bi bi-clock-history"></i>
@@ -191,7 +191,7 @@
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <h6 class="text-muted mb-1 fw-medium">Current Streak</h6>
-                                <h3 class="fw-bold mb-0">12 Days</h3>
+                                <h3 class="fw-bold mb-0"><span id="dashStreak">0</span> Days</h3>
                             </div>
                             <div class="icon-square text-warning" style="background-color: #fffbeb;">
                                 <i class="bi bi-fire"></i>
@@ -205,7 +205,7 @@
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
                                 <h6 class="text-muted mb-1 fw-medium">Solved Problems</h6>
-                                <h3 class="fw-bold mb-0">145</h3>
+                                <h3 class="fw-bold mb-0" id="dashSolved">0</h3>
                             </div>
                             <div class="icon-square text-success" style="background-color: #ecfdf5;">
                                 <i class="bi bi-code-slash"></i>
@@ -218,8 +218,8 @@
                     <div class="dash-card p-4">
                         <div class="d-flex justify-content-between align-items-start mb-3">
                             <div>
-                                <h6 class="text-muted mb-1 fw-medium">Placement Score</h6>
-                                <h3 class="fw-bold mb-0">78/100</h3>
+                                <h6 class="text-muted mb-1 fw-medium">Average Score</h6>
+                                <h3 class="fw-bold mb-0" id="dashScore">0</h3>
                             </div>
                             <div class="icon-square text-info" style="background-color: #f0f9ff;">
                                 <i class="bi bi-shield-check"></i>
@@ -391,26 +391,9 @@
                 <div class="col-lg-4">
                     <div class="dash-card p-4">
                         <h5 class="fw-bold mb-4">Recent Activity</h5>
-                        <ul class="timeline m-0">
+                        <ul class="timeline m-0" id="dashRecentActivity">
                             <li class="timeline-item">
-                                <div class="timeline-marker bg-success border-success"></div>
-                                <h6 class="fw-semibold mb-1">Solved Problem</h6>
-                                <p class="text-muted small mb-0">Two Sum (Easy) • 2 hours ago</p>
-                            </li>
-                            <li class="timeline-item">
-                                <div class="timeline-marker bg-primary border-primary"></div>
-                                <h6 class="fw-semibold mb-1">Mock Interview Completed</h6>
-                                <p class="text-muted small mb-0">HR Round • AI rated 4.5/5 • Yesterday</p>
-                            </li>
-                            <li class="timeline-item">
-                                <div class="timeline-marker bg-warning border-warning"></div>
-                                <h6 class="fw-semibold mb-1">Certificate Earned</h6>
-                                <p class="text-muted small mb-0">Basic Python Certification • 3 days ago</p>
-                            </li>
-                            <li class="timeline-item">
-                                <div class="timeline-marker bg-info border-info"></div>
-                                <h6 class="fw-semibold mb-1">Project Milestone</h6>
-                                <p class="text-muted small mb-0">E-Commerce App (Frontend) • Last week</p>
+                                <p class="text-muted small mb-0">Loading...</p>
                             </li>
                         </ul>
                     </div>
@@ -424,54 +407,8 @@
                             <a href="#" class="text-primary text-decoration-none small fw-semibold">Full List</a>
                         </div>
                         
-                        <div class="leaderboard-item">
-                            <div class="rank-badge rank-1 me-3 shadow-sm">1</div>
-                            <img src="https://ui-avatars.com/api/?name=Aarav+S&background=random" class="rounded-circle me-3" width="40" height="40">
-                            <div class="flex-grow-1">
-                                <h6 class="mb-0 fw-bold fs-6">Aarav Sharma</h6>
-                                <small class="text-muted fw-medium">Level 24</small>
-                            </div>
-                            <div class="fw-bold text-primary">4500 XP</div>
-                        </div>
-                        
-                        <div class="leaderboard-item">
-                            <div class="rank-badge rank-2 me-3 shadow-sm">2</div>
-                            <img src="https://ui-avatars.com/api/?name=Priya+M&background=random" class="rounded-circle me-3" width="40" height="40">
-                            <div class="flex-grow-1">
-                                <h6 class="mb-0 fw-bold fs-6">Priya M</h6>
-                                <small class="text-muted fw-medium">Level 22</small>
-                            </div>
-                            <div class="fw-bold text-primary">4120 XP</div>
-                        </div>
-                        
-                        <div class="leaderboard-item">
-                            <div class="rank-badge rank-3 me-3 shadow-sm">3</div>
-                            <img src="https://ui-avatars.com/api/?name=Rahul+V&background=random" class="rounded-circle me-3" width="40" height="40">
-                            <div class="flex-grow-1">
-                                <h6 class="mb-0 fw-bold fs-6">Rahul Verma</h6>
-                                <small class="text-muted fw-medium">Level 20</small>
-                            </div>
-                            <div class="fw-bold text-primary">3800 XP</div>
-                        </div>
-                        
-                        <div class="leaderboard-item">
-                            <div class="rank-badge bg-light text-muted me-3 shadow-sm">4</div>
-                            <img src="https://ui-avatars.com/api/?name=Neha+K&background=random" class="rounded-circle me-3" width="40" height="40">
-                            <div class="flex-grow-1">
-                                <h6 class="mb-0 fw-bold fs-6">Neha Kapoor</h6>
-                                <small class="text-muted fw-medium">Level 19</small>
-                            </div>
-                            <div class="fw-bold text-primary">3550 XP</div>
-                        </div>
-                        
-                        <div class="leaderboard-item border border-primary border-opacity-25" style="background-color: #eff6ff;">
-                            <div class="rank-badge bg-primary text-white me-3 shadow-sm">12</div>
-                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff" class="rounded-circle me-3" width="40" height="40">
-                            <div class="flex-grow-1">
-                                <h6 class="mb-0 fw-bold fs-6">You</h6>
-                                <small class="text-muted fw-medium">Level 15</small>
-                            </div>
-                            <div class="fw-bold text-primary">2100 XP</div>
+                        <div id="dashLeaderboard">
+                            <p class="text-muted small">Loading leaderboard...</p>
                         </div>
                     </div>
                 </div>

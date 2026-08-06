@@ -55,6 +55,7 @@ def create_app() -> FastAPI:
     from app.api.v1.ai.router import router as ai_router
     from app.api.v1.resume.router import router as resume_router
     from app.api.v1.admin.router import router as admin_router
+    from app.api.v1.analytics.router import router as analytics_router
     
     app.include_router(auth_router, prefix=settings.API_V1_STR)
     app.include_router(users_router, prefix=settings.API_V1_STR)
@@ -62,6 +63,7 @@ def create_app() -> FastAPI:
     app.include_router(ai_router, prefix=settings.API_V1_STR)
     app.include_router(resume_router, prefix=settings.API_V1_STR)
     app.include_router(admin_router, prefix=settings.API_V1_STR)
+    app.include_router(analytics_router, prefix=settings.API_V1_STR)
     
     # Automatically create tables on startup
     from app.database.connection import engine, Base

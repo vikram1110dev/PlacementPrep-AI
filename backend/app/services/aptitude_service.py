@@ -259,6 +259,14 @@ class AptitudeService:
             
         self.repo.finalize_test_session(session_id, float(score), float(accuracy), total_time)
         
+        # Trigger Analytics XP & Achievements
+        try:
+            from app.services.analytics_service import AnalyticsService
+            AnalyticsService(self.repo.db).award_xp_and_achievements(user_id, session_id)
+        except Exception as e:
+            from loguru import logger
+            logger.error(f"Failed to award XP: {e}")
+        
         return {
             "session_id": session_id,
             "score": float(score),

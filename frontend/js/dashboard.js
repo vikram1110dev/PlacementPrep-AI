@@ -74,4 +74,83 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    // Fetch Analytics Data
+    const fetchDashboardData = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        try {
+            // Fetch Overview
+            const overviewRes = await fetch('http://localhost:1111/api/v1/analytics/dashboard', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const overviewData = await overviewRes.json();
+            
+            if (overviewData.success) {
+                const data = overviewData.data;
+                document.getElementById('dashStudyTime').innerText = data.total_study_time_minutes;
+                document.getElementById('dashStreak').innerText = data.current_streak;
+                document.getElementById('dashSolved').innerText = data.questions_solved;
+                document.getElementById('dashScore').innerText = data.average_score.toFixed(1);
+            }
+
+            // Fetch Leaderboard
+            const lbRes = await fetch('http://localhost:1111/api/v1/analytics/leaderboard', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const lbData = await lbRes.json();
+            
+            if (lbData.success) {
+                const lbContainer = document.getElementById('dashLeaderboard');
+                lbContainer.innerHTML = '';
+                lbData.data.forEach((user, index) => {
+                    let rankClass = index === 0 ? 'rank-1' : (index === 1 ? 'rank-2' : (index === 2 ? 'rank-3' : 'bg-light text-muted'));
+                    lbContainer.innerHTML += `
+                        <div class="leaderboard-item">
+                            <div class="rank-badge ${rankClass} me-3 shadow-sm">${user.rank}</div>
+                            <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=random" class="rounded-circle me-3" width="40" height="40">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 fw-bold fs-6">${user.name}</h6>
+                                <small class="text-muted fw-medium">Level ${user.level}</small>
+                            </div>
+                            <div class="fw-bold text-primary">${user.xp} XP</div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Fetch Recent Activity
+            const recentRes = await fetch('http://localhost:1111/api/v1/analytics/recent', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const recentData = await recentRes.json();
+            
+            if (recentData.success) {
+                const recentContainer = document.getElementById('dashRecentActivity');
+                recentContainer.innerHTML = '';
+                
+                if (recentData.data.length === 0) {
+                    recentContainer.innerHTML = '<li class="timeline-item"><p class="text-muted small mb-0">No recent activity.</p></li>';
+                }
+                
+                recentData.data.forEach((item, index) => {
+                    const dateStr = new Date(item.completed_time).toLocaleString();
+                    const markerColor = index % 2 === 0 ? 'bg-success border-success' : 'bg-primary border-primary';
+                    recentContainer.innerHTML += `
+                        <li class="timeline-item">
+                            <div class="timeline-marker ${markerColor}"></div>
+                            <h6 class="fw-semibold mb-1">Aptitude Test Completed</h6>
+                            <p class="text-muted small mb-0">Score: ${item.score} • ${dateStr}</p>
+                        </li>
+                    `;
+                });
+            }
+
+        } catch (error) {
+            console.error("Error fetching dashboard data:", error);
+        }
+    };
+
+    fetchDashboardData();
 });
