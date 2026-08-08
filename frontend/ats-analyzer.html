@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Resume Analyzer - PlacementPrep AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .ats-ring {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--bs-primary) var(--score), #e2e8f0 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+        }
+        .ats-ring::before {
+            content: '';
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: white;
+            border-radius: 50%;
+        }
+        .ats-ring-value {
+            position: relative;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--bs-primary);
+        }
+        .upload-zone {
+            border: 2px dashed #cbd5e1;
+            border-radius: 1rem;
+            padding: 3rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--bs-primary);
+            background: #eff6ff;
+        }
+        .upload-zone i {
+            font-size: 3rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-brand"><i class="bi bi-robot"></i> PlacementPrep AI</a>
+        </div>
+        <ul class="sidebar-menu">
+            <div class="sidebar-menu-title">Main</div>
+            <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+            
+            <div class="sidebar-menu-title">Tools</div>
+            <li class="sidebar-item"><a href="resume.html" class="sidebar-link"><i class="bi bi-file-earmark-person"></i> Resume Builder</a></li>
+            <li class="sidebar-item"><a href="ats-analyzer.html" class="sidebar-link active"><i class="bi bi-file-check"></i> ATS Analyzer</a></li>
+            <li class="sidebar-item"><a href="ai-mentor.html" class="sidebar-link"><i class="bi bi-chat-dots"></i> AI Mentor</a></li>
+            <li class="sidebar-item mt-4"><a href="login.html" class="sidebar-link text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="top-navbar bg-white border-bottom shadow-sm">
+            <button class="navbar-toggler-btn" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+            <h5 class="mb-0 fw-bold d-none d-md-block">ATS Analyzer</h5>
+            <div class="nav-actions ms-auto">
+                <div class="dropdown profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="Profile" data-bs-toggle="dropdown">
+                </div>
+            </div>
+        </header>
+
+        <main class="content-area pt-4 px-4 pb-5">
+            
+            <div class="d-flex justify-content-between align-items-end mb-4">
+                <div>
+                    <h2 class="fw-bold mb-1">AI ATS Evaluation</h2>
+                    <p class="text-muted mb-0">Upload your resume to get an instant ATS compatibility score and job match analysis.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                
+                <!-- Left: Upload & JD -->
+                <div class="col-lg-5">
+                    <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                        <h6 class="fw-bold mb-3">1. Upload Resume (PDF / DOCX)</h6>
+                        <div class="upload-zone" id="uploadZone">
+                            <i class="bi bi-cloud-arrow-up"></i>
+                            <h6 class="fw-bold text-dark">Drag & Drop your resume here</h6>
+                            <p class="small text-muted mb-3">or click to browse files (Max 5MB)</p>
+                            <input type="file" id="resumeFileInput" accept=".pdf,.docx" class="d-none">
+                            <button class="btn btn-primary rounded-pill px-4" id="btnBrowse">Browse File</button>
+                            <div id="uploadStatus" class="mt-3 small fw-medium"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-4 shadow-sm border">
+                        <h6 class="fw-bold mb-3">2. Job Match Analysis (Optional)</h6>
+                        <p class="small text-muted">Paste the target Job Description to see match percentage.</p>
+                        <textarea class="form-control mb-3" id="inpJobDescription" rows="5" placeholder="Paste JD here..."></textarea>
+                        <button class="btn btn-dark w-100 rounded-pill fw-bold" id="btnAnalyze">Run AI Analysis</button>
+                    </div>
+                </div>
+
+                <!-- Right: Dashboard Results -->
+                <div class="col-lg-7">
+                    
+                    <div id="loadingOverlay" class="d-none h-100 w-100 bg-white bg-opacity-75 d-flex flex-column align-items-center justify-content-center rounded-4 border">
+                        <div class="spinner-border text-primary mb-3" style="width: 3rem; height: 3rem;" role="status"></div>
+                        <h5 class="fw-bold text-primary">AI is analyzing your resume...</h5>
+                        <p class="text-muted small">This usually takes about 3-5 seconds.</p>
+                    </div>
+
+                    <div id="resultsDashboard" class="d-none">
+                        <div class="row g-3 mb-4">
+                            <!-- Overall Score -->
+                            <div class="col-md-6">
+                                <div class="bg-white p-4 rounded-4 shadow-sm border text-center h-100">
+                                    <h6 class="fw-bold mb-4 text-muted">Overall ATS Score</h6>
+                                    <div class="ats-ring" id="overallScoreRing" style="--score: 0%;">
+                                        <span class="ats-ring-value" id="overallScoreText">0</span>
+                                    </div>
+                                    <p class="small text-muted mt-3 mb-0" id="matchTextIndicator"></p>
+                                </div>
+                            </div>
+                            
+                            <!-- Mini Metrics -->
+                            <div class="col-md-6">
+                                <div class="d-flex flex-column gap-3 h-100">
+                                    <div class="bg-white p-3 rounded-4 shadow-sm border flex-fill">
+                                        <div class="text-muted small fw-bold text-uppercase mb-1">Formatting</div>
+                                        <h3 class="fw-bold text-dark mb-0" id="formattingScore">--</h3>
+                                    </div>
+                                    <div class="bg-white p-3 rounded-4 shadow-sm border flex-fill">
+                                        <div class="text-muted small fw-bold text-uppercase mb-1">Completeness</div>
+                                        <h3 class="fw-bold text-dark mb-0" id="completenessScore">--</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Skills Analysis -->
+                        <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-radar text-primary me-2"></i>Skills Analysis</h6>
+                            <div class="row">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <p class="small fw-bold text-success mb-2">Matched Keywords</p>
+                                    <div class="d-flex flex-wrap gap-2" id="matchedSkillsList">
+                                        <!-- populated via js -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="small fw-bold text-danger mb-2">Missing Skills</p>
+                                    <div class="d-flex flex-wrap gap-2" id="missingSkillsList">
+                                        <!-- populated via js -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bullet Point Improvements -->
+                        <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-magic text-warning me-2"></i>AI Bullet Point Enhancements</h6>
+                            <div class="accordion custom-accordion" id="bulletsAccordion">
+                                <!-- populated via js -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/ats-analyzer.js"></script>
+</body>
+</html>

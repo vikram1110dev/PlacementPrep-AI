@@ -62,7 +62,10 @@ class UserResumeResponse(BaseModel):
     title: str
     is_primary: int
     template_id: Optional[int]
-    resume_data: ResumeData
+    resume_data: Optional[ResumeData]
+    is_uploaded: int
+    file_path: Optional[str]
+    raw_text: Optional[str]
     
     class Config:
         from_attributes = True
@@ -71,11 +74,15 @@ class UserResumeResponse(BaseModel):
 class ATSReportResponse(BaseModel):
     id: str
     overall_score: Decimal
-    formatting_score: Decimal
-    section_completeness: Decimal
+    formatting_score: Optional[Decimal]
+    section_completeness: Optional[Decimal]
+    match_percentage: Optional[Decimal]
     missing_skills: List[str]
     keyword_matches: List[str]
     industry_suggestions: List[str]
+    section_scores: Optional[Dict[str, Any]]
+    bullet_improvements: Optional[List[Dict[str, Any]]]
+    job_description: Optional[str]
     
     class Config:
         from_attributes = True

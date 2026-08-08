@@ -21,7 +21,22 @@ class ResumeRepository:
             user_id=user_id,
             title=payload.title,
             template_id=payload.template_id,
-            resume_data=payload.resume_data.model_dump()
+            resume_data=payload.resume_data.model_dump() if payload.resume_data else None,
+            is_uploaded=0
+        )
+        self.db.add(resume)
+        self.db.commit()
+        self.db.refresh(resume)
+        return resume
+
+    def create_uploaded_resume(self, user_id: str, title: str, file_path: str, raw_text: str) -> UserResume:
+        resume = UserResume(
+            user_id=user_id,
+            title=title,
+            is_uploaded=1,
+            file_path=file_path,
+            raw_text=raw_text,
+            resume_data=None
         )
         self.db.add(resume)
         self.db.commit()
@@ -58,3 +73,9 @@ class ResumeRepository:
         self.db.commit()
         self.db.refresh(report)
         return report
+
+    def get_ats_history(self, resume_id: str, user_id: str) -> List[ATSReport]:
+        resume = self.get_resume_by_id(resume_id, user_id)
+        if not resume:
+            return []
+        return self.db.query(ATSReport).filter(ATSReport.resume_id == resume_id).order_by(ATSReport.generated_at.desc()).all()

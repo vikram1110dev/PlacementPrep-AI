@@ -24,7 +24,12 @@ class UserResume(Base):
     is_primary = Column(Integer, default=0) # 1 if this is the default resume to show on profile
     
     # Store the entire complex structure as JSON to allow infinite flexibility for "Custom Sections"
-    resume_data = Column(JSON, nullable=False)
+    resume_data = Column(JSON, nullable=True) # Changed to nullable for uploaded resumes
+    
+    # Upload support
+    is_uploaded = Column(Integer, default=0) # 1 if uploaded, 0 if built via UI
+    file_path = Column(String(255), nullable=True)
+    raw_text = Column(Text, nullable=True)
     
     created_at = Column(DateTime, server_default=func.now())
     updated_at = Column(DateTime, server_default=func.now(), onupdate=func.now())
@@ -42,11 +47,17 @@ class ATSReport(Base):
     overall_score = Column(Numeric(5,2), nullable=False)
     formatting_score = Column(Numeric(5,2))
     section_completeness = Column(Numeric(5,2))
+    match_percentage = Column(Numeric(5,2), nullable=True)
     
     # Analysis JSON blocks
     missing_skills = Column(JSON) # e.g. ["Docker", "Kubernetes"]
     keyword_matches = Column(JSON)
     industry_suggestions = Column(JSON)
+    section_scores = Column(JSON, nullable=True)
+    bullet_improvements = Column(JSON, nullable=True)
+    
+    # Job Match Text
+    job_description = Column(Text, nullable=True)
     
     generated_at = Column(DateTime, server_default=func.now())
 
