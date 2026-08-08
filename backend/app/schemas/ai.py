@@ -2,18 +2,40 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Any, Dict
 from datetime import datetime
 
-class ChatMessage(BaseModel):
-    role: str = Field(..., description="Role of the sender: user, assistant, system")
+class MessageResponse(BaseModel):
+    id: str
+    role: str
     content: str
+    created_at: datetime
+    
+    class Config:
+        from_attributes = True
+
+class ConversationCreate(BaseModel):
+    title: str = "New Conversation"
+    mode: str = "general"
+
+class ConversationResponse(BaseModel):
+    id: str
+    title: str
+    mode: str
+    created_at: datetime
+    updated_at: datetime
+    
+    class Config:
+        from_attributes = True
 
 class ChatRequest(BaseModel):
     message: str
-    session_id: Optional[str] = None
+    conversation_id: str
     stream: bool = True
 
 class ChatResponse(BaseModel):
-    session_id: str
+    conversation_id: str
     message: str
+    
+    class Config:
+        from_attributes = True
 
 class AgentAction(BaseModel):
     agent: str

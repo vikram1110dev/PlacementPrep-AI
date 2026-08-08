@@ -69,6 +69,7 @@ def create_app() -> FastAPI:
     
     # Automatically create tables on startup
     from app.database.connection import engine, Base
+    import app.models.ai  # Load AI models before create_all
     Base.metadata.create_all(bind=engine)
     
     # --- Health Check ---
