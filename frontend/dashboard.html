@@ -36,6 +36,11 @@
             
             <div class="sidebar-menu-title">Learning</div>
             <li class="sidebar-item">
+                <a href="roadmap.html" class="sidebar-link">
+                    <i class="bi bi-map"></i> Roadmap
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a href="aptitude.html" class="sidebar-link">
                     <i class="bi bi-calculator"></i> Aptitude
                 </a>
@@ -351,38 +356,12 @@
                 <!-- Today's Tasks -->
                 <div class="col-lg-4">
                     <div class="dash-card p-0 overflow-hidden d-flex flex-column">
-                        <div class="p-4 border-bottom border-light">
+                        <div class="p-4 border-bottom border-light d-flex justify-content-between align-items-center">
                             <h5 class="fw-bold mb-0">Today's Tasks</h5>
+                            <a href="roadmap.html" class="small text-decoration-none">View Roadmap</a>
                         </div>
-                        <div class="flex-grow-1">
-                            <div class="task-item">
-                                <input type="checkbox" class="task-checkbox me-3">
-                                <div>
-                                    <h6 class="mb-1 fw-medium">Solve 2 Array Problems</h6>
-                                    <small class="text-muted fw-medium"><span class="badge bg-danger bg-opacity-10 text-danger me-1">High</span> 45 mins</small>
-                                </div>
-                            </div>
-                            <div class="task-item">
-                                <input type="checkbox" class="task-checkbox me-3" checked>
-                                <div>
-                                    <h6 class="mb-1 fw-medium text-decoration-line-through text-muted">Complete Aptitude Mock Test 1</h6>
-                                    <small class="text-muted fw-medium">Completed</small>
-                                </div>
-                            </div>
-                            <div class="task-item">
-                                <input type="checkbox" class="task-checkbox me-3">
-                                <div>
-                                    <h6 class="mb-1 fw-medium">Watch System Design video</h6>
-                                    <small class="text-muted fw-medium"><span class="badge bg-primary-light me-1">Medium</span> 1 hr</small>
-                                </div>
-                            </div>
-                            <div class="task-item">
-                                <input type="checkbox" class="task-checkbox me-3">
-                                <div>
-                                    <h6 class="mb-1 fw-medium">Update Resume Project section</h6>
-                                    <small class="text-muted fw-medium"><span class="badge bg-secondary bg-opacity-10 text-secondary me-1">Low</span> 20 mins</small>
-                                </div>
-                            </div>
+                        <div class="flex-grow-1" id="dashTodayTasks">
+                            <div class="p-4 text-muted small">Loading tasks...</div>
                         </div>
                     </div>
                 </div>

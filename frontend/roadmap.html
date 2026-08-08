@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Roadmap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/roadmap.css">
+</head>
+<body onload="loadRoadmap()">
+    
+    <div class="roadmap-container">
+        
+        <!-- Loading State -->
+        <div id="loading-state" style="text-align: center; margin-top: 5rem;">
+            <h2 style="color: var(--text-muted);">Loading Roadmap Data...</h2>
+        </div>
+
+        <!-- Setup Form -->
+        <div id="setup-view" class="hidden">
+            <div class="glass-panel setup-form" style="max-width: 600px; margin: 2rem auto;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h1 style="color: var(--primary); margin-bottom: 0.5rem;">Create Your Roadmap</h1>
+                    <p style="color: var(--text-muted);">We'll analyze your past performance to generate a personalized study plan.</p>
+                </div>
+                
+                <form onsubmit="generateRoadmap(event)">
+                    <div class="form-group">
+                        <label for="role">Target Role</label>
+                        <input type="text" id="role" placeholder="e.g., Data Scientist" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Target Company (Optional)</label>
+                        <input type="text" id="company" placeholder="e.g., Microsoft">
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Preparation Duration (Weeks)</label>
+                        <select id="duration" required>
+                            <option value="2">2 Weeks (Crash Course)</option>
+                            <option value="4" selected>4 Weeks (Standard)</option>
+                            <option value="8">8 Weeks (Comprehensive)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Daily Study Time (Minutes)</label>
+                        <select id="time" required>
+                            <option value="30">30 Minutes</option>
+                            <option value="60" selected>60 Minutes</option>
+                            <option value="120">2 Hours</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;" id="genBtn">Generate My Roadmap</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Roadmap View -->
+        <div id="roadmap-view" class="hidden">
+            <div class="header-flex">
+                <div>
+                    <h1 style="margin: 0 0 0.5rem 0;" id="role-display">Software Engineer</h1>
+                    <p style="margin: 0; color: var(--text-muted); font-style: italic;" id="ai-summary"></p>
+                </div>
+                <button class="btn-secondary" onclick="document.getElementById('setup-view').classList.remove('hidden'); document.getElementById('roadmap-view').classList.add('hidden');">
+                    Regenerate Roadmap
+                </button>
+            </div>
+
+            <!-- Progress -->
+            <div class="glass-panel" style="margin-bottom: 2rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 600;">Overall Progress</span>
+                    <span id="progress-text" style="color: var(--secondary); font-weight: bold;">0% Completed</span>
+                </div>
+                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">
+                    <div id="progress-bar-fill" style="width: 0%; height: 100%; background: var(--secondary); border-radius: 4px; transition: width 0.3s;"></div>
+                </div>
+            </div>
+
+            <div id="weeks-container">
+                <!-- Dynamically populated -->
+            </div>
+            
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="dashboard.html" style="color: var(--text-muted); text-decoration: none;">&larr; Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="task-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2 id="modal-topic" style="margin-top: 0; color: var(--primary);">Day 1: Arrays</h2>
+            <div style="margin-top: 1.5rem; margin-bottom: 2rem;">
+                <p><strong>Activity:</strong> <span id="modal-activity"></span></p>
+                <p><strong>Expected Outcome:</strong> <span id="modal-outcome"></span></p>
+            </div>
+            
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn-primary" style="flex: 1;" onclick="updateTaskStatus('completed')">Mark Completed</button>
+                <button class="btn-secondary" style="flex: 1; border-color: #ef4444; color: #ef4444;" onclick="updateTaskStatus('skipped')">Skip Task</button>
+            </div>
+            <button class="btn-secondary" style="width: 100%; margin-top: 1rem;" onclick="closeTaskModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="js/roadmap.js"></script>
+</body>
+</html>

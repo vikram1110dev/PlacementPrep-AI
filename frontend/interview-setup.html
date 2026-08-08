@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock Interview - Setup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/interview.css">
+</head>
+<body>
+    <div class="setup-container">
+        <div class="glass-panel">
+            <div class="setup-header">
+                <h1>Mock Interview</h1>
+                <p style="color: var(--text-secondary)">Customize your AI mock interview experience</p>
+            </div>
+            
+            <form onsubmit="startInterview(event)">
+                <div class="form-group">
+                    <label for="type">Interview Type</label>
+                    <select id="type" required>
+                        <option value="technical">Technical Interview</option>
+                        <option value="hr">HR / Behavioral</option>
+                        <option value="mixed">Mixed</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="role">Target Role</label>
+                    <input type="text" id="role" placeholder="e.g., Frontend Developer" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Target Company (Optional)</label>
+                    <input type="text" id="company" placeholder="e.g., Google, Amazon">
+                </div>
+                
+                <div class="form-group">
+                    <label for="difficulty">Difficulty</label>
+                    <select id="difficulty" required>
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="questions">Number of Questions</label>
+                    <select id="questions" required>
+                        <option value="3">3 Questions (Quick Practice)</option>
+                        <option value="5" selected>5 Questions (Standard)</option>
+                        <option value="10">10 Questions (Full Interview)</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-primary" id="startBtn">Start Interview</button>
+            </form>
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="interview-history.html" style="color: var(--text-secondary); text-decoration: none;">View Past Interviews</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/interview.js"></script>
+</body>
+</html>

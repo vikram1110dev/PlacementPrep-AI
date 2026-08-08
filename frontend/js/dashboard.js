@@ -146,6 +146,38 @@ document.addEventListener("DOMContentLoaded", function () {
                     `;
                 });
             }
+            
+            // Fetch Current Roadmap Tasks
+            const roadmapRes = await fetch('http://localhost:1111/api/v1/roadmap/current', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const roadmapData = await roadmapRes.json();
+            
+            const tasksContainer = document.getElementById('dashTodayTasks');
+            if (roadmapData.success && roadmapData.data) {
+                const activeWeek = roadmapData.data.weeks[0]; // simplistic assumption: show week 1 tasks
+                if (activeWeek && activeWeek.tasks.length > 0) {
+                    tasksContainer.innerHTML = '';
+                    activeWeek.tasks.slice(0, 4).forEach(task => { // show up to 4 tasks
+                        const isChecked = task.status === 'completed' ? 'checked' : '';
+                        const titleClass = task.status === 'completed' ? 'text-decoration-line-through text-muted' : '';
+                        
+                        tasksContainer.innerHTML += `
+                            <div class="task-item" style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: flex-start;">
+                                <input type="checkbox" class="form-check-input me-3 mt-1" ${isChecked} disabled>
+                                <div>
+                                    <h6 class="mb-1 fw-medium ${titleClass}">${task.topic}</h6>
+                                    <small class="text-muted fw-medium">${task.estimated_time} mins | ${task.difficulty || 'Medium'}</small>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    tasksContainer.innerHTML = '<div class="p-4 text-muted small">No tasks available for today.</div>';
+                }
+            } else {
+                tasksContainer.innerHTML = '<div class="p-4 text-muted small">No active roadmap. <a href="roadmap.html">Create one</a></div>';
+            }
 
         } catch (error) {
             console.error("Error fetching dashboard data:", error);

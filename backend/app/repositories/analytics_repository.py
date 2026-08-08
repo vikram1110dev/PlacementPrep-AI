@@ -4,7 +4,8 @@ from datetime import datetime, timedelta
 from typing import List, Optional
 
 from app.models.aptitude import PracticeSession, QuestionAttempt, AptitudeQuestion, AptitudeTopic, AptitudeCategory
-from app.models.users import StudentProfile, User, Achievement
+from app.models.users import StudentProfile, Achievement
+from app.models.auth import User
 
 class AnalyticsRepository:
     def __init__(self, db: Session):

@@ -15,6 +15,9 @@ class ConversationCreate(BaseModel):
     title: str = "New Conversation"
     mode: str = "general"
 
+class ConversationUpdate(BaseModel):
+    title: str
+
 class ConversationResponse(BaseModel):
     id: str
     title: str

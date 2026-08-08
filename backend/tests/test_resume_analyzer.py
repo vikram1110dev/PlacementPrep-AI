@@ -17,13 +17,14 @@ def test_extract_text_unsupported():
     with pytest.raises(ValueError, match="Unsupported file format"):
         ResumeParser.extract_text(b"some data", "test.txt")
 
+import asyncio
+
 @pytest.fixture
 def mock_resume():
     r = UserResume(id="res-1", user_id="user-1", is_uploaded=1, raw_text="Experienced Software Engineer with Python and Java.")
     return r
 
-@pytest.mark.asyncio
-async def test_analyze_resume(mock_resume):
+def test_analyze_resume(mock_resume):
     with patch('app.services.ats_service.get_llm') as mock_get_llm, \
          patch('app.services.ats_service.ResumeRepository') as mock_repo_cls:
         
@@ -41,14 +42,13 @@ async def test_analyze_resume(mock_resume):
         ats.llm = mock_llm
         ats.repo = mock_repo
         
-        report = await ats.analyze_resume(mock_resume)
+        report = asyncio.run(ats.analyze_resume(mock_resume))
         
         assert report.overall_score == 85
         assert "Docker" in report.missing_skills
         assert "Python" in report.keyword_matches
 
-@pytest.mark.asyncio
-async def test_match_job_description(mock_resume):
+def test_match_job_description(mock_resume):
     with patch('app.services.ats_service.get_llm') as mock_get_llm, \
          patch('app.services.ats_service.ResumeRepository') as mock_repo_cls:
         
@@ -65,7 +65,7 @@ async def test_match_job_description(mock_resume):
         ats.llm = mock_llm
         ats.repo = mock_repo
         
-        report = await ats.match_job_description(mock_resume, "Looking for Java developer with AWS.")
+        report = asyncio.run(ats.match_job_description(mock_resume, "Looking for Java developer with AWS."))
         
         assert report.match_percentage == 75
         assert "AWS" in report.missing_skills

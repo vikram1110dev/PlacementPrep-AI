@@ -112,15 +112,23 @@
                         </div>
                     </div>
 
+                    <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                        <h6 class="fw-bold mb-3">2. Select Existing Resume</h6>
+                        <div class="list-group list-group-flush mb-3" id="resumeList">
+                            <div class="text-muted small">Loading your resumes...</div>
+                        </div>
+                        <button class="btn btn-outline-danger btn-sm d-none w-100" id="btnDeleteResume">Delete Selected Resume</button>
+                    </div>
+
                     <div class="bg-white p-4 rounded-4 shadow-sm border">
-                        <h6 class="fw-bold mb-3">2. Job Match Analysis (Optional)</h6>
+                        <h6 class="fw-bold mb-3">3. Job Match Analysis (Optional)</h6>
                         <p class="small text-muted">Paste the target Job Description to see match percentage.</p>
                         <textarea class="form-control mb-3" id="inpJobDescription" rows="5" placeholder="Paste JD here..."></textarea>
                         <button class="btn btn-dark w-100 rounded-pill fw-bold" id="btnAnalyze">Run AI Analysis</button>
                     </div>
                 </div>
 
-                <!-- Right: Dashboard Results -->
+                <!-- Right: Dashboard Results & History -->
                 <div class="col-lg-7">
                     
                     <div id="loadingOverlay" class="d-none h-100 w-100 bg-white bg-opacity-75 d-flex flex-column align-items-center justify-content-center rounded-4 border">
@@ -181,6 +189,15 @@
                             <h6 class="fw-bold mb-3"><i class="bi bi-magic text-warning me-2"></i>AI Bullet Point Enhancements</h6>
                             <div class="accordion custom-accordion" id="bulletsAccordion">
                                 <!-- populated via js -->
+                            </div>
+                        </div>
+                        
+                        <!-- Analysis History -->
+                        <div class="bg-white p-4 rounded-4 shadow-sm border mb-4">
+                            <h6 class="fw-bold mb-3"><i class="bi bi-clock-history text-secondary me-2"></i>Analysis History</h6>
+                            <div class="list-group" id="historyList">
+                                <!-- populated via js -->
+                                <div class="text-muted small">No history available for this resume.</div>
                             </div>
                         </div>
 

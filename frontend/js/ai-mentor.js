@@ -12,12 +12,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const sendBtn = document.getElementById('sendMsgBtn');
     const chatMessages = document.getElementById('chatMessages');
     const suggestedChips = document.querySelectorAll('.suggested-chip');
+    const conversationList = document.getElementById('conversationList');
+    const newConvBtn = document.getElementById('newConvBtn');
     
     let currentConversationId = null;
     let currentMode = 'general';
 
     // Fetch initial conversations or create one
     async function init() {
+        await fetchConversations();
+    }
+
+    async function fetchConversations() {
         try {
             const res = await fetch(`${API_BASE}/ai/mentor/conversations`, {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -25,14 +31,86 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await res.json();
             
             if (data.data && data.data.length > 0) {
-                currentConversationId = data.data[0].id;
-                loadConversation(currentConversationId);
+                renderConversationList(data.data);
+                if (!currentConversationId) {
+                    currentConversationId = data.data[0].id;
+                    loadConversation(currentConversationId);
+                }
             } else {
-                createNewConversation();
+                conversationList.innerHTML = '<div class="text-muted small">No conversations yet.</div>';
+                if (!currentConversationId) {
+                    createNewConversation();
+                }
             }
         } catch (error) {
             console.error('Failed to init AI mentor', error);
         }
+    }
+
+    function renderConversationList(convs) {
+        if (!conversationList) return;
+        conversationList.innerHTML = '';
+        convs.forEach(c => {
+            const activeClass = c.id === currentConversationId ? 'active bg-light border-primary' : '';
+            const html = `
+                <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center ${activeClass}" style="cursor:pointer;" data-id="${c.id}">
+                    <div class="conv-select" style="flex-grow:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <i class="bi bi-chat-left-text me-2"></i> <span class="conv-title">${c.title}</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm text-secondary rename-btn" title="Rename"><i class="bi bi-pencil"></i></button>
+                        <button class="btn btn-sm text-danger delete-btn" title="Delete"><i class="bi bi-trash"></i></button>
+                    </div>
+                </div>
+            `;
+            conversationList.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Add events
+        conversationList.querySelectorAll('.conv-select').forEach(el => {
+            el.addEventListener('click', (e) => {
+                const id = e.currentTarget.closest('.list-group-item').dataset.id;
+                currentConversationId = id;
+                loadConversation(id);
+                fetchConversations(); // refresh active state
+            });
+        });
+
+        conversationList.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const id = e.currentTarget.closest('.list-group-item').dataset.id;
+                if(confirm('Delete this conversation?')) {
+                    await fetch(`${API_BASE}/ai/mentor/conversations/${id}`, {
+                        method: 'DELETE',
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (currentConversationId === id) currentConversationId = null;
+                    fetchConversations();
+                }
+            });
+        });
+
+        conversationList.querySelectorAll('.rename-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                const item = e.currentTarget.closest('.list-group-item');
+                const id = item.dataset.id;
+                const oldTitle = item.querySelector('.conv-title').textContent;
+                const newTitle = prompt('Enter new title:', oldTitle);
+                if (newTitle && newTitle !== oldTitle) {
+                    await fetch(`${API_BASE}/ai/mentor/conversations/${id}`, {
+                        method: 'PATCH',
+                        headers: { 
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({title: newTitle})
+                    });
+                    fetchConversations();
+                }
+            });
+        });
     }
 
     async function createNewConversation(mode = 'general') {
@@ -50,7 +128,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentConversationId = data.data.id;
                 currentMode = data.data.mode;
                 chatMessages.innerHTML = '';
-                addAIMessage("Hi! I'm your Placement AI Mentor. I can help you with coding questions, interview prep, resume reviews, or study plans. What would you like to focus on today?");
+                renderAIMessage(`Hi! I'm your Placement AI Mentor (${mode} mode). What would you like to focus on today?`);
+                fetchConversations();
             }
         } catch (error) {
             console.error('Failed to create conversation', error);
@@ -68,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 chatMessages.innerHTML = '';
                 const msgs = data.data.messages;
                 if(msgs.length === 0) {
-                     addAIMessage("Hi! I'm your Placement AI Mentor. What would you like to focus on today?");
+                     renderAIMessage("Hi! I'm your Placement AI Mentor. What would you like to focus on today?");
                 } else {
                     msgs.forEach(m => {
                         if (m.role === 'user') {
@@ -228,6 +307,12 @@ document.addEventListener("DOMContentLoaded", function () {
             if(val) sendToAI(val);
         }
     });
+
+    if (newConvBtn) {
+        newConvBtn.addEventListener('click', () => {
+            createNewConversation('general');
+        });
+    }
 
     // Suggested Chips click
     suggestedChips.forEach(chip => {

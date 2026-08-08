@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock Interview - History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/interview.css">
+</head>
+<body onload="loadHistory()">
+    <div style="max-width: 1000px; margin: 4rem auto; width: 90%;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1 style="color: var(--primary-color);">Interview History</h1>
+            <button class="btn-primary" style="width: auto;" onclick="window.location.href='interview-setup.html'">+ New Interview</button>
+        </div>
+        
+        <div class="glass-panel" style="overflow-x: auto;">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Role</th>
+                        <th>Type</th>
+                        <th>Score</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="history-tbody">
+                    <!-- Loaded dynamically -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div style="margin-top: 2rem;">
+            <a href="dashboard.html" style="color: var(--text-secondary); text-decoration: none;">&larr; Back to Dashboard</a>
+        </div>
+    </div>
+
+    <script src="js/interview.js"></script>
+</body>
+</html>

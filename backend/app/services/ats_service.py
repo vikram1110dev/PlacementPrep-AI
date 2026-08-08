@@ -26,7 +26,7 @@ Your task is to analyze the provided resume text and return a STRICT JSON output
     "section_completeness": float (0-100),
     "missing_skills": ["skill1", "skill2"],
     "keyword_matches": ["keyword1", "keyword2"],
-    "industry_suggestions": ["suggestion1", "suggestion2"],
+    "industry_suggestions": ["suggestion1", "suggestion2", "Missing Section: Education (if missing)"],
     "section_scores": {
         "Experience": float,
         "Education": float,

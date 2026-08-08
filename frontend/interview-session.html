@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mock Interview - Session</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/interview.css">
+</head>
+<body onload="loadSession()">
+    <div class="session-layout">
+        <div class="sidebar">
+            <h2 style="color: var(--primary-color)">Mock Interview</h2>
+            <div style="margin-top: 2rem;">
+                <div id="progress-text" style="margin-bottom: 0.5rem; color: var(--text-secondary);">Question 1 of 5</div>
+                <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">
+                    <div id="progress-bar-fill" style="width: 20%; height: 100%; background: var(--primary-color); border-radius: 4px; transition: width 0.3s;"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="glass-panel" style="flex: 1; display: flex; flex-direction: column;">
+                <div class="question-card">
+                    <h3 style="color: var(--text-secondary); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">AI Interviewer</h3>
+                    <div class="question-text" id="question-text">Loading question...</div>
+                </div>
+                
+                <div style="flex: 1;">
+                    <textarea id="answer-input" class="answer-input" placeholder="Type your answer here..."></textarea>
+                </div>
+                
+                <div id="evaluation-box" class="evaluation-box">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                        <span style="font-weight: 600; color: #047857;">AI Evaluation</span>
+                        <span class="score-badge"><span id="eval-score">0</span> / 10</span>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong>What went well:</strong> <span id="eval-good" style="color: var(--text-primary);"></span>
+                    </div>
+                    <div>
+                        <strong>How to improve:</strong> <span id="eval-improve" style="color: var(--text-primary);"></span>
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+                    <button class="btn-primary" style="width: auto;" id="submitBtn" onclick="submitAnswer()">Submit Answer</button>
+                    <button class="btn-primary" style="width: auto; display: none;" id="nextBtn" onclick="loadNextQuestion()">Next Question</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/interview.js"></script>
+</body>
+</html>

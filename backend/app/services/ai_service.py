@@ -46,6 +46,13 @@ class AIService:
         self.db.commit()
         return {"message": "Conversation deleted"}
 
+    def rename_conversation(self, user_id: str, conv_id: str, title: str):
+        conv = self.get_conversation(user_id, conv_id)
+        conv.title = title
+        self.db.commit()
+        self.db.refresh(conv)
+        return conv
+
     def add_message(self, conv_id: str, role: str, content: str):
         msg = Message(conversation_id=conv_id, role=role, content=content)
         self.db.add(msg)
@@ -58,22 +65,56 @@ class AIService:
         return msg
 
     def build_user_context(self, user_id: str, mode: str) -> str:
-        # In a real scenario, this would query aptitude_service, dsa_service, etc.
-        # For MVP, we provide a placeholder context template that would be populated from DB stats.
-        from app.services.aptitude_service import AptitudeService
-        
         context_str = "USER CONTEXT:\n"
-        if mode == "aptitude":
-            apt_service = AptitudeService(self.db)
-            try:
+        
+        try:
+            if mode == "aptitude":
+                from app.services.aptitude_service import AptitudeService
+                apt_service = AptitudeService(self.db)
                 progress = apt_service.get_user_progress(user_id)
                 context_str += f"- Total Aptitude Tests Taken: {progress.get('total_tests_taken', 0)}\n"
                 context_str += f"- Overall Accuracy: {progress.get('overall_accuracy', 0)}%\n"
                 context_str += f"- Strongest Topic: {progress.get('strongest_topic', 'Unknown')}\n"
                 context_str += f"- Weakest Topic: {progress.get('weakest_topic', 'Unknown')}\n"
-            except Exception:
-                context_str += "No aptitude data available yet.\n"
-        
+            
+            elif mode == "dsa":
+                from app.services.analytics_service import AnalyticsService
+                ana_service = AnalyticsService(self.db)
+                overview = ana_service.get_dashboard_overview(user_id)
+                solved = overview.questions_solved if hasattr(overview, 'questions_solved') else overview.get('questions_solved', 0)
+                context_str += f"- DSA Problems Solved: {solved}\n"
+            
+            elif mode == "resume":
+                from app.services.resume_service import ResumeService
+                resume_service = ResumeService(self.db)
+                try:
+                    resumes = resume_service.get_user_resumes(user_id)
+                    if resumes:
+                        last_resume = resumes[0]
+                        context_str += f"- Resume Parsed Name: {last_resume.parsed_name}\n"
+                        context_str += f"- Resume Parsed Email: {last_resume.parsed_email}\n"
+                        context_str += f"- Overall ATS Score: {last_resume.ats_score}\n"
+                    else:
+                        context_str += "No resume uploaded.\n"
+                except Exception:
+                    context_str += "No resume data available.\n"
+                    
+            elif mode == "interview":
+                context_str += "- Recommend focusing on data structures and behavioral STAR method.\n"
+                
+            elif mode == "company":
+                context_str += "- User is preparing for tech companies. Verify constraints on algorithmic questions.\n"
+                
+            elif mode == "career" or mode == "general":
+                from app.services.analytics_service import AnalyticsService
+                ana_service = AnalyticsService(self.db)
+                overview = ana_service.get_dashboard_overview(user_id)
+                solved = overview.questions_solved if hasattr(overview, 'questions_solved') else overview.get('questions_solved', 0)
+                context_str += f"- General Progress - DSA Solved: {solved}\n"
+                
+        except Exception as e:
+            context_str += f"Note: Some user data could not be retrieved.\n"
+            
         return context_str
 
     def get_system_prompt(self, mode: str) -> str:

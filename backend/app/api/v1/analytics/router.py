@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from app.api.deps import get_db, get_current_user
-from app.models.users import User
+from app.database.connection import get_db
+from app.dependencies.auth import get_current_user
+from app.models.auth import User
 from app.services.analytics_service import AnalyticsService
 from app.schemas.base import StandardResponse
 from app.schemas.analytics import (

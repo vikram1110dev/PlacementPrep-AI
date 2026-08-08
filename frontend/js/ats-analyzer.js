@@ -16,8 +16,112 @@ document.addEventListener("DOMContentLoaded", function () {
     
     const loadingOverlay = document.getElementById('loadingOverlay');
     const resultsDashboard = document.getElementById('resultsDashboard');
+    const resumeList = document.getElementById('resumeList');
+    const btnDeleteResume = document.getElementById('btnDeleteResume');
+    const historyList = document.getElementById('historyList');
 
     let currentUploadedResumeId = null;
+
+    // Load initial resumes
+    async function loadResumes() {
+        try {
+            const res = await fetch(`${API_BASE}/resume`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            if (data.success && data.data && data.data.length > 0) {
+                renderResumeList(data.data);
+            } else {
+                resumeList.innerHTML = '<div class="text-muted small">No resumes found. Please upload one.</div>';
+                btnDeleteResume.classList.add('d-none');
+            }
+        } catch (e) {
+            resumeList.innerHTML = '<div class="text-danger small">Failed to load resumes.</div>';
+        }
+    }
+
+    function renderResumeList(resumes) {
+        resumeList.innerHTML = '';
+        resumes.forEach(r => {
+            const activeClass = r.id === currentUploadedResumeId ? 'active bg-light border-primary' : '';
+            const html = `
+                <a href="#" class="list-group-item list-group-item-action ${activeClass} resume-item" data-id="${r.id}">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1 text-truncate" style="max-width: 80%;">${r.title || 'Untitled Resume'}</h6>
+                        <small class="text-muted">${r.is_uploaded ? '<i class="bi bi-cloud-arrow-up"></i>' : '<i class="bi bi-layout-text-sidebar"></i>'}</small>
+                    </div>
+                </a>
+            `;
+            resumeList.insertAdjacentHTML('beforeend', html);
+        });
+
+        if (currentUploadedResumeId) {
+            btnDeleteResume.classList.remove('d-none');
+        }
+
+        document.querySelectorAll('.resume-item').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = e.currentTarget.dataset.id;
+                currentUploadedResumeId = id;
+                renderResumeList(resumes);
+                loadHistory(id);
+                resultsDashboard.classList.add('d-none'); // Hide dashboard until analyzed
+            });
+        });
+    }
+
+    btnDeleteResume.addEventListener('click', async () => {
+        if(!currentUploadedResumeId) return;
+        if(!confirm('Are you sure you want to delete this resume?')) return;
+        
+        try {
+            await fetch(`${API_BASE}/resume/${currentUploadedResumeId}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            currentUploadedResumeId = null;
+            resultsDashboard.classList.add('d-none');
+            loadResumes();
+        } catch (e) {
+            alert('Failed to delete resume');
+        }
+    });
+
+    async function loadHistory(id) {
+        historyList.innerHTML = '<div class="text-muted small">Loading history...</div>';
+        try {
+            const res = await fetch(`${API_BASE}/resume/${id}/history`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            if (data.success && data.data && data.data.length > 0) {
+                historyList.innerHTML = '';
+                data.data.forEach(h => {
+                    const date = new Date(h.generated_at).toLocaleString();
+                    const score = h.overall_score || h.match_percentage || 0;
+                    const type = h.job_description ? 'Job Match' : 'General ATS';
+                    const html = `
+                        <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" style="cursor:pointer;" onclick="renderDashboardFromHistory(this)" data-report='${JSON.stringify(h)}'>
+                            <div>
+                                <h6 class="mb-0 fw-bold">${type}</h6>
+                                <small class="text-muted">${date}</small>
+                            </div>
+                            <span class="badge bg-primary rounded-pill">${score}%</span>
+                        </div>
+                    `;
+                    historyList.insertAdjacentHTML('beforeend', html);
+                });
+            } else {
+                historyList.innerHTML = '<div class="text-muted small">No history available for this resume.</div>';
+            }
+        } catch (e) {
+            historyList.innerHTML = '<div class="text-danger small">Failed to load history.</div>';
+        }
+    }
+
+    // Call loadResumes on startup
+    loadResumes();
 
     // Drag and Drop Logic
     uploadZone.addEventListener('dragover', (e) => {
@@ -70,6 +174,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if(data.success) {
                 currentUploadedResumeId = data.data.id;
                 uploadStatus.innerHTML = '<span class="text-success"><i class="bi bi-check-circle-fill"></i> Uploaded successfully! Ready for analysis.</span>';
+                loadResumes();
             } else {
                 uploadStatus.innerHTML = `<span class="text-danger"><i class="bi bi-exclamation-triangle-fill"></i> ${data.detail || 'Upload failed'}</span>`;
             }
@@ -117,6 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (data.success) {
                 renderDashboard(data.data, !!jdText);
+                loadHistory(currentUploadedResumeId);
             } else {
                 alert('Analysis failed: ' + (data.detail || 'Unknown error'));
             }
@@ -126,6 +232,11 @@ document.addEventListener("DOMContentLoaded", function () {
             alert('Network error during analysis.');
         }
     });
+
+    window.renderDashboardFromHistory = function(element) {
+        const report = JSON.parse(element.dataset.report);
+        renderDashboard(report, !!report.job_description);
+    };
 
     function renderDashboard(report, isJobMatch) {
         resultsDashboard.classList.remove('d-none');

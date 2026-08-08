@@ -57,6 +57,9 @@ def create_app() -> FastAPI:
     from app.api.v1.admin.router import router as admin_router
     from app.api.v1.analytics.router import router as analytics_router
     from app.api.v1.companies.router import router as companies_router
+    from app.api.v1.dsa.router import router as dsa_router
+    from app.api.v1.interview.router import router as interview_router
+    from app.api.v1.roadmap.router import router as roadmap_router
     
     app.include_router(auth_router, prefix=settings.API_V1_STR)
     app.include_router(users_router, prefix=settings.API_V1_STR)
@@ -66,10 +69,16 @@ def create_app() -> FastAPI:
     app.include_router(admin_router, prefix=settings.API_V1_STR)
     app.include_router(analytics_router, prefix=settings.API_V1_STR)
     app.include_router(companies_router, prefix=settings.API_V1_STR)
+    app.include_router(dsa_router, prefix=settings.API_V1_STR)
+    app.include_router(interview_router, prefix=settings.API_V1_STR)
+    app.include_router(roadmap_router, prefix=settings.API_V1_STR)
     
     # Automatically create tables on startup
     from app.database.connection import engine, Base
-    import app.models.ai  # Load AI models before create_all
+    import app.models.ai as ai_models
+    import app.models.dsa as dsa_models
+    import app.models.interview as interview_models
+    import app.models.roadmap as roadmap_models
     Base.metadata.create_all(bind=engine)
     
     # --- Health Check ---

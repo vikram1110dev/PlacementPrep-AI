@@ -5,7 +5,7 @@ from app.database.connection import get_db
 from app.dependencies.auth import get_current_user
 from app.models.auth import User
 from app.schemas.base import StandardResponse
-from app.schemas.ai import ChatRequest, StudyPlanRequest, ResumeReviewRequest, ConversationCreate, ConversationResponse, MessageResponse
+from app.schemas.ai import ChatRequest, StudyPlanRequest, ResumeReviewRequest, ConversationCreate, ConversationResponse, MessageResponse, ConversationUpdate
 from app.services.ai_service import AIService
 import json
 
@@ -36,6 +36,12 @@ def delete_conversation(conv_id: str, current_user: User = Depends(get_current_u
     service = AIService(db)
     service.delete_conversation(current_user.id, conv_id)
     return StandardResponse(success=True, message="Conversation deleted", data=None)
+
+@router.patch("/mentor/conversations/{conv_id}", response_model=StandardResponse)
+def rename_conversation(conv_id: str, data: ConversationUpdate, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    service = AIService(db)
+    conv = service.rename_conversation(current_user.id, conv_id, data.title)
+    return StandardResponse(success=True, message="Conversation renamed", data=ConversationResponse.from_orm(conv))
 
 @router.post("/mentor/chat")
 async def chat_with_mentor(request: ChatRequest, current_user: User = Depends(get_current_user), db: Session = Depends(get_db)):

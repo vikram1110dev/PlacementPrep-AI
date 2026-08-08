@@ -3,6 +3,7 @@ from sqlalchemy import Column, String, Boolean, DateTime, Integer, ForeignKey, T
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.database.connection import Base
+import app.models.users
 import enum
 
 class OTPType(str, enum.Enum):
